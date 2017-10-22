@@ -2,3 +2,6 @@ Post links to assets below. This will be used for sources later.
 
 #Probuilder Basic - for creating geometric room designs
 https://www.assetstore.unity3d.com/en/#!/content/11919
+
+#Simple FX - low poly particle effects (i.e., fire, smoke, fireworks)
+https://www.assetstore.unity3d.com/en/#!/content/67834
