@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour {
         // Set movement
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Goalkeeper Idle") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("Throw")) horizontal = 0.0f;
+
         if (isGrounded || airControl) rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         anim.SetFloat("hSpeed", Mathf.Abs(horizontal));
 
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour {
     /* Handles trigger collisions with the player */ 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "KillPlane" || collision.tag == "Bullet")
+        if (collision.tag == "Bullet")
         {
             anim.SetBool("isDead", true);
             isDead = true;
@@ -145,6 +146,11 @@ public class PlayerController : MonoBehaviour {
         {
             // Pickup ball - TODO: perform other actions?
             hasBall = true;
+        } else if (other.gameObject.tag == "KillPlane")
+        {
+            anim.SetBool("isDead", true);
+            isDead = true;
+            FindObjectOfType<GameManager>().endGame();
         }
     }
 

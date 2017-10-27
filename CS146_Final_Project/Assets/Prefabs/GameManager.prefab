@@ -52,5 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartDelay: 2
+  loadDelay: 2
   completeLevelUI: {fileID: 0}
   symbol: {fileID: 0}
