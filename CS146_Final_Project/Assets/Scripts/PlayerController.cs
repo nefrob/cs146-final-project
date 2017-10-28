@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     // Movement parameters
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private Transform body;
     private Rigidbody2D rb;
     // Ground status
     [SerializeField] private Transform[] groundPoints;
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private AudioClip shieldSound;
     // UI
     [SerializeField] private Text scoreText;
-    public int pickupCount = 0;
+    public int score = 0;
     // Player status
     private bool facingRight;
     private bool hasBall;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Animator anim;
     // Player Systems
     [SerializeField] private GameObject forceField;
+    private DodgeBall dodgeBallScript;
 
     /* Init vars. */
     void Start () {
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         throwBall = false;
         isDead = false;
         forceField.SetActive(false);
+        dodgeBallScript = FindObjectOfType<DodgeBall>();
     }
 
     /* Check for input. */
@@ -80,11 +83,12 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isGrounded", isGrounded);
 
         // Set throwing
-        if (throwBall && hasBall)
+        if (hasBall && throwBall && isGrounded)
         {
             anim.SetBool("isThrowing", true);
 			source.PlayOneShot(throwSound);
             hasBall = false;
+            Invoke("InvokeThrow", 0.75f);
         }
         else
         {
@@ -135,27 +139,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    /* Handles trigger collisions with the player */ 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "KillPlane" || collision.tag == "Bullet")
-        {
-            anim.SetBool("isDead", true);
-            isDead = true;
-            FindObjectOfType<GameManager>().endGame();
-        }
-    }
-
-    /* Pickup dodgeball. */
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Ball")
-        {
-            // Pickup ball - TODO: perform other actions?
-            hasBall = true;
-        }
-    }
-
     /* Checks whether the player is grounded */
     private bool getIsGrounded()
     {
@@ -177,6 +160,25 @@ public class PlayerController : MonoBehaviour {
         return false;
     }
 
+    /* Perform kill action. */
+    public void Die()
+    {
+        anim.SetBool("isDead", true);
+        isDead = true;
+        FindObjectOfType<GameManager>().endGame();
+    }
+
+    /* Invoke function to throw ball. */
+    private void InvokeThrow() {
+        dodgeBallScript.ThowBall(body.forward.x);
+    }
+
+    /* Pickup dodgeball. */
+    public void pickupBall()
+    {
+        hasBall = true;
+    }
+
     /* Play pickup sound and updates score */ 
     public void playPickupSound()
     {
@@ -187,7 +189,7 @@ public class PlayerController : MonoBehaviour {
     /* Adds value to score and updates UI component */
     public void updateScore(int add)
     {
-        pickupCount += add;
-        scoreText.text = pickupCount.ToString();
+        score += add;
+        scoreText.text = score.ToString();
     }
 }
