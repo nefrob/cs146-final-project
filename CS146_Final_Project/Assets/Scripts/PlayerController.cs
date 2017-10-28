@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip pickupSound;
     [SerializeField] private AudioClip throwSound;
+    [SerializeField] private AudioClip shieldSound;
     // UI
     [SerializeField] private Text scoreText;
     public int pickupCount = 0;
@@ -31,14 +32,17 @@ public class PlayerController : MonoBehaviour {
     private bool isDead;
     // Animation
     [SerializeField] private Animator anim;
+    // Player Systems
+    [SerializeField] private GameObject forceField;
 
-	/* Init vars. */
-	void Start () {
+    /* Init vars. */
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
         facingRight = true;
         hasBall = true;
         throwBall = false;
         isDead = false;
+        forceField.SetActive(false);
     }
 
     /* Check for input. */
@@ -87,20 +91,23 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isThrowing", false);
         }
 
-        // Set shielding - TODO: put on cooldown?
-        if (shield && hasBall)
+        // Set shielding - TODO: put on cooldown, add collider?
+        if (shield && hasBall && isGrounded)
         {
-			// TODO: shield sound?
+            forceField.SetActive(true);
+            source.PlayOneShot(shieldSound);
             anim.SetBool("isShielding", true);
         }
         else
         {
+            forceField.SetActive(false);
             anim.SetBool("isShielding", false);
         }
 
         // Disbale movement if shielding
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shield") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("Throw")) horizontal = 0.0f;
+
         // Set movement
         if (isGrounded || airControl) rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         anim.SetFloat("hSpeed", Mathf.Abs(horizontal));
