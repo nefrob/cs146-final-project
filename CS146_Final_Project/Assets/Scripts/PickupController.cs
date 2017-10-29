@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+* File:        Pickup Controller
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Handles collisions with pickups, removing them as a result.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

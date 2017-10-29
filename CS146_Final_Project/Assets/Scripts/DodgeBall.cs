@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+* File:        Dodge Ball
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Implements methods for the dodgeball object.
+*              Handles collisions and provides interface to 
+*              other classes.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

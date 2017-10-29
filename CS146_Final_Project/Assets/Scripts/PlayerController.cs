@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+* File:        Player Controller
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Implements player reltaed systems: movement, animation, and
+*              and public methods to be called upon collision with another object.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

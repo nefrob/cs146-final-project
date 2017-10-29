@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+* File:        Ground Scroller
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Scrolls the background textutre in only the x-direction
+*              to simulate a parallax effect, while maintaining positioning
+*              on the player.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+* File:        Two Way Platform Collider
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Disables/enablles two colliders such that no collision is incurred
+*              if the colliding object 'hits' the trigger colider first.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

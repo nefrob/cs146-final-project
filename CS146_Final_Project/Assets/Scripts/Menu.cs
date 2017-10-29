@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+* File:        Menu
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Controls for menu buttons and tweening objects onto the screen.
+*/
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {

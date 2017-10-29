@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+* File:        Game Manager
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Handles the game state and scene loading.
+*/
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {

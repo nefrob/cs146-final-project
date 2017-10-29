@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/*
+* File:        Don't Destroy Music
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Begins music playing on a gameobject that will not
+*              be destroyed on scene reload.
+*/
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DontDestroyMusic : MonoBehaviour {

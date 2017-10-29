@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+* File:        End Trigger
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Checks whether the player has entered the end zone and
+*              calls the game manager on change.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

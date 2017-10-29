@@ -25,7 +25,7 @@ Shader "Custom/CRTShader"
 	SubShader
 	{
 		// No culling or depth
-		//Cull Off // cull back side
+		Cull Off // cull back side
 		ZWrite Off // write pixels to depth buffer
 		ZTest Always // type of depth testing
 		Blend SrcAlpha OneMinusSrcAlpha // blend mode

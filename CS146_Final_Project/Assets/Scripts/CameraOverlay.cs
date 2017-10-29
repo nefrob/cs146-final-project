@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+* File:        Camera OVerlay
+* Author:      Robert Neff
+* Date:        10/28/17
+* Description: Overlays an effect material on the camera.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
