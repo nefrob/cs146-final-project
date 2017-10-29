@@ -1,4 +1,9 @@
-﻿// From: http://wiki.unity3d.com/index.php?title=Shield, small additions by Robert Neff
+﻿/*
+* File:   Force Field Shield Shader
+* Author: Unity wiki: http://wiki.unity3d.com/index.php?title=Shield,
+*         additions by Robert Neff
+* Date:   10/28/17
+*/
 
 Shader "Custom/ForceShieldShader" {
 

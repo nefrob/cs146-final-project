@@ -146,6 +146,11 @@ Prefab:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 185066691}
+    - target: {fileID: 114061570510719860, guid: 5cbd6a77e7e6bd14389039032ccf0c07,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cbd6a77e7e6bd14389039032ccf0c07, type: 2}
   m_IsPrefabParent: 0
