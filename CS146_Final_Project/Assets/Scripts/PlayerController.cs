@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip pickupSound;
     [SerializeField] private AudioClip throwSound;
-    [SerializeField] private AudioClip shieldSound;
+    [SerializeField] private AudioClip shieldSound; // should be able to loop
+    [SerializeField] private AudioClip deathSound;
     // UI
     [SerializeField] private Text scoreText;
     public int score = 0;
@@ -177,6 +178,7 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isDead", true);
         anim.SetBool("isGrounded", true);
         isDead = true;
+        source.PlayOneShot(deathSound);
         FindObjectOfType<GameManager>().endGame();
     }
 
