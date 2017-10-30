@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
         // Read the jump input in Update so button presses aren't missed.
         if (!jump) jump = Input.GetButtonDown("Jump");
         if (!throwBall) throwBall = Input.GetButtonDown("Fire1");
-        if (!shield) shield = Input.GetButton("Fire2");
+        shield = Input.GetButton("Fire2");
     }
 
     /* Compute physics and movement. */
@@ -81,7 +81,6 @@ public class PlayerController : MonoBehaviour {
         Flip(horizontal);
         jump = false; // reset input
         throwBall = false;
-        shield = false;
     }
 
     /* Handle all forms of player movement. */

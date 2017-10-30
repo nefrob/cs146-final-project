@@ -15,6 +15,7 @@ public class BackgroundScroller : MonoBehaviour {
 
     [SerializeField] private float speed = 0.5f;
     [SerializeField] private float z_offset = 8;
+    [SerializeField] private bool scrollY = false;
 
     private Transform player;
     private Renderer r;
@@ -51,6 +52,6 @@ public class BackgroundScroller : MonoBehaviour {
         prevY = player.position.y;
 
         // Update texture coords
-        r.material.mainTextureOffset = new Vector2(posX, posY);
+        r.material.mainTextureOffset = new Vector2(posX, (scrollY) ? posY : 0);
     }
 }
