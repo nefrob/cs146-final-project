@@ -17,14 +17,19 @@ public class DodgeBall : MonoBehaviour {
     // Ball state
     private Rigidbody2D rb;
     // Ball stats
-    [SerializeField] private float throwForce = 15.0f;
+    private float throwForce = 15.0f;
     // Player update
     private PlayerController playerScript;
+    // Audio
+    private AudioSource source;
+    [SerializeField] private AudioClip pickupBallSound;
+    [SerializeField] private AudioClip bounceSound;
 
-	// Initialize variables
-	void Start () {
+    // Initialize variables
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
         playerScript = FindObjectOfType<PlayerController>();
+        source = GetComponent<AudioSource>();
         transform.position = hand.position;
         transform.parent = hand;
         rb.simulated = false;
@@ -46,14 +51,23 @@ public class DodgeBall : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
+            // Pickup ball
             playerScript.pickupBall();
+            source.PlayOneShot(pickupBallSound);
             transform.position = hand.position;
             transform.parent = hand;
             rb.simulated = false;
-        } else if (collision.gameObject.tag == "Enemy")
+        }
+        else if (collision.gameObject.tag == "Enemy")
         {
-            // Kill enemy, TODO: enemy.die()?
-            Destroy(collision.gameObject);
+            // Kill enemy
+            // ex. collision.gameobject.GetComponent<EnemyScript>().die();
+            // Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Ground")
+        {
+            // Collide with ground
+            if (!source.isPlaying) source.PlayOneShot(bounceSound);
         }
     }
 }

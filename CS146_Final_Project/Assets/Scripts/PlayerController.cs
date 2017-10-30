@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour {
         isDead = false;
         forceField.SetActive(false);
         dodgeBallScript = FindObjectOfType<DodgeBall>();
+
+        source.clip = shieldSound;
+        source.loop = true;
     }
 
     /* Check for input. */
@@ -96,7 +99,7 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isThrowing", true);
 			source.PlayOneShot(throwSound);
             hasBall = false;
-            Invoke("InvokeThrow", 0.75f);
+            Invoke("InvokeThrow", 0.375f);
         }
         else
         {
@@ -107,16 +110,17 @@ public class PlayerController : MonoBehaviour {
         if (shield && hasBall && isGrounded)
         {
             forceField.SetActive(true);
-            source.PlayOneShot(shieldSound);
+            source.Play();
             anim.SetBool("isShielding", true);
         }
         else
         {
             forceField.SetActive(false);
+            source.Stop();
             anim.SetBool("isShielding", false);
         }
 
-        // Disbale movement if shielding
+        // Disbale movement if shielding or throwing
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shield") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("Throw")) horizontal = 0.0f;
 
@@ -172,6 +176,7 @@ public class PlayerController : MonoBehaviour {
     public void Die()
     {
         anim.SetBool("isDead", true);
+        anim.SetBool("isGrounded", true);
         isDead = true;
         FindObjectOfType<GameManager>().endGame();
     }
