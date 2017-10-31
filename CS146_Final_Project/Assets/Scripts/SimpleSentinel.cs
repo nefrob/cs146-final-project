@@ -72,6 +72,17 @@ public class SimpleSentinel : MonoBehaviour {
             timePassed = timePassed + Time.deltaTime;
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerController>().Die();
+        } else if(other.gameObject.tag == "Balll")
+        {
+            Destroy(this.gameObject, 0.02f);
+        }
+    }
+
     //_______________________________________________________________________________FOLLOW PLAYER________________________________________________________________________________
     public void followPlayer() {
         float range = Vector2.Distance(transform.position, player.transform.position);

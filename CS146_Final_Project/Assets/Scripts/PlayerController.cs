@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour {
         isDead = false;
         forceField.SetActive(false);
         dodgeBallScript = FindObjectOfType<DodgeBall>();
-
         source.clip = shieldSound;
         source.loop = true;
     }

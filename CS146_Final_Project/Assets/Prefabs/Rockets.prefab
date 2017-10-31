@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50190437787846668}
   - component: {fileID: 58533959851504876}
   - component: {fileID: 114881710678441542}
+  - component: {fileID: 114742738131022110}
   m_Layer: 0
   m_Name: Rockets
   m_TagString: Missile
@@ -287,6 +288,17 @@ CircleCollider2D:
   m_Offset: {x: 16449115, y: -0.030369163}
   serializedVersion: 2
   m_Radius: 0.6273258
+--- !u!114 &114742738131022110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068579011313790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82a58434b6c0d64c940e69a51235664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114881710678441542
 MonoBehaviour:
   m_ObjectHideFlags: 1
