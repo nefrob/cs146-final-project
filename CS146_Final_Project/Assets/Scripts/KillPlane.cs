@@ -12,6 +12,22 @@ using UnityEngine;
 
 public class KillPlane : MonoBehaviour {
 
+    private Transform player;
+
+    /* Get player transform. */
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    /* Track player x-position. */
+    void Update()
+    {
+        Vector3 temp = transform.position;
+        temp.x = player.position.x;
+        transform.position = temp;
+    }
+
     /* Handle collision with plane. */
     void OnTriggerEnter2D(Collider2D other)
     {
