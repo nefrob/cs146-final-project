@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: fd1508517f950cf48b487a137d104884
-timeCreated: 1509420140
-=======
-guid: 0690e417078e04849a205f967afada9d
-timeCreated: 1509419464
->>>>>>> 2368dc00aaf98b64b87695be3d843907245ad60e
-licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
@@ -17,6 +10,7 @@ ModelImporter:
     2300000: PA_DropPod 1
     3300000: PA_DropPod 1
     4300000: PA_DropPod
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -86,7 +80,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
