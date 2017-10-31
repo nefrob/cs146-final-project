@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:CS146_Final_Project/Assets/SimpleTurret/Models/Turret/Materials.meta
 guid: 2ba6cc07ee35f6e48ba6ed95a06c09fc
 folderAsset: yes
 timeCreated: 1509419638
+=======
+guid: 488e4661beec6463d92e43f69520d9d5
+folderAsset: yes
+timeCreated: 1509419326
+>>>>>>> 2368dc00aaf98b64b87695be3d843907245ad60e:CS146_Final_Project/Assets/SimpleTurret/Models/Turret/Materials.meta
 licenseType: Free
 DefaultImporter:
   userData: 
