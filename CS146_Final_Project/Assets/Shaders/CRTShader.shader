@@ -1,7 +1,10 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
+<<<<<<< HEAD
+=======
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
+>>>>>>> fccffb6c3cc81f4957d22ffb14b6265d10172188
 /*
 * File:   CRT Scanline shader
 * Author: Robert Neff
