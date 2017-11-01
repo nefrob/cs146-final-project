@@ -1,11 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-<<<<<<< HEAD
-=======
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
->>>>>>> fccffb6c3cc81f4957d22ffb14b6265d10172188
-/*
+﻿/*
 * File:   CRT Scanline shader
 * Author: Robert Neff
 * Date:   10/28/17
@@ -26,6 +19,8 @@ Shader "Custom/CRTShader"
 		_Color ("Color", Color) = (0, 0, 0, 1)
 		// CRT scanline size
 		_LineSize("LineSize", Range(0, 10)) = 1
+		// Y texture scroll speed
+		_YScrollSpeed("Y-Scroll Speed", Range(-5, 5)) = 0
 	}
 	
 	// Shader code
@@ -56,6 +51,7 @@ Shader "Custom/CRTShader"
 			sampler2D _OverlayTexture;
 			fixed4 _Color;
 			half _LineSize;
+			float _YScrollSpeed;
 
 			// Vertex incoming data
 			struct appdata
@@ -88,7 +84,8 @@ Shader "Custom/CRTShader"
 				if ((uint) (p * _ScreenParams.y / floor(_LineSize)) % 2 == 0) discard;
 				
 				// Apply texture overlay
-				fixed4 col = tex2D(_OverlayTexture, i.uv);
+				float2 movingUV = float2(i.uv.x, i.uv.y + (_YScrollSpeed *_Time.y));
+				fixed4 col = tex2D(_OverlayTexture, movingUV);
 				col *= _Color;
 				col += tex2D(_MainTex, i.uv);
 				return col;
