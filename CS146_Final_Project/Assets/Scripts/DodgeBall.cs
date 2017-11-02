@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Dodge Ball
 * Author:      Robert Neff
-* Date:        10/28/17
+* Date:        11/02/17
 * Description: Implements methods for the dodgeball object.
 *              Handles collisions and provides interface to 
 *              other classes.
@@ -43,7 +43,15 @@ public class DodgeBall : MonoBehaviour {
         update.x += xPlayerFacing;
         transform.position = update;
         rb.simulated = true;
+        // TODO: force?
         rb.velocity = new Vector2(xPlayerFacing * throwForce, 0.3f * throwForce);
+    }
+
+    /* Drops the ball from the player's hand. */
+    public void DropBall()
+    {
+        rb.simulated = true;
+        transform.parent = null;
     }
 
     /* Handle collisions with enemies and player. */
@@ -52,17 +60,12 @@ public class DodgeBall : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             // Pickup ball
-            playerScript.pickupBall();
+            if (playerScript.pickupBall) playerScript.AddBallToPlayer(this);
+            playerScript.pickupBall = false;
             source.PlayOneShot(pickupBallSound);
             transform.position = hand.position;
             transform.parent = hand;
             rb.simulated = false;
-        }
-        else if (collision.gameObject.tag == "Enemy")
-        {
-            // Kill enemy
-            // ex. collision.gameobject.GetComponent<EnemyScript>().die();
-            // Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Ground")
         {

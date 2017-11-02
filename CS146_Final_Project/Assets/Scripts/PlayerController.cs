@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Player Controller
 * Author:      Robert Neff
-* Date:        10/28/17
+* Date:        11/02/17
 * Description: Implements player reltaed systems: movement, animation, and
 *              and public methods to be called upon collision with another object.
 */
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     // Player status
     private bool facingRight;
     private bool hasBall;
+    public  bool pickupBall = false;
     private bool isGrounded;
     private bool jump;
     private bool throwBall;
@@ -49,6 +50,9 @@ public class PlayerController : MonoBehaviour {
     // Player Systems
     [SerializeField] private GameObject forceField;
     private DodgeBall dodgeBallScript;
+    // Balls
+    public List<DodgeBall> balls = new List<DodgeBall>();
+    private int currBall = -1;
 
     /* Init vars. */
     void Start () {
@@ -72,6 +76,8 @@ public class PlayerController : MonoBehaviour {
         if (!jump) jump = Input.GetButtonDown("Jump");
         if (!throwBall) throwBall = Input.GetButtonDown("Fire1");
         shield = Input.GetButton("Fire2");
+        //setCurrBallMouse();
+        //pickupBall = Input.GetKeyDown(KeyCode.LeftShift);
     }
 
     /* Compute physics and movement. */
@@ -81,35 +87,47 @@ public class PlayerController : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         isGrounded = getIsGrounded();
-        HandleMovement(horizontal, vertical);
+        HandlePlayerSystems(horizontal, vertical);
         Flip(horizontal);
         jump = false; // reset input
         throwBall = false;
     }
 
     /* Handle all forms of player movement. */
-    private void HandleMovement(float horizontal, float vertical)
+    private void HandlePlayerSystems(float horizontal, float vertical)
     {
         // Set the vertical animation
         anim.SetFloat("vSpeed", rb.velocity.y);
-
         // Set grounded animation
         anim.SetBool("isGrounded", isGrounded);
 
-        // Set throwing
+        // Update player state
+        setThrowing();
+        setShielding();
+        setMovement(horizontal);
+        setJumping();
+    }
+
+    /* Sets player throwing status. */
+    private void setThrowing()
+    {
         if (hasBall && throwBall && isGrounded)
         {
             anim.SetBool("isThrowing", true);
-			source.PlayOneShot(throwSound);
+            source.PlayOneShot(throwSound);
             hasBall = false;
+            // TODO: set current ball
             Invoke("InvokeThrow", 0.25f);
         }
         else
         {
             anim.SetBool("isThrowing", false);
         }
+    }
 
-        // Set shielding
+    /* Sets player shielding status. */
+    private void setShielding()
+    {
         if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && !depletedShield)
         {
             forceField.SetActive(true);
@@ -127,7 +145,11 @@ public class PlayerController : MonoBehaviour {
         }
         // Reset so can use again
         if (shieldBarSlider.value > 0.3f) depletedShield = false;
+    }
 
+    /* Sets player movement status. */
+    private void setMovement(float horizontal)
+    {
         // Disbale movement if shielding or throwing
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shield") ||
             anim.GetCurrentAnimatorStateInfo(0).IsName("Throw")) horizontal = 0.0f;
@@ -135,8 +157,11 @@ public class PlayerController : MonoBehaviour {
         // Set movement
         if (isGrounded || airControl) rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         anim.SetFloat("hSpeed", Mathf.Abs(horizontal));
+    }
 
-        // Set jumping
+    /* Sets player jumping status. */
+    private void setJumping()
+    {
         if (isGrounded && jump && anim.GetBool("isGrounded"))
         {
             source.PlayOneShot(jumpSound);
@@ -144,6 +169,61 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isGrounded", false);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
         }
+    }
+
+    /* Sets current ball from scroll wheel. */
+    private void setCurrBallMouse()
+    {
+        // No balls return
+        if (balls.Count == 0) return;
+
+        // Change on input
+        float input = Input.GetAxis("Mouse ScrollWheel");
+        balls[currBall].gameObject.SetActive(false);
+
+        if (input > 0f)
+        {
+            // scroll up
+            currBall += 1;
+            if (currBall >= balls.Count) currBall = 0;
+        }
+        else if (input < 0f)
+        {
+            // scroll down
+            currBall -= 1;
+            if (currBall < 0) currBall = balls.Count - 1;
+        }
+        balls[currBall].gameObject.SetActive(true);
+    }
+
+    /* Pickup dodgeball. */
+    public void AddBallToPlayer(DodgeBall ball)
+    {
+        // Set that has a ball
+        hasBall = true;
+
+        if (balls.Count == 0)
+        {
+            // Add first ball
+            balls.Add(ball);
+            currBall = 0;
+        }
+        else
+        {
+            // Change to new ball
+            balls[currBall].gameObject.SetActive(false);
+            balls.Add(ball);
+            currBall = balls.Count - 1;
+        }
+    }
+
+    /* Drops current ball on the ground. */
+    private void dropBall()
+    {
+        if (balls.Count == 0) return;
+        balls[currBall].DropBall();
+
+        // TODO: Set current ball
     }
 
     /* Flips player facing direction */
@@ -203,13 +283,8 @@ public class PlayerController : MonoBehaviour {
 
     /* Invoke function to throw ball. */
     private void InvokeThrow() {
+        // TODO: set current ball
         dodgeBallScript.ThowBall(playerBody.transform.forward.x);
-    }
-
-    /* Pickup dodgeball. */
-    public void pickupBall()
-    {
-        hasBall = true;
     }
 
     /* Play pickup sound and updates score */ 
