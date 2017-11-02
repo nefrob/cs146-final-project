@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     // Movement parameters
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float shieldDepleteRate = 0.5f;
+    [SerializeField] private float shieldRefillRate = 0.1f;
     [SerializeField] private GameObject playerBody;
     private Rigidbody2D rb;
     // Ground status
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private AudioClip deathSound;
     // UI
     [SerializeField] private Text scoreText;
+    [SerializeField] private Slider shieldBarSlider;
     public int score = 0;
     // Player status
     private bool facingRight;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour {
     private bool throwBall;
     private bool shield;
     private bool isDead;
+    private bool depletedShield = false;
     // Animation
     [SerializeField] private Animator anim;
     // Player Systems
@@ -105,19 +109,24 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isThrowing", false);
         }
 
-        // Set shielding - TODO: put on cooldown, add collider?
-        if (shield && hasBall && isGrounded)
+        // Set shielding
+        if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && !depletedShield)
         {
             forceField.SetActive(true);
             source.Play();
             anim.SetBool("isShielding", true);
+            shieldBarSlider.value -= shieldDepleteRate * Time.deltaTime;  // reduce shield capacity
         }
         else
         {
             forceField.SetActive(false);
             source.Stop();
             anim.SetBool("isShielding", false);
+            if (shieldBarSlider.value < 1) shieldBarSlider.value += shieldRefillRate * Time.deltaTime;
+            if (shieldBarSlider.value <= 0.01f) depletedShield = true;
         }
+        // Reset so can use again
+        if (shieldBarSlider.value > 0.3f) depletedShield = false;
 
         // Disbale movement if shielding or throwing
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shield") ||
@@ -214,6 +223,6 @@ public class PlayerController : MonoBehaviour {
     public void updateScore(int add)
     {
         score += add;
-        scoreText.text = score.ToString();
+        scoreText.text = "Score: " + score.ToString();
     }
 }
