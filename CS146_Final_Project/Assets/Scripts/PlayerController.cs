@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     // Movement parameters
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
-    [SerializeField] private Transform body;
+    [SerializeField] private GameObject playerBody;
     private Rigidbody2D rb;
     // Ground status
     [SerializeField] private Transform[] groundPoints;
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isThrowing", true);
 			source.PlayOneShot(throwSound);
             hasBall = false;
-            Invoke("InvokeThrow", 0.375f);
+            Invoke("InvokeThrow", 0.25f);
         }
         else
         {
@@ -181,9 +181,20 @@ public class PlayerController : MonoBehaviour {
         FindObjectOfType<GameManager>().endGame();
     }
 
+    /* Perform kill action if falling. */
+    public void FallDie()
+    {
+        anim.SetBool("isFallingDead", true);
+        anim.SetBool("isGrounded", true);
+        iTween.RotateBy(playerBody, iTween.Hash("y", 0.9, "easeType", "easeInOutBack", "time", 5.0f));
+        isDead = true;
+        source.PlayOneShot(deathSound);
+        FindObjectOfType<GameManager>().endGame();
+    }
+
     /* Invoke function to throw ball. */
     private void InvokeThrow() {
-        dodgeBallScript.ThowBall(body.forward.x);
+        dodgeBallScript.ThowBall(playerBody.transform.forward.x);
     }
 
     /* Pickup dodgeball. */
