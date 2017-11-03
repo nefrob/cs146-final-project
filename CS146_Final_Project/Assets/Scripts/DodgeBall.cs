@@ -47,7 +47,6 @@ public class DodgeBall : MonoBehaviour {
     public void ThowBall(float xPlayerFacing)
     {
         DropBall(xPlayerFacing);
-        myCollider.enabled = true;
         rb.AddForce(new Vector2(xPlayerFacing * throwForce, 0.3f * throwForce));
     }
 
@@ -61,6 +60,7 @@ public class DodgeBall : MonoBehaviour {
         rb.simulated = true;
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
+        myCollider.enabled = true;
     }
 
     /* Handle collisions with enemies and player. */

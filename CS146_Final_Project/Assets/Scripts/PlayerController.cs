@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
         shield = Input.GetButton("Fire2");
         setCurrBallMouse();
         pickupBall = Input.GetKey(KeyCode.LeftShift);
-        dropBall = Input.GetKey(KeyCode.E);
+        dropBall = Input.GetKeyDown(KeyCode.E);
     }
 
     /* Compute physics and movement. */
@@ -238,8 +238,8 @@ public class PlayerController : MonoBehaviour {
     {
         if (balls.Count == 0) return;
         lastBall = balls[currBall];
-        balls[currBall].DropBall(playerBody.transform.forward.x);
         removeBall();
+        lastBall.DropBall(playerBody.transform.forward.x);
     }
 
     /* Flips player facing direction */
