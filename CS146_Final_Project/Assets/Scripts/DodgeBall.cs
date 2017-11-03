@@ -13,11 +13,13 @@ using UnityEngine;
 
 public class DodgeBall : MonoBehaviour {
     // Parent positioning
-    [SerializeField] private Transform hand;
+    private Transform hand;
+    [SerializeField] private bool isStartBall = false;
     // Ball state
     private Rigidbody2D rb;
+    private CircleCollider2D myCollider;
     // Ball stats
-    private float throwForce = 15.0f;
+    [SerializeField] private float throwForce = 100.0f;
     // Player update
     private PlayerController playerScript;
     // Audio
@@ -28,30 +30,37 @@ public class DodgeBall : MonoBehaviour {
     // Initialize variables
     void Start () {
         rb = GetComponent<Rigidbody2D>();
+        myCollider = GetComponent<CircleCollider2D>();
         playerScript = FindObjectOfType<PlayerController>();
         source = GetComponent<AudioSource>();
-        transform.position = hand.position;
-        transform.parent = hand;
-        rb.simulated = false;
+        hand = GameObject.FindGameObjectWithTag("PlayerHand").transform;
+        if (isStartBall)
+        {
+            // Disable movement
+            transform.position = hand.position;
+            transform.parent = hand;
+            rb.simulated = false;
+        }
     }
 
     /* Throw the ball in player facing direction. */ 
     public void ThowBall(float xPlayerFacing)
     {
-        transform.parent = null;
-        Vector3 update = transform.position;
-        update.x += xPlayerFacing;
-        transform.position = update;
-        rb.simulated = true;
-        // TODO: force?
-        rb.velocity = new Vector2(xPlayerFacing * throwForce, 0.3f * throwForce);
+        DropBall(xPlayerFacing);
+        myCollider.enabled = true;
+        rb.AddForce(new Vector2(xPlayerFacing * throwForce, 0.3f * throwForce));
     }
 
     /* Drops the ball from the player's hand. */
-    public void DropBall()
+    public void DropBall(float xPlayerFacing)
     {
-        rb.simulated = true;
         transform.parent = null;
+        Vector3 update = transform.position;
+        update.x += xPlayerFacing * 2;
+        transform.position = update;
+        rb.simulated = true;
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
     }
 
     /* Handle collisions with enemies and player. */
@@ -60,7 +69,9 @@ public class DodgeBall : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             // Pickup ball
-            if (playerScript.pickupBall) playerScript.AddBallToPlayer(this);
+            if (!playerScript.pickupBall) return;
+            myCollider.enabled = false;
+            playerScript.AddBallToPlayer(this);
             playerScript.pickupBall = false;
             source.PlayOneShot(pickupBallSound);
             transform.position = hand.position;

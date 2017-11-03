@@ -2,7 +2,7 @@
 * File:        Player Controller
 * Author:      Robert Neff
 * Date:        11/02/17
-* Description: Implements player reltaed systems: movement, animation, and
+* Description: Implements player related systems: movement, animation, and
 *              and public methods to be called upon collision with another object.
 */
 
@@ -31,9 +31,12 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private AudioClip throwSound;
     [SerializeField] private AudioClip shieldSound; // should be able to loop
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip fallingDeathSound;
     // UI
     [SerializeField] private Text scoreText;
     [SerializeField] private Slider shieldBarSlider;
+    [SerializeField] private GameObject waitText;
+    [SerializeField] private GameObject reloadText;
     public int score = 0;
     // Player status
     private bool facingRight;
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour {
     private bool isGrounded;
     private bool jump;
     private bool throwBall;
+    private bool dropBall = false;
     private bool shield;
     private bool isDead;
     private bool depletedShield = false;
@@ -49,10 +53,10 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Animator anim;
     // Player Systems
     [SerializeField] private GameObject forceField;
-    private DodgeBall dodgeBallScript;
+    [SerializeField] private DodgeBall lastBall;
     // Balls
     public List<DodgeBall> balls = new List<DodgeBall>();
-    private int currBall = -1;
+    private int currBall = 0;
 
     /* Init vars. */
     void Start () {
@@ -61,8 +65,7 @@ public class PlayerController : MonoBehaviour {
         hasBall = true;
         throwBall = false;
         isDead = false;
-        forceField.SetActive(false);
-        dodgeBallScript = FindObjectOfType<DodgeBall>();
+        balls.Add(lastBall);
         source.clip = shieldSound;
         source.loop = true;
     }
@@ -74,10 +77,11 @@ public class PlayerController : MonoBehaviour {
 
         // Read the jump input in Update so button presses aren't missed.
         if (!jump) jump = Input.GetButtonDown("Jump");
-        if (!throwBall) throwBall = Input.GetButtonDown("Fire1");
+        throwBall = Input.GetKeyDown(KeyCode.Q);// Input.GetButtonDown("Fire1");
         shield = Input.GetButton("Fire2");
-        //setCurrBallMouse();
-        //pickupBall = Input.GetKeyDown(KeyCode.LeftShift);
+        setCurrBallMouse();
+        pickupBall = Input.GetKey(KeyCode.LeftShift);
+        dropBall = Input.GetKey(KeyCode.E);
     }
 
     /* Compute physics and movement. */
@@ -90,7 +94,6 @@ public class PlayerController : MonoBehaviour {
         HandlePlayerSystems(horizontal, vertical);
         Flip(horizontal);
         jump = false; // reset input
-        throwBall = false;
     }
 
     /* Handle all forms of player movement. */
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isGrounded", isGrounded);
 
         // Update player state
+        if (dropBall) playerDropBall();
         setThrowing();
         setShielding();
         setMovement(horizontal);
@@ -113,11 +117,11 @@ public class PlayerController : MonoBehaviour {
     {
         if (hasBall && throwBall && isGrounded)
         {
+            lastBall = balls[currBall];
+            removeBall();
             anim.SetBool("isThrowing", true);
             source.PlayOneShot(throwSound);
-            hasBall = false;
-            // TODO: set current ball
-            Invoke("InvokeThrow", 0.25f);
+            Invoke("InvokeThrow", 0.28f);
         }
         else
         {
@@ -128,23 +132,34 @@ public class PlayerController : MonoBehaviour {
     /* Sets player shielding status. */
     private void setShielding()
     {
+        if (shieldBarSlider.value == 1) reloadText.SetActive(false);
         if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && !depletedShield)
         {
             forceField.SetActive(true);
             source.Play();
             anim.SetBool("isShielding", true);
             shieldBarSlider.value -= shieldDepleteRate * Time.deltaTime;  // reduce shield capacity
-        }
+        } 
         else
         {
+            if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && depletedShield) waitText.SetActive(true);
+
             forceField.SetActive(false);
             source.Stop();
             anim.SetBool("isShielding", false);
-            if (shieldBarSlider.value < 1) shieldBarSlider.value += shieldRefillRate * Time.deltaTime;
+            if (shieldBarSlider.value < 1)
+            {
+                shieldBarSlider.value += shieldRefillRate * Time.deltaTime;
+                reloadText.SetActive(true);
+            }
             if (shieldBarSlider.value <= 0.01f) depletedShield = true;
         }
         // Reset so can use again
-        if (shieldBarSlider.value > 0.3f) depletedShield = false;
+        if (shieldBarSlider.value > 0.3f)
+        {
+            depletedShield = false;
+            waitText.SetActive(false);
+        }
     }
 
     /* Sets player movement status. */
@@ -179,6 +194,7 @@ public class PlayerController : MonoBehaviour {
 
         // Change on input
         float input = Input.GetAxis("Mouse ScrollWheel");
+        if (input == 0) return;
         balls[currBall].gameObject.SetActive(false);
 
         if (input > 0f)
@@ -218,12 +234,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     /* Drops current ball on the ground. */
-    private void dropBall()
+    private void playerDropBall()
     {
         if (balls.Count == 0) return;
-        balls[currBall].DropBall();
-
-        // TODO: Set current ball
+        lastBall = balls[currBall];
+        balls[currBall].DropBall(playerBody.transform.forward.x);
+        removeBall();
     }
 
     /* Flips player facing direction */
@@ -277,14 +293,29 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isGrounded", true);
         iTween.RotateBy(playerBody, iTween.Hash("y", 0.9, "easeType", "easeInOutBack", "time", 5.0f));
         isDead = true;
-        source.PlayOneShot(deathSound);
+        source.PlayOneShot(fallingDeathSound);
         FindObjectOfType<GameManager>().endGame();
     }
 
     /* Invoke function to throw ball. */
     private void InvokeThrow() {
-        // TODO: set current ball
-        dodgeBallScript.ThowBall(playerBody.transform.forward.x);
+        lastBall.ThowBall(playerBody.transform.forward.x);
+    }
+
+    /* Updates balls list and character to reflect current ball. */
+    private void removeBall()
+    {
+        balls.Remove(lastBall);
+         // Set next ball as active ball
+         if (balls.Count > 0)
+         {
+            currBall--;
+            if (currBall < 0) currBall = balls.Count - 1;
+            balls[currBall].gameObject.SetActive(true);
+        } else
+         {
+             hasBall = false;
+         }
     }
 
     /* Play pickup sound and updates score */ 
