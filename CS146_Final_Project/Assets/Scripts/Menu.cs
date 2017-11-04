@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour {
 
     public void StartGame() {
         Invoke("changeScene", load_delay);
+        GetComponent<AudioSource>().Play();
         iTween.MoveBy(panel, iTween.Hash("y", 3 * Screen.height, "easeType", "easeInOutExpo", "delay", 0.25));
         iTween.MoveBy(start, iTween.Hash("y", -3 * Screen.height, "easeType", "easeInOutExpo", "delay", 0.25));
     }

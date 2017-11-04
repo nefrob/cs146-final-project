@@ -25,13 +25,16 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private bool airControl;
     // Audio options
-    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioSource playerSource;
+    [SerializeField] private AudioSource shieldSource;
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip pickupSound;
-    [SerializeField] private AudioClip throwSound;
+    [SerializeField] private AudioClip dropSound;
+    [SerializeField] private AudioClip[] throwSounds;
     [SerializeField] private AudioClip shieldSound; // should be able to loop
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip fallingDeathSound;
+    [SerializeField] private AudioClip switchBall;
     // UI
     [SerializeField] private Text scoreText;
     [SerializeField] private Slider shieldBarSlider;
@@ -66,8 +69,7 @@ public class PlayerController : MonoBehaviour {
         throwBall = false;
         isDead = false;
         balls.Add(lastBall);
-        source.clip = shieldSound;
-        source.loop = true;
+        playerSource.clip = jumpSound;
     }
 
     /* Check for input. */
@@ -120,7 +122,8 @@ public class PlayerController : MonoBehaviour {
             lastBall = balls[currBall];
             removeBall();
             anim.SetBool("isThrowing", true);
-            source.PlayOneShot(throwSound);
+            playerSource.clip = throwSounds[Random.Range(0, 3)];
+            playerSource.Play();
             Invoke("InvokeThrow", 0.28f);
         }
         else
@@ -136,7 +139,7 @@ public class PlayerController : MonoBehaviour {
         if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && !depletedShield)
         {
             forceField.SetActive(true);
-            source.Play();
+            shieldSource.Play();
             anim.SetBool("isShielding", true);
             shieldBarSlider.value -= shieldDepleteRate * Time.deltaTime;  // reduce shield capacity
         } 
@@ -145,7 +148,7 @@ public class PlayerController : MonoBehaviour {
             if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && depletedShield) waitText.SetActive(true);
 
             forceField.SetActive(false);
-            source.Stop();
+            shieldSource.Stop();
             anim.SetBool("isShielding", false);
             if (shieldBarSlider.value < 1)
             {
@@ -179,7 +182,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (isGrounded && jump && anim.GetBool("isGrounded"))
         {
-            source.PlayOneShot(jumpSound);
+            playerSource.PlayOneShot(jumpSound);
             isGrounded = false;
             anim.SetBool("isGrounded", false);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
@@ -190,13 +193,14 @@ public class PlayerController : MonoBehaviour {
     private void setCurrBallMouse()
     {
         // No balls return
-        if (balls.Count == 0) return;
+        if (balls.Count <= 1) return;
 
         // Change on input
         float input = Input.GetAxis("Mouse ScrollWheel");
         if (input == 0) return;
-        balls[currBall].gameObject.SetActive(false);
 
+        balls[currBall].gameObject.SetActive(false);
+        playerSource.PlayOneShot(switchBall);
         if (input > 0f)
         {
             // scroll up
@@ -237,6 +241,7 @@ public class PlayerController : MonoBehaviour {
     private void playerDropBall()
     {
         if (balls.Count == 0) return;
+        playerSource.PlayOneShot(dropSound);
         lastBall = balls[currBall];
         removeBall();
         lastBall.DropBall(playerBody.transform.forward.x);
@@ -282,7 +287,8 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isDead", true);
         anim.SetBool("isGrounded", true);
         isDead = true;
-        source.PlayOneShot(deathSound);
+        resetScore();
+        playerSource.PlayOneShot(deathSound);
         FindObjectOfType<GameManager>().endGame();
     }
 
@@ -293,12 +299,14 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isGrounded", true);
         iTween.RotateBy(playerBody, iTween.Hash("y", 0.9, "easeType", "easeInOutBack", "time", 5.0f));
         isDead = true;
-        source.PlayOneShot(fallingDeathSound);
+        resetScore();
+        playerSource.PlayOneShot(fallingDeathSound);
         FindObjectOfType<GameManager>().endGame();
     }
 
     /* Invoke function to throw ball. */
     private void InvokeThrow() {
+
         lastBall.ThowBall(playerBody.transform.forward.x);
     }
 
@@ -322,13 +330,20 @@ public class PlayerController : MonoBehaviour {
     public void playPickupSound()
     {
         updateScore(1);
-        source.PlayOneShot(pickupSound);
+        playerSource.PlayOneShot(pickupSound);
     }
 
     /* Adds value to score and updates UI component */
     public void updateScore(int add)
     {
         score += add;
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    /* Reset score to zero. */
+    private void resetScore()
+    {
+        score = 0;
         scoreText.text = "Score: " + score.ToString();
     }
 }

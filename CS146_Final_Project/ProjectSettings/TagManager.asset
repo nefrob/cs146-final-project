@@ -8,6 +8,7 @@ TagManager:
   - Balll
   - Shield
   - PlayerHand
+  - Ground
   layers:
   - Default
   - TransparentFX
