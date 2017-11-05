@@ -89,7 +89,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Inside: 0
-    - _LineSize: 1
+    - _LineSize: 0
     - _LinesSize: 2.4
     - _Metallic: 0
     - _Mode: 0
@@ -105,9 +105,9 @@ Material:
     - _UVSec: 0
     - _VertsColor: 12
     - _VertsColor2: 0
-    - _YScrollSpeed: 1.8
+    - _YScrollSpeed: 0.73
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.24772923, g: 0.3081315, b: 0.42647058, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

@@ -16,18 +16,21 @@ public class BlinkingUI : MonoBehaviour {
     public bool useColor = false;
 
     /* Loop to make text flash. */
-    public IEnumerator MakeTextFlash()
+    private IEnumerator MakeTextFlash()
     {
         while (true)
         {
+            // Flash 1
             if (useColor) flashingText.color = first;
             if (changeText) flashingText.text = "";
             yield return new WaitForSeconds(flashSpeed);
+            // Flash 2
             if (useColor) flashingText.color = second;
             if (changeText) flashingText.text = startText;
             yield return new WaitForSeconds(flashSpeed);
             // Break if no longer active
             if (!gameObject.activeInHierarchy) break;
+
         }
     }
 

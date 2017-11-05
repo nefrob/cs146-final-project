@@ -12,7 +12,7 @@ Shader "Custom/CRTShader"
 		// _name("unity editor name", type) = value
 
 		// Screen texture to CRT split
-		_MainTex("Screen Texture - leave blank", 2D) = "white" {}
+	    _MainTex("Screen Texture - leave blank", 2D) = "white" {}
 		// Texture to overlay screen with
 		_OverlayTexture("Overlay Texture", 2D) = "white" {}
 		// Color to add
@@ -33,10 +33,10 @@ Shader "Custom/CRTShader"
 		Blend SrcAlpha OneMinusSrcAlpha // blend mode
 
 		// Shader passes, Overlay = 4000
-		Tags{ "IgnoreProjector" = "True" "Queue" = "Overlay" }
+		Tags { "IgnoreProjector" = "True" "Queue" = "Overlay" }
 
 		// Diable any fog
-		Fog{ Mode Off }
+		Fog { Mode Off }
 
 		Pass
 		{
@@ -77,7 +77,7 @@ Shader "Custom/CRTShader"
 			}
 
 			// Fragment shader
-			fixed4 frag (v2f i) : COLOR
+			fixed4 frag (v2f i) : SV_Target
 			{
 				// Drop every other pixel line
 				fixed p = i.uv.y / i.uv.w;

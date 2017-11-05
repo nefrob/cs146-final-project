@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float jumpForce;
     [SerializeField] private float shieldDepleteRate = 0.5f;
     [SerializeField] private float shieldRefillRate = 0.1f;
+    [SerializeField] private float powerUpRate = 0.1f;
+    [SerializeField] private float powerUpForce = 50f;
     [SerializeField] private GameObject playerBody;
     private Rigidbody2D rb;
     // Ground status
@@ -37,7 +39,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private AudioClip switchBall;
     // UI
     [SerializeField] private Text scoreText;
-    [SerializeField] private Slider shieldBarSlider;
+    public Slider shieldBarSlider;
+    [SerializeField] private Slider powerUpSlider;
     [SerializeField] private GameObject waitText;
     [SerializeField] private GameObject reloadText;
     public int score = 0;
@@ -52,6 +55,7 @@ public class PlayerController : MonoBehaviour {
     private bool shield;
     private bool isDead;
     private bool depletedShield = false;
+    private bool powerUp = false;
     // Animation
     [SerializeField] private Animator anim;
     // Player Systems
@@ -79,7 +83,8 @@ public class PlayerController : MonoBehaviour {
 
         // Read the jump input in Update so button presses aren't missed.
         if (!jump) jump = Input.GetButtonDown("Jump");
-        throwBall = Input.GetKeyDown(KeyCode.Q);// Input.GetButtonDown("Fire1");
+        throwBall = Input.GetKeyUp(KeyCode.Q);// Input.GetButtonDown("Fire1");
+        powerUp = Input.GetKey(KeyCode.Q);
         shield = Input.GetButton("Fire2");
         setCurrBallMouse();
         pickupBall = Input.GetKey(KeyCode.LeftShift);
@@ -109,9 +114,26 @@ public class PlayerController : MonoBehaviour {
         // Update player state
         if (dropBall) playerDropBall();
         setThrowing();
+        setPowerUp();
         setShielding();
         setMovement(horizontal);
         setJumping();
+    }
+
+    /* Sets layer power up status. */
+    private void setPowerUp()
+    {
+        GameObject parent = powerUpSlider.transform.parent.gameObject;
+        if (powerUp && hasBall && isGrounded)
+        {
+            if (!parent.activeInHierarchy) parent.SetActive(true);
+            if (powerUpSlider.value < 1) powerUpSlider.value += powerUpRate * Time.deltaTime;
+        }
+        else
+        {
+            if (parent.activeInHierarchy) parent.SetActive(false);
+            powerUpSlider.value = 0;
+        }
     }
 
     /* Sets player throwing status. */
@@ -124,7 +146,7 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isThrowing", true);
             playerSource.clip = throwSounds[Random.Range(0, 3)];
             playerSource.Play();
-            Invoke("InvokeThrow", 0.28f);
+            StartCoroutine(InvokeThrow(0.28f, powerUpForce * powerUpSlider.value));
         }
         else
         {
@@ -305,9 +327,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     /* Invoke function to throw ball. */
-    private void InvokeThrow() {
-
-        lastBall.ThowBall(playerBody.transform.forward.x);
+    IEnumerator InvokeThrow(float delay, float force) {
+        yield return new WaitForSeconds(delay);
+        lastBall.ThowBall(playerBody.transform.forward.x, force);
     }
 
     /* Updates balls list and character to reflect current ball. */

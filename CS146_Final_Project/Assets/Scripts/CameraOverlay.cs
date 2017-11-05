@@ -12,11 +12,27 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraOverlay : MonoBehaviour {
     // Material to apply to the camera
-    [SerializeField] private Material EffectMaterial;
+    [SerializeField] private Material crtEffectMaterial;
+    [SerializeField] private PlayerController controller;
+    [SerializeField] private Color otherColor;
+    [SerializeField] private bool useOtherColor;
+    private Color startColor;
+
+    /* Set start color for reference. */
+    void Start()
+    {
+        if (useOtherColor) startColor = otherColor;
+        else startColor = crtEffectMaterial.color;
+    }
 
     /* Render texture to the screen. */
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        Graphics.Blit(source, destination, EffectMaterial);
+        Color temp = startColor;
+        temp.r = (1 - controller.shieldBarSlider.value) * temp.r;
+        temp.b = (1 - controller.shieldBarSlider.value) * temp.b;
+        temp.g = (1 - controller.shieldBarSlider.value) * temp.g;
+        crtEffectMaterial.color = temp;
+        Graphics.Blit(source, destination, crtEffectMaterial);
     }
 }
