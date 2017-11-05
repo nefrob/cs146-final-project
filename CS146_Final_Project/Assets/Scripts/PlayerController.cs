@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Player Controller
 * Author:      Robert Neff
-* Date:        11/02/17
+* Date:        11/05/17
 * Description: Implements player related systems: movement, animation, and
 *              and public methods to be called upon collision with another object.
 */
@@ -47,22 +47,22 @@ public class PlayerController : MonoBehaviour {
     // Player status
     private bool facingRight;
     private bool hasBall;
-    public  bool pickupBall = false;
+    public  bool pickupBall;
     private bool isGrounded;
     private bool jump;
     private bool throwBall;
-    private bool dropBall = false;
+    private bool dropBall;
     private bool shield;
     private bool isDead;
-    private bool depletedShield = false;
-    private bool powerUp = false;
+    private bool depletedShield;
+    private bool powerUp;
     // Animation
     [SerializeField] private Animator anim;
     // Player Systems
     [SerializeField] private GameObject forceField;
     [SerializeField] private DodgeBall lastBall;
     // Balls
-    public List<DodgeBall> balls = new List<DodgeBall>();
+    public List<DodgeBall> balls;
     private int currBall = 0;
 
     /* Init vars. */
@@ -70,8 +70,13 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         facingRight = true;
         hasBall = true;
+        pickupBall = false;
         throwBall = false;
+        dropBall = false;
         isDead = false;
+        depletedShield = false;
+        powerUp = false;
+        balls = new List<DodgeBall>();
         balls.Add(lastBall);
         playerSource.clip = jumpSound;
     }

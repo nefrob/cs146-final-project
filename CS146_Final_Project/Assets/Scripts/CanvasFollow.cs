@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+* File:        Canvas Follow
+* Author:      Robert Neff
+* Date:        11/05/17
+* Description: Makes the current object follow the player's x and y
+*              positions with offset specified.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

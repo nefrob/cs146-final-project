@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Dodge Ball
 * Author:      Robert Neff
-* Date:        11/02/17
+* Date:        11/05/17
 * Description: Implements methods for the dodgeball object.
 *              Handles collisions and provides interface to 
 *              other classes.
