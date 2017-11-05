@@ -18,6 +18,10 @@ public class CameraOverlay : MonoBehaviour {
     [SerializeField] private bool useOtherColor;
     private Color startColor;
 
+    // Powers
+    [Range(0.0f, 1.0f)] public float baseColorPower = 0.0f; // 0-1
+    [Range(0.0f, 1.0f)] public float fullColorPower = 1.0f; // no greater than 1 - baseColorPower
+
     /* Set start color for reference. */
     void Start()
     {
@@ -29,9 +33,9 @@ public class CameraOverlay : MonoBehaviour {
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         Color temp = startColor;
-        temp.r = (1 - controller.shieldBarSlider.value) * temp.r;
-        temp.b = (1 - controller.shieldBarSlider.value) * temp.b;
-        temp.g = (1 - controller.shieldBarSlider.value) * temp.g;
+        temp.r = baseColorPower * temp.r + fullColorPower * (1 - controller.shieldBarSlider.value) * temp.r;
+        temp.b = baseColorPower * temp.b + fullColorPower * (1 - controller.shieldBarSlider.value) * temp.b;
+        temp.g = baseColorPower * temp.g + fullColorPower * (1 - controller.shieldBarSlider.value) * temp.g;
         crtEffectMaterial.color = temp;
         Graphics.Blit(source, destination, crtEffectMaterial);
     }
