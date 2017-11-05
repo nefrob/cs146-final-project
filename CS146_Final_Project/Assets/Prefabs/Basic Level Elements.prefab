@@ -5813,7 +5813,7 @@ MonoBehaviour:
   playerSource: {fileID: 82790558586187486}
   shieldSource: {fileID: 82288628528409220}
   jumpSound: {fileID: 8300000, guid: a4fc1550214bfce43b43c94b42eb9093, type: 3}
-  pickupSound: {fileID: 0}
+  explosionSound: {fileID: 8300000, guid: 76a52012c594ca04ca54f68c5bb54b81, type: 3}
   dropSound: {fileID: 8300000, guid: 324d04fe7ddd67549b1639d5c9279ad2, type: 3}
   throwSounds:
   - {fileID: 8300000, guid: 818c6f512357dd44f8c606dc6dbaf522, type: 3}
@@ -6423,17 +6423,17 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1414852587437974}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84b863933fdbafc47849f02aea15f42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   crtEffectMaterial: {fileID: 2100000, guid: aeaa19d7c80fd4446a1a7d194dd2b92d, type: 2}
   controller: {fileID: 114085421907316594}
-  otherColor: {r: 1, g: 0, b: 0, a: 0}
+  otherColor: {r: 1, g: 0, b: 0.6666667, a: 0}
   useOtherColor: 1
-  baseColorPower: 0
-  fullColorPower: 1
+  baseColorPower: 0.2
+  fullColorPower: 0.8
 --- !u!114 &114875800714688354
 MonoBehaviour:
   m_ObjectHideFlags: 1
