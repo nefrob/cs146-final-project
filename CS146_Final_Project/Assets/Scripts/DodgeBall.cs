@@ -78,8 +78,7 @@ public class DodgeBall : MonoBehaviour {
             transform.position = hand.position;
             transform.parent = hand;
             rb.simulated = false;
-        }
-        else if (collision.gameObject.tag == "Ground")
+        } else if (collision.gameObject.tag == "Ground")
         {
             // Collide with ground
             if (!source.isPlaying) source.PlayOneShot(bounceSound);

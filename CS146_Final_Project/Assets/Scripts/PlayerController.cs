@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private AudioSource playerSource;
     [SerializeField] private AudioSource shieldSource;
     [SerializeField] private AudioClip jumpSound;
-    [SerializeField] private AudioClip pickupSound;
+    [SerializeField] private AudioClip explosionSound;
     [SerializeField] private AudioClip dropSound;
     [SerializeField] private AudioClip[] throwSounds;
     [SerializeField] private AudioClip shieldSound; // should be able to loop
@@ -361,11 +361,10 @@ public class PlayerController : MonoBehaviour {
          }
     }
 
-    /* Play pickup sound and updates score */ 
-    public void playPickupSound()
+    /* Play explosion sound. */ 
+    public void playExplosionSound()
     {
-        updateScore(1);
-        playerSource.PlayOneShot(pickupSound);
+        playerSource.PlayOneShot(explosionSound);
     }
 
     /* Adds value to score and updates UI component */
