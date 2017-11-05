@@ -83,6 +83,10 @@ public class DodgeBall : MonoBehaviour {
         {
             // Collide with ground
             if (!source.isPlaying) source.PlayOneShot(bounceSound);
+        } else if (collision.gameObject.tag == "Stand")
+        {
+            // Put on ball stand
+            transform.parent = collision.gameObject.transform;
         }
     }
 }

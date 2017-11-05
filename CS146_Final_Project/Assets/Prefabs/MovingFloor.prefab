@@ -9,21 +9,21 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1702405681285376}
+  m_RootGameObject: {fileID: 1636377618809588}
   m_IsPrefabParent: 1
---- !u!1 &1702405681285376
+--- !u!1 &1636377618809588
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4522185898613508}
-  - component: {fileID: 33796266964812426}
-  - component: {fileID: 23284733458729364}
-  - component: {fileID: 61830572183336026}
-  - component: {fileID: 50326411712223608}
-  - component: {fileID: 114150556999428294}
+  - component: {fileID: 4302776649644662}
+  - component: {fileID: 33854574470291170}
+  - component: {fileID: 23153846029534148}
+  - component: {fileID: 61337200175954862}
+  - component: {fileID: 50395422934491912}
+  - component: {fileID: 114152574122579872}
   m_Layer: 0
   m_Name: MovingFloor
   m_TagString: Ground
@@ -31,25 +31,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4522185898613508
+--- !u!4 &4302776649644662
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702405681285376}
+  m_GameObject: {fileID: 1636377618809588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -28.66, y: 0, z: 0}
+  m_LocalPosition: {x: -28, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23284733458729364
+--- !u!23 &23153846029534148
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702405681285376}
+  m_GameObject: {fileID: 1636377618809588}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: eb2d34a3a1526e64b8687da2b770abe1, type: 2}
+  - {fileID: 2100000, guid: 31543fbb980f8154d84bb1d68fceafa9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,20 +78,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33796266964812426
+--- !u!33 &33854574470291170
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702405681285376}
+  m_GameObject: {fileID: 1636377618809588}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50326411712223608
+--- !u!50 &50395422934491912
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702405681285376}
+  m_GameObject: {fileID: 1636377618809588}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -105,12 +105,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61830572183336026
+--- !u!61 &61337200175954862
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702405681285376}
+  m_GameObject: {fileID: 1636377618809588}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 486fc68f3c290e2448168a0733cb838a, type: 2}
@@ -130,18 +130,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114150556999428294
+--- !u!114 &114152574122579872
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702405681285376}
+  m_GameObject: {fileID: 1636377618809588}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd77d34858817d74d8fd361f72d24058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useX: 1
-  useY: 0
+  useX: 0
+  useY: 1
   time: 4
-  distance: -10
+  distance: 5

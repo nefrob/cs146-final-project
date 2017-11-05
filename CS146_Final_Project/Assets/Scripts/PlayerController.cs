@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Text scoreText;
     public Slider shieldBarSlider;
     [SerializeField] private Slider powerUpSlider;
+    [SerializeField] private Text alertText;
     [SerializeField] private GameObject waitText;
     [SerializeField] private GameObject reloadText;
     public int score = 0;
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour {
         balls = new List<DodgeBall>();
         balls.Add(lastBall);
         playerSource.clip = jumpSound;
+        alertText.enabled = false;
     }
 
     /* Check for input. */
@@ -311,6 +313,9 @@ public class PlayerController : MonoBehaviour {
     /* Perform kill action. */
     public void Die()
     {
+        if (isDead) return;
+
+        // Reset all values
         anim.SetBool("isDead", true);
         anim.SetBool("isGrounded", true);
         isDead = true;
@@ -322,6 +327,9 @@ public class PlayerController : MonoBehaviour {
     /* Perform kill action if falling. */
     public void FallDie()
     {
+        if (isDead) return;
+
+        // Reset all values
         anim.SetBool("isFallingDead", true);
         anim.SetBool("isGrounded", true);
         iTween.RotateBy(playerBody, iTween.Hash("y", 0.9, "easeType", "easeInOutBack", "time", 5.0f));

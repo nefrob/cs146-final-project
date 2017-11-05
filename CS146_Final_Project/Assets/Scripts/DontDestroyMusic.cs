@@ -20,6 +20,7 @@ public class DontDestroyMusic : MonoBehaviour {
     /* Don't destroy, if already exists destroy self.  */
     void Awake()
     {
+        transform.parent = null;
         if (instance != null &&instance != this) {
             Destroy(this.gameObject);
             return;

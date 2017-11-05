@@ -5,10 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - KillPlane
-  - Balll
   - Shield
   - PlayerHand
   - Ground
+  - Missile
+  - Stand
+  - Ball
   layers:
   - Default
   - TransparentFX

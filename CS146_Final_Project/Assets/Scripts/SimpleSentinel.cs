@@ -77,7 +77,7 @@ public class SimpleSentinel : MonoBehaviour {
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<PlayerController>().Die();
-        } else if(other.gameObject.tag == "Balll")
+        } else if(other.gameObject.tag == "Ball")
         {
             Destroy(this.gameObject, 0.02f);
         }
