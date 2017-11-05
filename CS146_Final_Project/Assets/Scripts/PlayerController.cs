@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Text alertText;
     [SerializeField] private GameObject waitText;
     [SerializeField] private GameObject reloadText;
+    [SerializeField] private Text ballsText;
     public int score = 0;
     // Player status
     private bool facingRight;
@@ -65,6 +66,8 @@ public class PlayerController : MonoBehaviour {
     // Balls
     public List<DodgeBall> balls;
     private int currBall = 0;
+    [SerializeField] private int numBallsToFind = 0;
+    private HashSet<DodgeBall> ballsFound;
 
     /* Init vars. */
     void Start () {
@@ -78,7 +81,10 @@ public class PlayerController : MonoBehaviour {
         depletedShield = false;
         powerUp = false;
         balls = new List<DodgeBall>();
+        ballsFound = new HashSet<DodgeBall>();
+        ballsFound.Add(lastBall);
         balls.Add(lastBall);
+        updateBallsText();
         playerSource.clip = jumpSound;
         alertText.enabled = false;
     }
@@ -250,6 +256,8 @@ public class PlayerController : MonoBehaviour {
     {
         // Set that has a ball
         hasBall = true;
+        ballsFound.Add(ball);
+        updateBallsText();
 
         if (balls.Count == 0)
         {
@@ -264,6 +272,13 @@ public class PlayerController : MonoBehaviour {
             balls.Add(ball);
             currBall = balls.Count - 1;
         }
+    }
+
+    /* Number of unique balls found. */
+    public int getNumBallsFound()
+    {
+        Debug.Log("balls found = " + ballsFound.Count);
+        return ballsFound.Count;
     }
 
     /* Drops current ball on the ground. */
@@ -365,6 +380,13 @@ public class PlayerController : MonoBehaviour {
     public void playExplosionSound()
     {
         playerSource.PlayOneShot(explosionSound);
+    }
+
+    /* Update ball collection status. */
+    private void updateBallsText()
+    {
+        ballsText.text = "Balls: " + 
+            ballsFound.Count.ToString() + " / " + numBallsToFind.ToString();
     }
 
     /* Adds value to score and updates UI component */

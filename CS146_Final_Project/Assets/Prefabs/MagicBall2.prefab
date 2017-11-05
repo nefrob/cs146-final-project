@@ -172,7 +172,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStartBall: 0
-  throwForce: 75
+  throwForce: 100
   pickupBallSound: {fileID: 8300000, guid: d32aebe945d18954e8d8734cc96078e0, type: 3}
   bounceSound: {fileID: 8300000, guid: 84ab941ab95bbdc43bd16f1460e6d3cc, type: 3}
 --- !u!198 &198766686762355386

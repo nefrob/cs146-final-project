@@ -25,8 +25,6 @@ public class MovingPlatform : MonoBehaviour {
             "easeType", "easeInOutExpo", "time", time, "looptype", "pingpong"));
         else if (useY) iTween.MoveBy(gameObject, iTween.Hash("y", distance, 
             "easeType", "easeInOutExpo", "time", time, "looptype", "pingpong"));
-        else iTween.MoveBy(gameObject, iTween.Hash("z", distance, 
-            "easeType", "easeInOutExpo", "time", time, "looptype", "pingpong"));
     }
 
     void OnCollisionEnter2D(Collision2D collision)
