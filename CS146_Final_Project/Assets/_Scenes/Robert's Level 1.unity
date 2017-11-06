@@ -3849,7 +3849,7 @@ Prefab:
     - target: {fileID: 224317298369471498, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 114985361562931114, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
@@ -3941,7 +3941,7 @@ Prefab:
     - target: {fileID: 114856180420277398, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1012983709434874, guid: d4f1f24f22417024197edad43d21b940, type: 2}
       propertyPath: m_IsActive
