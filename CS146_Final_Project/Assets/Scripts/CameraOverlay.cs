@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class CameraOverlay : MonoBehaviour {
     // Material to apply to the camera
     [SerializeField] private Material crtEffectMaterial;
