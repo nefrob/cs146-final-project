@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Slider powerUpSlider;
     [SerializeField] private Text alertText;
     [SerializeField] private GameObject waitText;
+
     [SerializeField] private GameObject reloadText;
     [SerializeField] private Text ballsText;
     public int score = 0;

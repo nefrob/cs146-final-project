@@ -24,8 +24,12 @@ public class DodgeBall : MonoBehaviour {
     private PlayerController playerScript;
     // Audio
     private AudioSource source;
-    [SerializeField] private AudioClip pickupBallSound;
+    [SerializeField] private AudioClip[] pickupBallSound;
     [SerializeField] private AudioClip bounceSound;
+    // Audio text
+    [SerializeField] private GameObject niceText;
+    [SerializeField] private GameObject rightousText;
+    int secondsToWait = 2;
 
     // Initialize variables
     void Start () {
@@ -74,7 +78,9 @@ public class DodgeBall : MonoBehaviour {
             myCollider.enabled = false;
             playerScript.AddBallToPlayer(this);
             playerScript.pickupBall = false;
-            source.PlayOneShot(pickupBallSound);
+            // audio 
+            playBallAudio();
+            // rest of picking up ball
             transform.position = hand.position;
             transform.parent = hand;
             rb.simulated = false;
@@ -88,4 +94,27 @@ public class DodgeBall : MonoBehaviour {
             transform.parent = collision.gameObject.transform;
         }
     }
+
+    void playBallAudio() {
+        AudioClip nice = pickupBallSound[0];
+        AudioClip rightous = pickupBallSound[1];
+        AudioClip pickupBall = pickupBallSound[Random.Range(0, 2)];
+        source.PlayOneShot(pickupBall);
+        if (pickupBall == nice)
+        {
+            niceText.SetActive(true);
+            Invoke("deleteText", 2);
+        }
+        else
+        {
+            rightousText.SetActive(true);
+            Invoke("deleteText", 2);
+        }
+    }
+
+    void deleteText() {
+        niceText.SetActive(false);
+        rightousText.SetActive(false);
+    }
+
 }
