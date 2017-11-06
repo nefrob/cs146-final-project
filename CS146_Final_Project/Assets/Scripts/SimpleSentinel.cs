@@ -18,9 +18,12 @@ public class SimpleSentinel : MonoBehaviour {
     public float speed = 10f;
     public  rocketManager fireScript;
 
+    private PlayerController playerScript;
+
     void Start(){
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         enemy = GetComponent<Rigidbody2D>();
+        playerScript = FindObjectOfType<PlayerController>();
     }
 
     void Update () {
@@ -79,6 +82,7 @@ public class SimpleSentinel : MonoBehaviour {
             other.gameObject.GetComponent<PlayerController>().Die();
         } else if(other.gameObject.tag == "Ball")
         {
+            playerScript.updateScore(10);
             Destroy(this.gameObject, 0.02f);
         }
     }

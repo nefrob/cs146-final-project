@@ -6481,7 +6481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endUI: {fileID: 1460197552693950}
   ballMsg: {fileID: 1634609522941818}
-  ballsInLevel: 6
 --- !u!114 &114432611173337358
 MonoBehaviour:
   m_ObjectHideFlags: 1

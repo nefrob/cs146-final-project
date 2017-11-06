@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
     // Balls
     public List<DodgeBall> balls;
     private int currBall = 0;
-    [SerializeField] private int numBallsToFind = 0;
+    public int numBallsToFind = 0;
     private HashSet<DodgeBall> ballsFound;
 
     /* Init vars. */
@@ -277,7 +277,6 @@ public class PlayerController : MonoBehaviour {
     /* Number of unique balls found. */
     public int getNumBallsFound()
     {
-        Debug.Log("balls found = " + ballsFound.Count);
         return ballsFound.Count;
     }
 

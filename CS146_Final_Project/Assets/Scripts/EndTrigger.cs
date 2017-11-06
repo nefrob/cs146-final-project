@@ -15,8 +15,6 @@ public class EndTrigger : MonoBehaviour {
     // UI
     [SerializeField] private GameObject endUI;
     [SerializeField] private GameObject ballMsg;
-    // End condition
-    [SerializeField] private int ballsInLevel = 0;
     // Change game state
     private GameManager gameManager;
     private PlayerController playerScript;
@@ -32,11 +30,11 @@ public class EndTrigger : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag != "Player") return;
 
-        // MAke ui visible
+        // Make ui visible
         endUI.SetActive(true);
 
-        // Check if found all balls
-        if (playerScript.getNumBallsFound() < ballsInLevel)
+        // Check if found all balls, end condition
+        if (playerScript.getNumBallsFound() < playerScript.numBallsToFind)
         {
             ballMsg.SetActive(true);
             return;
