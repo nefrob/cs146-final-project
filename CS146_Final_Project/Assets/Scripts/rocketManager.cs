@@ -12,10 +12,16 @@ public class rocketManager : MonoBehaviour
     public float cannonSpeed = 10f;
     public float fireTime = 3f;
     public Animation shoot;
+    private PlayerController playerScript;
 
     private double timePassed = 0;
     private bool firingAllowed = false;
     private int counter = 0;
+
+    private void Start()
+    {
+        playerScript = FindObjectOfType<PlayerController>();
+    }
 
     void Update()
     {
@@ -25,14 +31,6 @@ public class rocketManager : MonoBehaviour
             if (timePassed > fireTime)
             {
                 fire();
-                /*Debug.Log(timePassed);
-                if (counter < 2) {
-                    fire();
-                }
-                else {
-                    counter = 0;
-                    fireTargeted();
-                }*/
                 counter++;
                 timePassed = 0;
             }
@@ -42,6 +40,7 @@ public class rocketManager : MonoBehaviour
 
     public void startFiring()
     {
+        if (!firingAllowed)fire(); 
         firingAllowed = true;
     }
 
@@ -53,6 +52,7 @@ public class rocketManager : MonoBehaviour
     //Organize these up
     private void fire()
     {
+        if (playerScript.isDeadState()) return;
         shoot.Play();
         if (enemyControl.getDirection() == "forward")
         {

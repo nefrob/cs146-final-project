@@ -401,4 +401,9 @@ public class PlayerController : MonoBehaviour {
         score = 0;
         scoreText.text = "Score: " + score.ToString();
     }
+
+    /*For external scripts to note when the player has died*/
+    public bool isDeadState() {
+        return isDead;
+    }
 }

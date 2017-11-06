@@ -16,7 +16,9 @@ public class SimpleSentinel : MonoBehaviour {
     private Rigidbody2D enemy;
     public Rigidbody2D player;
     public float speed = 10f;
-    public  rocketManager fireScript;
+    public rocketManager fireScript;
+    [SerializeField]
+    private GameObject explosion;
 
     private PlayerController playerScript;
 
@@ -54,9 +56,9 @@ public class SimpleSentinel : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         if (timePassed > changeDirTime && movementEnabled)
             {
-                if (direction == "forward")
+                if (direction == "backward")
                 {
-                    direction = "backward";
+                    direction = "forward";
                     //enemy.AddForce(Vector2.right* -speed,ForceMode2D.Impulse);
                     enemy.velocity = Vector2.right*-speed;
                     theScale.z *= -1;
@@ -64,7 +66,7 @@ public class SimpleSentinel : MonoBehaviour {
             }
                 else
                 {
-                    direction = "forward";
+                    direction = "backward";
                     //enemy.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
                     enemy.velocity = Vector2.right * speed;
                     theScale.z *= -1;
@@ -79,9 +81,14 @@ public class SimpleSentinel : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
+            Vector3 pos = transform.position;
+            pos.y += 1.5f;
+            Destroy(this.gameObject, 0.02f);
+            GameObject boom = Instantiate(explosion, pos, transform.rotation) as GameObject;
             other.gameObject.GetComponent<PlayerController>().Die();
         } else if(other.gameObject.tag == "Ball")
         {
+            GameObject boom = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
             playerScript.updateScore(10);
             Destroy(this.gameObject, 0.02f);
         }
