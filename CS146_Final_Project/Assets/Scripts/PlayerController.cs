@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Player Controller
 * Author:      Robert Neff
-* Date:        11/05/17
+* Date:        11/09/17
 * Description: Implements player related systems: movement, animation, and
 *              and public methods to be called upon collision with another object.
 */
@@ -9,7 +9,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     // Movement parameters
@@ -27,26 +26,10 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float groundRadius;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private bool airControl;
-    // Audio options
-    [SerializeField] private AudioSource playerSource;
-    [SerializeField] private AudioSource shieldSource;
-    [SerializeField] private AudioClip jumpSound;
-    [SerializeField] private AudioClip explosionSound;
-    [SerializeField] private AudioClip dropSound;
-    [SerializeField] private AudioClip[] throwSounds;
-    [SerializeField] private AudioClip shieldSound; // should be able to loop
-    [SerializeField] private AudioClip deathSound;
-    [SerializeField] private AudioClip fallingDeathSound;
-    [SerializeField] private AudioClip switchBall;
-    // UI
-    [SerializeField] private Text scoreText;
-    public Slider shieldBarSlider;
-    [SerializeField] private Slider powerUpSlider;
-    [SerializeField] private Text alertText;
-    [SerializeField] private GameObject waitText;
-    [SerializeField] private GameObject reloadText;
-    [SerializeField] private Text ballsText;
-    public int score = 0;
+    // Audio
+    [SerializeField] private PlayerAudio myAudio;
+    //UI
+    [SerializeField] private UIHandler ui;
     // Player status
     private bool facingRight;
     private bool hasBall;
@@ -59,12 +42,13 @@ public class PlayerController : MonoBehaviour {
     private bool isDead;
     private bool depletedShield;
     private bool powerUp;
+    public int score = 0;
     // Animation
     [SerializeField] private Animator anim;
     // Player Systems
     [SerializeField] private GameObject forceField;
-    [SerializeField] private DodgeBall lastBall;
     // Balls
+    [SerializeField] private DodgeBall lastBall;
     public List<DodgeBall> balls;
     private int currBall = 0;
     public int numBallsToFind = 0;
@@ -72,6 +56,8 @@ public class PlayerController : MonoBehaviour {
 
     /* Init vars. */
     void Start () {
+        myAudio = FindObjectOfType<PlayerAudio>();
+        ui = FindObjectOfType<UIHandler>();
         rb = GetComponent<Rigidbody2D>();
         facingRight = true;
         hasBall = true;
@@ -85,9 +71,7 @@ public class PlayerController : MonoBehaviour {
         ballsFound = new HashSet<DodgeBall>();
         ballsFound.Add(lastBall);
         balls.Add(lastBall);
-        updateBallsText();
-        playerSource.clip = jumpSound;
-        alertText.enabled = false;
+        ui.updateBallsText(ballsFound.Count, numBallsToFind);
     }
 
     /* Check for input. */
@@ -95,7 +79,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (isDead) return;
 
-        // Read the jump input in Update so button presses aren't missed.
+        // Read the input in Update so button presses aren't missed.
         if (!jump) jump = Input.GetButtonDown("Jump");
         throwBall = Input.GetKeyUp(KeyCode.Q);// Input.GetButtonDown("Fire1");
         powerUp = Input.GetKey(KeyCode.Q);
@@ -104,6 +88,7 @@ public class PlayerController : MonoBehaviour {
         pickupBall = Input.GetKey(KeyCode.LeftShift);
         dropBall = Input.GetKeyDown(KeyCode.E);
 
+        // TODO: fix
         if (Input.GetKeyDown(KeyCode.T)) cameraShake.SetActive(true);
         if (cameraShake.GetComponent<CameraShake>().shakeDuration == 0)
         {
@@ -144,17 +129,7 @@ public class PlayerController : MonoBehaviour {
     /* Sets layer power up status. */
     private void setPowerUp()
     {
-        GameObject parent = powerUpSlider.transform.parent.gameObject;
-        if (powerUp && hasBall && isGrounded)
-        {
-            if (!parent.activeInHierarchy) parent.SetActive(true);
-            if (powerUpSlider.value < 1) powerUpSlider.value += powerUpRate * Time.deltaTime;
-        }
-        else
-        {
-            if (parent.activeInHierarchy) parent.SetActive(false);
-            powerUpSlider.value = 0;
-        }
+        ui.setPowerUpUI(powerUp && hasBall && isGrounded, powerUpRate);
     }
 
     /* Sets player throwing status. */
@@ -165,9 +140,8 @@ public class PlayerController : MonoBehaviour {
             lastBall = balls[currBall];
             removeBall();
             anim.SetBool("isThrowing", true);
-            playerSource.clip = throwSounds[Random.Range(0, 3)];
-            playerSource.Play();
-            StartCoroutine(InvokeThrow(0.28f, powerUpForce * powerUpSlider.value));
+            myAudio.playThrowSound();
+            StartCoroutine(InvokeThrow(0.28f, powerUpForce * ui.powerUpSlider.value));
         }
         else
         {
@@ -178,33 +152,33 @@ public class PlayerController : MonoBehaviour {
     /* Sets player shielding status. */
     private void setShielding()
     {
-        if (shieldBarSlider.value == 1) reloadText.SetActive(false);
-        if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && !depletedShield)
+        if (ui.shieldBarSlider.value == 1) ui.reloadText.SetActive(false);
+        if (shield && hasBall && isGrounded && ui.shieldBarSlider.value > 0 && !depletedShield)
         {
             forceField.SetActive(true);
-            shieldSource.Play();
+            myAudio.shieldSource.Play();
             anim.SetBool("isShielding", true);
-            shieldBarSlider.value -= shieldDepleteRate * Time.deltaTime;  // reduce shield capacity
+            ui.shieldBarSlider.value -= shieldDepleteRate * Time.deltaTime;  // reduce shield capacity
         } 
         else
         {
-            if (shield && hasBall && isGrounded && shieldBarSlider.value > 0 && depletedShield) waitText.SetActive(true);
+            if (shield && hasBall && isGrounded && ui.shieldBarSlider.value > 0 && depletedShield) ui.waitText.SetActive(true);
 
+            myAudio.shieldSource.Stop();
             forceField.SetActive(false);
-            shieldSource.Stop();
             anim.SetBool("isShielding", false);
-            if (shieldBarSlider.value < 1)
+            if (ui.shieldBarSlider.value < 1)
             {
-                shieldBarSlider.value += shieldRefillRate * Time.deltaTime;
-                reloadText.SetActive(true);
+                ui.shieldBarSlider.value += shieldRefillRate * Time.deltaTime;
+                ui.reloadText.SetActive(true);
             }
-            if (shieldBarSlider.value <= 0.01f) depletedShield = true;
+            if (ui.shieldBarSlider.value <= 0.01f) depletedShield = true;
         }
         // Reset so can use again
-        if (shieldBarSlider.value > 0.3f)
+        if (ui.shieldBarSlider.value > 0.3f)
         {
             depletedShield = false;
-            waitText.SetActive(false);
+            ui.waitText.SetActive(false);
         }
     }
 
@@ -225,7 +199,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (isGrounded && jump && anim.GetBool("isGrounded"))
         {
-            playerSource.PlayOneShot(jumpSound);
+            myAudio.playerSource.PlayOneShot(myAudio.jumpSound);
             isGrounded = false;
             anim.SetBool("isGrounded", false);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
@@ -243,7 +217,7 @@ public class PlayerController : MonoBehaviour {
         if (input == 0) return;
 
         balls[currBall].gameObject.SetActive(false);
-        playerSource.PlayOneShot(switchBall);
+        myAudio.playerSource.PlayOneShot(myAudio.switchBall);
         if (input > 0f)
         {
             // scroll up
@@ -264,8 +238,9 @@ public class PlayerController : MonoBehaviour {
     {
         // Set that has a ball
         hasBall = true;
+        myAudio.playerSource.PlayOneShot(myAudio.pickupBall);
         ballsFound.Add(ball);
-        updateBallsText();
+        ui.updateBallsText(ballsFound.Count, numBallsToFind);
 
         if (balls.Count == 0)
         {
@@ -292,7 +267,7 @@ public class PlayerController : MonoBehaviour {
     private void playerDropBall()
     {
         if (balls.Count == 0) return;
-        playerSource.PlayOneShot(dropSound);
+        myAudio.playerSource.PlayOneShot(myAudio.dropSound);
         lastBall = balls[currBall];
         removeBall();
         lastBall.DropBall(playerBody.transform.forward.x);
@@ -342,7 +317,7 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("isGrounded", true);
         isDead = true;
         resetScore();
-        playerSource.PlayOneShot(deathSound);
+        myAudio.playerSource.PlayOneShot(myAudio.deathSound);
         FindObjectOfType<GameManager>().endGame();
     }
 
@@ -357,14 +332,14 @@ public class PlayerController : MonoBehaviour {
         iTween.RotateBy(playerBody, iTween.Hash("y", 0.9, "easeType", "easeInOutBack", "time", 5.0f));
         isDead = true;
         resetScore();
-        playerSource.PlayOneShot(fallingDeathSound);
+        myAudio.playerSource.PlayOneShot(myAudio.fallingDeathSound);
         FindObjectOfType<GameManager>().endGame();
     }
 
     /* Invoke function to throw ball. */
     IEnumerator InvokeThrow(float delay, float force) {
         yield return new WaitForSeconds(delay);
-        lastBall.ThowBall(playerBody.transform.forward.x, force);
+        lastBall.ThrowBall(playerBody.transform.forward.x, force);
     }
 
     /* Updates balls list and character to reflect current ball. */
@@ -386,28 +361,21 @@ public class PlayerController : MonoBehaviour {
     /* Play explosion sound. */ 
     public void playExplosionSound()
     {
-        playerSource.PlayOneShot(explosionSound);
-    }
-
-    /* Update ball collection status. */
-    private void updateBallsText()
-    {
-        ballsText.text = "Balls: " + 
-            ballsFound.Count.ToString() + " / " + numBallsToFind.ToString();
+        myAudio.playerSource.PlayOneShot(myAudio.explosionSound);
     }
 
     /* Adds value to score and updates UI component */
     public void updateScore(int add)
     {
         score += add;
-        scoreText.text = "Score: " + score.ToString();
+        ui.updateScore(score);
     }
 
     /* Reset score to zero. */
     private void resetScore()
     {
         score = 0;
-        scoreText.text = "Score: " + score.ToString();
+        ui.updateScore(0);
     }
 
     /*For external scripts to note when the player has died*/

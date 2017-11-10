@@ -1,17 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+* File:        Shield Collision
+* Author:      Robert Neff
+* Date:        11/05/17
+* Description: Handles collisions with the shield.
+*/
+
 using UnityEngine;
 
 public class ShieldCollision : MonoBehaviour {
     // Missile hit deduction cost
-    [Range(0.0f, 1.0f)] public float cost = 0.3f;   
-    // Change shield health in player script
+    [Range(0.0f, 1.0f)] public float cost = 0.3f;
+    // Update shield ui and player status
     private PlayerController playerScript;
+    private UIHandler uiScript;
 
-    // Get player script
-    private void Start()
+    // Get ui script
+    void Start()
     {
-        
+        playerScript = FindObjectOfType<PlayerController>();
+        uiScript = FindObjectOfType<UIHandler>();
     }
 
     /* Handle collision with shield. */
@@ -19,9 +26,8 @@ public class ShieldCollision : MonoBehaviour {
     {
         if (collision.tag == "Missile")
         {
-            playerScript = FindObjectOfType<PlayerController>();
-            playerScript.shieldBarSlider.value -= cost;
-            if (playerScript.shieldBarSlider.value < 0) playerScript.shieldBarSlider.value = 0;
+            uiScript.shieldBarSlider.value -= cost;
+            if (uiScript.shieldBarSlider.value < 0) uiScript.shieldBarSlider.value = 0;
             playerScript.playExplosionSound();
             playerScript.updateScore(1);
             Destroy(collision.gameObject);

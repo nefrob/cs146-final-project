@@ -14,6 +14,7 @@ using UnityEngine;
 public class BackgroundScroller : MonoBehaviour {
 
     [SerializeField] private float speed = 0.5f;
+    [SerializeField] private float y_offset = 0;
     [SerializeField] private float z_offset = 8;
     [SerializeField] private bool scrollY = false;
 
@@ -37,7 +38,7 @@ public class BackgroundScroller : MonoBehaviour {
     /* Update texture coords to create scroll effect. */
     void Update()
     {
-        transform.position = new Vector3(player.position.x, player.position.y, z_offset);
+        transform.position = new Vector3(player.position.x, player.position.y + y_offset, z_offset);
 
         // Find coordinate shift
         posX += (player.position.x - prevX) * Time.deltaTime * speed;

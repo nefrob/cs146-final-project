@@ -1,22 +1,20 @@
 ﻿/*
 * File:        Camera Overlay
 * Author:      Robert Neff
-* Date:        11/05/17
+* Date:        11/09/17
 * Description: Overlays an effect material on the camera that scales with
 *              player shield value.
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //[ExecuteInEditMode]
 public class CameraOverlay : MonoBehaviour {
     // Material to apply to the camera
     [SerializeField] private Material crtEffectMaterial;
-    [SerializeField] private PlayerController controller;
+    private UIHandler uiScript;
     [SerializeField] private Color otherColor;
-    [SerializeField] private bool useOtherColor;
+    [SerializeField] private bool editColorOnCamera;
     private Color startColor;
     // Powers
     [Range(0.0f, 1.0f)] public float baseColorPower = 0.0f; // 0-1
@@ -25,8 +23,16 @@ public class CameraOverlay : MonoBehaviour {
     /* Set start color for reference. */
     void Start()
     {
-        if (useOtherColor) startColor = otherColor;
+        uiScript = FindObjectOfType<UIHandler>();
+
+        if (editColorOnCamera) startColor = otherColor;
         else startColor = crtEffectMaterial.color;
+    }
+
+    /* Allow runtime shader color changes for debugging. */
+    void Update()
+    {
+        if (editColorOnCamera) startColor = otherColor;
     }
 
     /* Render texture to the screen. */
@@ -34,9 +40,9 @@ public class CameraOverlay : MonoBehaviour {
     {
         Color temp = startColor;
         // Compute amount to change material color by
-        temp.r = baseColorPower * temp.r + fullColorPower * (1 - controller.shieldBarSlider.value) * temp.r;
-        temp.b = baseColorPower * temp.b + fullColorPower * (1 - controller.shieldBarSlider.value) * temp.b;
-        temp.g = baseColorPower * temp.g + fullColorPower * (1 - controller.shieldBarSlider.value) * temp.g;
+        temp.r = baseColorPower * temp.r + fullColorPower * (1 - uiScript.shieldBarSlider.value) * temp.r;
+        temp.b = baseColorPower * temp.b + fullColorPower * (1 - uiScript.shieldBarSlider.value) * temp.b;
+        temp.g = baseColorPower * temp.g + fullColorPower * (1 - uiScript.shieldBarSlider.value) * temp.g;
         crtEffectMaterial.color = temp;
         Graphics.Blit(source, destination, crtEffectMaterial);
     }

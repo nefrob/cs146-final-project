@@ -43,6 +43,8 @@ public class EndTrigger : MonoBehaviour {
         // End game, all complete
         GetComponent<AudioSource>().Play();
         gameManager.completeLevel();
+        playerScript.gameObject.GetComponent<Rigidbody2D>().simulated = false; // disable movement
+        playerScript.enabled = false;
     }
 
     /* Get rid of display text. */

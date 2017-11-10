@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33215949651221800}
   - component: {fileID: 23893441388841540}
   - component: {fileID: 58043655992632436}
+  - component: {fileID: 58304619767872848}
   - component: {fileID: 114961665347182906}
   - component: {fileID: 50056126281178532}
   - component: {fileID: 82510046937448654}
@@ -152,6 +153,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!58 &58304619767872848
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1141221837792654}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
 --- !u!82 &82510046937448654
 AudioSource:
   m_ObjectHideFlags: 1
@@ -245,7 +261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStartBall: 0
   throwForce: 100
-  pickupBallSound: {fileID: 8300000, guid: d32aebe945d18954e8d8734cc96078e0, type: 3}
   bounceSound: {fileID: 8300000, guid: 84ab941ab95bbdc43bd16f1460e6d3cc, type: 3}
 --- !u!198 &198003259834641770
 ParticleSystem:

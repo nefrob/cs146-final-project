@@ -11,7 +11,7 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     // Camera transfrom to shake
-	public Transform camTransform;	
+	public Transform cameraTransform;	
 	// Shake time
 	public float shakeDuration = 0f;
 	// Shake amplitude
@@ -19,21 +19,12 @@ public class CameraShake : MonoBehaviour
     public float shakeDepletionRate = 1.0f;
 	
     // Starting camera position
-	Vector3 startPos;
-	
-    /* Get the camera transform. */
-	void Awake()
-	{
-		if (camTransform == null)
-		{
-			camTransform = GetComponent(typeof(Transform)) as Transform;
-		}
-	}
+	private Vector3 startPos;
 	
     /* Set position to revert to. */
 	void OnEnable()
 	{
-        startPos = camTransform.localPosition;
+        startPos = cameraTransform.localPosition;
 	}
 
     /* Shake camera while active and duration greater than zero. */
@@ -41,13 +32,13 @@ public class CameraShake : MonoBehaviour
 	{
 		if (shakeDuration > 0)
 		{
-			camTransform.localPosition = startPos + Random.insideUnitSphere * shakeAmount;
+            cameraTransform.localPosition = startPos + Random.insideUnitSphere * shakeAmount;
 			shakeDuration -= shakeDepletionRate * Time.deltaTime;
 		}
 		else
 		{
 			shakeDuration = 0f;
-			camTransform.localPosition = startPos;
+            cameraTransform.localPosition = startPos;
 		}
 	}
 }
