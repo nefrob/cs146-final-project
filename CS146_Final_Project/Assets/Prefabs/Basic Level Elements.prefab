@@ -2517,7 +2517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1879023188798540
 GameObject:
   m_ObjectHideFlags: 1
@@ -5730,7 +5730,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 1}
+  m_Size: {x: 3, y: 1}
   m_EdgeRadius: 0
 --- !u!81 &81409754625005728
 AudioListener:
@@ -6416,7 +6416,6 @@ MonoBehaviour:
   powerUpRate: 0.5
   powerUpForce: 60
   playerBody: {fileID: 1202899737364002}
-  cameraShake: {fileID: 1861244946691164}
   groundPoints:
   - {fileID: 4719475972434864}
   - {fileID: 4279068139339334}
@@ -7021,7 +7020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 4237584877145008}
-  shakeDuration: 1
+  shakeDuration: 0
   shakeAmount: 0.7
   shakeDepletionRate: 1
 --- !u!114 &114805612969663700

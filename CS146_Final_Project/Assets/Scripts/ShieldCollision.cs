@@ -13,12 +13,14 @@ public class ShieldCollision : MonoBehaviour {
     // Update shield ui and player status
     private PlayerController playerScript;
     private UIHandler uiScript;
+    private CameraShake shakeScript;
 
     // Get ui script
     void Start()
     {
         playerScript = FindObjectOfType<PlayerController>();
         uiScript = FindObjectOfType<UIHandler>();
+        shakeScript = FindObjectOfType<CameraShake>();
     }
 
     /* Handle collision with shield. */
@@ -29,6 +31,7 @@ public class ShieldCollision : MonoBehaviour {
             uiScript.shieldBarSlider.value -= cost;
             if (uiScript.shieldBarSlider.value < 0) uiScript.shieldBarSlider.value = 0;
             playerScript.playExplosionSound();
+            shakeScript.shakeScreen(1.0f, 0.7f);
             playerScript.updateScore(1);
             Destroy(collision.gameObject);
         }

@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float powerUpRate = 0.1f;
     [SerializeField] private float powerUpForce = 50f;
     [SerializeField] private GameObject playerBody;
-    [SerializeField] private GameObject cameraShake;
     private Rigidbody2D rb;
     // Ground status
     [SerializeField] private Transform[] groundPoints;
@@ -87,14 +86,6 @@ public class PlayerController : MonoBehaviour {
         setCurrBallMouse();
         pickupBall = Input.GetKey(KeyCode.LeftShift);
         dropBall = Input.GetKeyDown(KeyCode.E);
-
-        // TODO: fix
-        if (Input.GetKeyDown(KeyCode.T)) cameraShake.SetActive(true);
-        if (cameraShake.GetComponent<CameraShake>().shakeDuration == 0)
-        {
-            cameraShake.SetActive(false);
-            cameraShake.GetComponent<CameraShake>().shakeDuration = 1;
-        }
     }
 
     /* Compute physics and movement. */

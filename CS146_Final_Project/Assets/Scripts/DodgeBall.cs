@@ -16,6 +16,7 @@ public class DodgeBall : MonoBehaviour {
     // Ball state
     private CircleCollider2D myCollider;
     private Rigidbody2D rb;
+    private Vector3 startLocation;
     // Ball stats
     [SerializeField] private float throwForce = 100.0f;
     // Player update
@@ -45,6 +46,7 @@ public class DodgeBall : MonoBehaviour {
         playerScript = FindObjectOfType<PlayerController>();
         Physics2D.IgnoreCollision(playerScript.gameObject.GetComponent<BoxCollider2D>(), myCollider);
         source = GetComponent<AudioSource>();
+        startLocation = transform.position;
         hand = GameObject.FindGameObjectWithTag("PlayerHand").transform;
         if (isStartBall)
         {
@@ -97,8 +99,13 @@ public class DodgeBall : MonoBehaviour {
     /* Handle collisions with the player. */
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") return;
-        playerPickMeUp();
+        if (collision.tag == "Player") playerPickMeUp();
+        else if (collision.tag == "KillPlane")
+        {
+            transform.position = startLocation;
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0;
+        }
     }
 
     /* Handle collisions with the player staying within ball trigger. */
