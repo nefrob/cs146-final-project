@@ -11,6 +11,8 @@ TagManager:
   - Missile
   - Stand
   - Ball
+  - CanDestroy
+  - Red
   layers:
   - Default
   - TransparentFX
