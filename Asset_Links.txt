@@ -1,3 +1,5 @@
+Placeholder citation for minimap: http://blog.theknightsofunity.com/implementing-minimap-unity/
+
 Post links to assets below. This will be used for sources later.
 
 https://www.sitepoint.com/create-a-neon-retro-text-effect-in-photoshop/
