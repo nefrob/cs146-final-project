@@ -26,25 +26,30 @@ public class SimpleSentinel : MonoBehaviour {
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         enemy = GetComponent<Rigidbody2D>();
         playerScript = FindObjectOfType<PlayerController>();
-
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
     }
 
     void Update () {
+        bool movementEnabled = true;
         //Use the two store floats to create a new Vector2 variable movement.
         float range = Vector2.Distance(transform.position, player.transform.position);
-        Vector3 directionToTarget = transform.position - player.transform.position;
-        bool movementEnabled = true;
-        float scalez = transform.localScale.z;
+        
+        //Angle to player calculation
+        Vector3 directionToTarget = player.transform.position - transform.position;
+        float angle = Vector3.Angle(directionToTarget, transform.forward);
+        //Is in range and is looking at direction and is in angle
 
-        //Is in range and is looking at direction
-        if (range <= detectionRange && directionToTarget.x > 0 && direction == "forward")
+        if (range <= detectionRange &&
+            (Vector3.Angle(transform.position - player.transform.position, transform.forward) <= 10 &&
+            !Physics.Linecast(transform.position, player.transform.position)) && direction == "forward")
         {
             movementEnabled = false;
             fireScript.startFiring();
             enemy.velocity = Vector2.right * 0;
         }
-        else if (range <= detectionRange && directionToTarget.x < 0 && direction == "backward")
+        else if (range <= detectionRange &&
+            (Vector3.Angle(player.transform.position - transform.position, transform.forward) <= 10 &&
+            !Physics.Linecast(transform.position, player.transform.position)) && direction == "backward")
         {
             movementEnabled = false;
             fireScript.startFiring();

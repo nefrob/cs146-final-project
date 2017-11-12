@@ -13,7 +13,6 @@ public class rocketManager : MonoBehaviour
     public float fireTime = 3f;
     public Animation shoot;
     private PlayerController playerScript;
-
     private double timePassed = 0;
     private bool firingAllowed = false;
     private int counter = 0;
