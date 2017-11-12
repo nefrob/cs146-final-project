@@ -12,6 +12,7 @@ public class backAndForthHover : MonoBehaviour {
     // Use this for initialization
     void Start () {
         enemy = GetComponent<Rigidbody2D>();
+        timePassed = 10000;
     }
 
     // Update is called once per frame

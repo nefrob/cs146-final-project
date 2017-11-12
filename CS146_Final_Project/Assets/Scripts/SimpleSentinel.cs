@@ -14,7 +14,7 @@ public class SimpleSentinel : MonoBehaviour {
     public double detectionRange = 10;
     private double timePassed = 0;
     private Rigidbody2D enemy;
-    public Rigidbody2D player;
+    private Rigidbody2D player;
     public float speed = 10f;
     public rocketManager fireScript;
     [SerializeField]
@@ -26,6 +26,8 @@ public class SimpleSentinel : MonoBehaviour {
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         enemy = GetComponent<Rigidbody2D>();
         playerScript = FindObjectOfType<PlayerController>();
+
+        player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
     }
 
     void Update () {

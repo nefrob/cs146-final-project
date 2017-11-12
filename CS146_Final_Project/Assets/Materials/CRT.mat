@@ -108,6 +108,6 @@ Material:
     - _YScrollSpeed: 1.5
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.38330883, g: 0.022547577, b: 0.26886034, a: 0}
+    - _Color: {r: 0.2, g: 0, b: 0.18620692, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

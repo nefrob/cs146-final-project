@@ -6,12 +6,12 @@ public class bomber : MonoBehaviour {
     public GameObject rockets;        
     public float fireTime = 2f;
     public float detectionRange = 6f;
-    public Transform player;
+    private Transform player;
     private float timePassed = 0;
     // Use this for initialization
     void Start () {
-		
-	}
+        player = GameObject.Find("Player").GetComponent<Transform>();
+    }
 	
 	// Update is called once per frame
 	void Update () {

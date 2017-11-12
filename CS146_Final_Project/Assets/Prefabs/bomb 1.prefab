@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114367962112890806}
   m_Layer: 0
   m_Name: bomb 1
-  m_TagString: Untagged
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,4 +169,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1000010608846784, guid: dc7d82d9fa6230e43b2ebf85206e55f3, type: 2}
-  onPlatformImpact: 0
+  onPlatformImpact: 1
