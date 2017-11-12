@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527605889004954}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -49.42, y: 5.5, z: 0}
+  m_LocalPosition: {x: 7.1, y: 0.79, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4092155883896062}
@@ -454,10 +454,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: forward
-  changeDirTime: 2.5
-  detectionRange: 20
-  player: {fileID: 0}
-  speed: 10
+  changeDirTime: 2
+  detectionRange: 15
+  speed: 1
   fireScript: {fileID: 114912055140026502}
   explosion: {fileID: 1000010608846784, guid: 6747b1742d70743a8aff8594e708b2f7, type: 2}
 --- !u!114 &114912055140026502
@@ -475,6 +474,6 @@ MonoBehaviour:
   rocketsTargeted: {fileID: 1373009456349000, guid: b130af442c640a74d83c31bba33cc162,
     type: 2}
   enemyControl: {fileID: 114178027379236362}
-  cannonSpeed: 25
-  fireTime: 2
+  cannonSpeed: 14
+  fireTime: 3
   shoot: {fileID: 111073035234347858}

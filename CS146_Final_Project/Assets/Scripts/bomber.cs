@@ -5,6 +5,7 @@ using UnityEngine;
 public class bomber : MonoBehaviour {
     public GameObject rockets;        
     public float fireTime = 2f;
+    public bool randomBombsMode = false;
     public float detectionRange = 6f;
     private Transform player;
     private float timePassed = 0;
@@ -17,17 +18,35 @@ public class bomber : MonoBehaviour {
 	void Update () {
         float range = Vector2.Distance(transform.position, player.transform.position);
         Vector3 directionToTarget = transform.position - player.transform.position;
-        if (range <= detectionRange)
-        {
-            if (timePassed > fireTime)
+
+        if (range <= detectionRange) {
+            if (randomBombsMode)
             {
-                Vector2 pos = transform.position;
-                pos.y -= 1.2f;
-                GameObject bomb = Instantiate(rockets,pos, transform.rotation) as GameObject;
-                timePassed = 0;
+                if (timePassed > fireTime)
+                {
+                    dropBomb();
+                    timePassed = 0;
+                }
+                timePassed = timePassed + Time.deltaTime;
             }
-            timePassed = timePassed + Time.deltaTime;
+            else if (player.transform.position.x > -1 + transform.position.x && player.transform.position.x < 1 + transform.position.x)
+            {
+                if (timePassed > fireTime)
+                {
+                    dropBomb();
+                    timePassed = 0;
+                }               
+
+            }
+            else {
+                timePassed = timePassed + Time.deltaTime;
+            }
         }
-        
+    }
+
+    private void dropBomb() {
+        Vector2 pos = transform.position;
+        pos.y -= 1.2f;
+        GameObject bomb = Instantiate(rockets, pos, transform.rotation) as GameObject;
     }
 }
