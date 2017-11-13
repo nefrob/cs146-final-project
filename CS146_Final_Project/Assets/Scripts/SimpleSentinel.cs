@@ -33,15 +33,12 @@ public class SimpleSentinel : MonoBehaviour {
         bool movementEnabled = true;
         //Use the two store floats to create a new Vector2 variable movement.
         float range = Vector2.Distance(transform.position, player.transform.position);
-        
-        //Angle to player calculation
-        Vector3 directionToTarget = player.transform.position - transform.position;
-        float angle = Vector3.Angle(directionToTarget, transform.forward);
-        //Is in range and is looking at direction and is in angle
 
-        if (range <= detectionRange &&
+        //Is in range and is looking at direction and is in angle
+        //Debug.Log((Vector3.Angle(transform.position - player.transform.position, transform.forward) + " " +!Physics.Linecast(transform.position, player.transform.position)));
+        if (range <= detectionRange && 
             (Vector3.Angle(transform.position - player.transform.position, transform.forward) <= 10 &&
-            !Physics.Linecast(transform.position, player.transform.position)) && direction == "forward")
+            Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "forward")
         {
             movementEnabled = false;
             fireScript.startFiring();
@@ -49,7 +46,7 @@ public class SimpleSentinel : MonoBehaviour {
         }
         else if (range <= detectionRange &&
             (Vector3.Angle(player.transform.position - transform.position, transform.forward) <= 10 &&
-            !Physics.Linecast(transform.position, player.transform.position)) && direction == "backward")
+            Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "backward")
         {
             movementEnabled = false;
             fireScript.startFiring();
