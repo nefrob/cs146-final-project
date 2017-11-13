@@ -132,6 +132,7 @@ public class PlayerController : MonoBehaviour {
             removeBall();
             anim.SetBool("isThrowing", true);
             myAudio.playThrowSound();
+            myAudio.playTauntSound();
             StartCoroutine(InvokeThrow(0.28f, powerUpForce * ui.powerUpSlider.value));
         }
         else

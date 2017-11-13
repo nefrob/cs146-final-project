@@ -14,6 +14,7 @@ public class UIHandler : MonoBehaviour {
     public Slider shieldBarSlider;
     public Slider powerUpSlider;
     [SerializeField] private Text alertText;
+    [SerializeField] private Text messageText;
     public GameObject waitText;
     public GameObject reloadText;
     [SerializeField] private Text ballsText;
@@ -21,21 +22,21 @@ public class UIHandler : MonoBehaviour {
     /* Initial UI conditions. */
     void Start()
     {
-        alertText.enabled = false;
+        messageText.text = "";
+        alertText.text = "!";
     }
 
     /* Sets throw power up status. */
     public void setPowerUpUI(bool shouldPowerUp, float powerUpRate)
     {
-        GameObject parent = powerUpSlider.transform.parent.gameObject;
         if (shouldPowerUp)
         {
-            if (!parent.activeInHierarchy) parent.SetActive(true);
+            powerUpSlider.gameObject.SetActive(true);
             if (powerUpSlider.value < 1) powerUpSlider.value += powerUpRate * Time.deltaTime;
         }
         else
         {
-            if (parent.activeInHierarchy) parent.SetActive(false);
+            powerUpSlider.gameObject.SetActive(false);
             powerUpSlider.value = 0;
         }
     }
@@ -50,6 +51,26 @@ public class UIHandler : MonoBehaviour {
     public void updateBallsText(int ballsFound, int ballsToFind)
     {
         ballsText.text = "Balls: " +
-            ballsFound.ToString() + " / " + ballsToFind.ToString();
+            ballsFound.ToString() + " : " + ballsToFind.ToString();
     }
+
+    /* Display a message to the user. */
+    public void displayMessage(string message)
+    {
+        messageText.text = message;
+        alertText.text = "!";
+        Invoke("disableAlert", 2.5f);
+    }
+
+    /* Disables the message. */
+    public void hideMessage()
+    {
+        messageText.text = "";
+    }
+
+    /* Disables the alert text. */
+    private void disableAlert()
+    {
+        alertText.text = "";
+    } 
 }

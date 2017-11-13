@@ -47,18 +47,21 @@ public class PlayerAudio : MonoBehaviour {
     /* Plays random comment dialogue sound. */
     public void playCommentSound()
     {
-        playerSource.PlayOneShot(generalCommentary[Random.Range(0, generalCommentary.Length)]);
+        if (generalCommentary.Length > 0) 
+            playerSource.PlayOneShot(generalCommentary[Random.Range(0, generalCommentary.Length)]);
     }
 
     /* Plays random celebration dialogue sound. */
     public void playCelebrationSound()
     {
-        playerSource.PlayOneShot(celebrations[Random.Range(0, celebrations.Length)]);
+        if (celebrations.Length > 0)
+            playerSource.PlayOneShot(celebrations[Random.Range(0, celebrations.Length)]);
     }
 
     /* Plays random taunt dialogue sound. */
     public void playTauntSound()
     {
-        playerSource.PlayOneShot(taunts[Random.Range(0, taunts.Length)]);
+        if (taunts.Length > 0)
+            playerSource.PlayOneShot(taunts[Random.Range(0, taunts.Length)]);
     }
 }

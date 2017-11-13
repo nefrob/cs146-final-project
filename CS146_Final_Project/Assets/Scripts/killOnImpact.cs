@@ -8,11 +8,13 @@ public class killOnImpact : MonoBehaviour
     public bool onPlatformImpact = false;
     private PlayerController playerScript;
     private CameraShake shakeScript;
+    private PlayerAudio playerAudio;
 
     void Start()
     {
         playerScript = FindObjectOfType<PlayerController>();
         shakeScript = FindObjectOfType<CameraShake>();
+        playerAudio = FindObjectOfType<PlayerAudio>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -27,6 +29,7 @@ public class killOnImpact : MonoBehaviour
         {
             GameObject boom = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
             playerScript.updateScore(10);
+            playerAudio.playCelebrationSound();
             shakeScript.shakeScreen(0.5f, 0.7f);
             Destroy(this.gameObject, 0.02f);
         }

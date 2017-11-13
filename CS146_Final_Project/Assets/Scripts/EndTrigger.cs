@@ -13,7 +13,6 @@ using UnityEngine.UI;
 
 public class EndTrigger : MonoBehaviour {
     // UI
-    [SerializeField] private GameObject endUI;
     [SerializeField] private GameObject ballMsg;
     // Change game state
     private GameManager gameManager;
@@ -29,9 +28,6 @@ public class EndTrigger : MonoBehaviour {
     /* Trigger next level to load on reaching end zone of current. */
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag != "Player") return;
-
-        // Make ui visible
-        endUI.SetActive(true);
 
         // Check if found all balls, end condition
         if (playerScript.getNumBallsFound() < playerScript.numBallsToFind)
@@ -51,6 +47,5 @@ public class EndTrigger : MonoBehaviour {
     void OnTriggerExit2D(Collider2D collision)
     {
         ballMsg.SetActive(false);
-        endUI.SetActive(false);
     }
 }
