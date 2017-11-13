@@ -23,7 +23,7 @@ public class UIHandler : MonoBehaviour {
     void Start()
     {
         messageText.text = "";
-        alertText.text = "!";
+        alertText.text = "";
     }
 
     /* Sets throw power up status. */

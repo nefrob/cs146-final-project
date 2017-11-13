@@ -36,7 +36,7 @@ public class TutorialLogic : MonoBehaviour {
         playerAudio = FindObjectOfType<PlayerAudio>();
         ui = FindObjectOfType<UIHandler>();
         player = FindObjectOfType<PlayerController>();
-        Invoke("displayNextText", 2.0f);
+        Invoke("displayNextText", 1.0f);
 	}
 	
 	/* Get action updates. */
@@ -113,7 +113,7 @@ public class TutorialLogic : MonoBehaviour {
         {
             scrolled = true;
             Invoke("hide", 0.2f);
-            blockers[2].SetActive(false);
+            blockers[3].SetActive(false);
             arrowsEnd.SetActive(true);
         }
     }
