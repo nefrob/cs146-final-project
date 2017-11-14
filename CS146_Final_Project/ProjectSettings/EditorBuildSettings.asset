@@ -9,9 +9,18 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu.unity
     guid: 4bf23e2ae8599014e92dc44a4f8f57c3
   - enabled: 1
+    path: Assets/_Scenes/CutScene 1.unity
+    guid: 4772325d445a6471b91f90617b289708
+  - enabled: 1
+    path: Assets/_Scenes/Tutorial Level.unity
+    guid: 0c507fbcfbec8dc45a3831b30d1acada
+  - enabled: 1
+    path: Assets/_Scenes/level3.unity
+    guid: 254f944d136a406428b40470ac9ad724
+  - enabled: 0
     path: Assets/_Scenes/Robert's Scene.unity
     guid: 1d1065b706ea46f4987a815fde9901bb
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Robert's Level 1.unity
     guid: 44b2558c33f03a749a9ee8e12155dd52
   - enabled: 0
