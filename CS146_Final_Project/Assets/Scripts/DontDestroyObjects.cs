@@ -1,21 +1,24 @@
 ﻿/*
-* File:        Don't Destroy Music
+* File:        Don't Destroy Objects
 * Author:      Robert Neff
 * Date:        11/02/17
 * Description: Begins music playing on a gameobject that will not
-*              be destroyed on scene reload.
+*              be destroyed on scene reload. Also stores player score.
 */
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DontDestroyMusic : MonoBehaviour {
+public class DontDestroyObjects : MonoBehaviour {
     // Original instance
-    private static DontDestroyMusic instance = null;
-    public static DontDestroyMusic Instance
+    private static DontDestroyObjects instance = null;
+    public static DontDestroyObjects Instance
     {
         get { return instance; }
     }
+
+    // Track player score here too
+    public int score;
 
     /* Don't destroy, if already exists destroy self.  */
     void Awake()
@@ -26,6 +29,7 @@ public class DontDestroyMusic : MonoBehaviour {
             return;
         } else {
             instance = this;
+            score = 0;
         }
         DontDestroyOnLoad(this.gameObject);
     }

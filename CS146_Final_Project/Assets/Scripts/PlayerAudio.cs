@@ -22,13 +22,19 @@ public class PlayerAudio : MonoBehaviour {
     public AudioClip fallingDeathSound;
     public AudioClip switchBall;
     [SerializeField] private AudioClip[] generalCommentary;
+    [SerializeField] private string[] commentMessages;
     [SerializeField] private AudioClip[] celebrations;
+    [SerializeField] private string[] celebrationMessages;
     [SerializeField] private AudioClip[] taunts;
+    [SerializeField] private string[] tauntMessages;
+
+    private UIHandler ui;
 
     /* Init audio items. */
     void Awake()
     {
         playerSource = GetComponent<AudioSource>();
+        ui = FindObjectOfType<UIHandler>();
     }
 
     /* Set shield clip. */
@@ -47,21 +53,33 @@ public class PlayerAudio : MonoBehaviour {
     /* Plays random comment dialogue sound. */
     public void playCommentSound()
     {
-        if (generalCommentary.Length > 0) 
-            playerSource.PlayOneShot(generalCommentary[Random.Range(0, generalCommentary.Length)]);
+        if (generalCommentary.Length > 0)
+        {
+            int rand = Random.Range(0, generalCommentary.Length);
+            playerSource.PlayOneShot(generalCommentary[rand]);
+            ui.setCalloutText(commentMessages[rand]);
+        }
     }
 
     /* Plays random celebration dialogue sound. */
     public void playCelebrationSound()
     {
         if (celebrations.Length > 0)
-            playerSource.PlayOneShot(celebrations[Random.Range(0, celebrations.Length)]);
+        {
+            int rand = Random.Range(0, celebrations.Length);
+            playerSource.PlayOneShot(celebrations[rand]);
+            ui.setCalloutText(celebrationMessages[rand]);
+        }
     }
 
     /* Plays random taunt dialogue sound. */
     public void playTauntSound()
     {
         if (taunts.Length > 0)
-            playerSource.PlayOneShot(taunts[Random.Range(0, taunts.Length)]);
+        {
+            int rand = Random.Range(0, taunts.Length);
+            playerSource.PlayOneShot(taunts[rand]);
+            ui.setCalloutText(tauntMessages[rand]);
+        }
     }
 }

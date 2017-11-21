@@ -15,6 +15,7 @@ public class UIHandler : MonoBehaviour {
     public Slider powerUpSlider;
     [SerializeField] private Text alertText;
     [SerializeField] private Text messageText;
+    [SerializeField] private Text calloutText;
     public GameObject waitText;
     public GameObject reloadText;
     [SerializeField] private Text ballsText;
@@ -24,6 +25,7 @@ public class UIHandler : MonoBehaviour {
     {
         messageText.text = "";
         alertText.text = "";
+        calloutText.text = "";
     }
 
     /* Sets throw power up status. */
@@ -73,4 +75,13 @@ public class UIHandler : MonoBehaviour {
     {
         alertText.text = "";
     } 
+
+    /* Displays callout text in desired way on screen, 
+     * ex. appear then fade out, enlarge with time, etc. */
+    public void setCalloutText(string msg)
+    {
+        // Ben insert code here
+        // You will probably have to use invoke, coroutine or do
+        // something in update to implement this
+    }
 }

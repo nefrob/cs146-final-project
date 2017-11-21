@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour {
     private bool isDead;
     private bool depletedShield;
     private bool powerUp;
-    public int score = 0;
+    // for score
+    public DontDestroyObjects overallScore;
     // Animation
     [SerializeField] private Animator anim;
     // Player Systems
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour {
         ballsFound.Add(lastBall);
         balls.Add(lastBall);
         ui.updateBallsText(ballsFound.Count, numBallsToFind);
+        overallScore = FindObjectOfType<DontDestroyObjects>();
     }
 
     /* Check for input. */
@@ -148,7 +150,7 @@ public class PlayerController : MonoBehaviour {
         if (shield && hasBall && isGrounded && ui.shieldBarSlider.value > 0 && !depletedShield)
         {
             forceField.SetActive(true);
-            myAudio.shieldSource.Play();
+            if (!myAudio.shieldSource.isPlaying) myAudio.shieldSource.Play();
             anim.SetBool("isShielding", true);
             ui.shieldBarSlider.value -= shieldDepleteRate * Time.deltaTime;  // reduce shield capacity
         } 
@@ -359,14 +361,14 @@ public class PlayerController : MonoBehaviour {
     /* Adds value to score and updates UI component */
     public void updateScore(int add)
     {
-        score += add;
-        ui.updateScore(score);
+        overallScore.score += add;
+        ui.updateScore(overallScore.score);
     }
 
     /* Reset score to zero. */
     private void resetScore()
     {
-        score = 0;
+        overallScore.score = 0;
         ui.updateScore(0);
     }
 
