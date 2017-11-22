@@ -540,13 +540,6 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
   - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
-  - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
-  - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
-  - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
-  - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
-  - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
-  - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
-  - {fileID: 7400000, guid: 64191364c30de7248bed7e71771f93e4, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -574,7 +567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ef2ef05dc70784aae5ae2f583e4356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopduration: 3
+  loopduration: 1
 --- !u!114 &114000012645646364
 MonoBehaviour:
   m_ObjectHideFlags: 1

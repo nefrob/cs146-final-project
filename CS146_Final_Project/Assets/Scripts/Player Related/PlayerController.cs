@@ -380,6 +380,7 @@ public class PlayerController : MonoBehaviour {
     public void updateScore(int add)
     {
         eventTimer = 0.0f;
+        deltaScore += add;
         if (deltaScore >= 10)
         {
             if (overallScore.multiplier <= 512) overallScore.multiplier *= 2;
@@ -387,7 +388,6 @@ public class PlayerController : MonoBehaviour {
             ui.setStreakText();
         }
         overallScore.score += add * overallScore.multiplier;
-        deltaScore += add;
         ui.updateScore(overallScore.score);
     }
 
@@ -395,6 +395,7 @@ public class PlayerController : MonoBehaviour {
     private void resetScore()
     {
         overallScore.score = 0;
+        deltaScore = 0;
         overallScore.multiplier = BASE_MULTIPLIER;
         ui.updateScore(0);
     }
