@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Player Controller
 * Author:      Robert Neff
-* Date:        11/09/17
+* Date:        11/21/17
 * Description: Implements player related systems: movement, animation, and
 *              and public methods to be called upon collision with another object.
 */

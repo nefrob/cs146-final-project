@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Don't Destroy Objects
 * Author:      Robert Neff
-* Date:        11/02/17
+* Date:        11/21/17
 * Description: Begins music playing on a gameobject that will not
 *              be destroyed on scene reload. Also stores player score.
 */

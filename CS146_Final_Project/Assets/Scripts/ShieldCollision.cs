@@ -31,7 +31,7 @@ public class ShieldCollision : MonoBehaviour {
             uiScript.shieldBarSlider.value -= cost;
             if (uiScript.shieldBarSlider.value < 0) uiScript.shieldBarSlider.value = 0;
             playerScript.playExplosionSound();
-            shakeScript.shakeScreen(1.0f, 0.7f);
+            uiScript.shakeCamera(Random.Range(2.5f, 3.5f), Random.Range(2.5f, 3.5f));
             playerScript.updateScore(1);
             Destroy(collision.gameObject);
         }
