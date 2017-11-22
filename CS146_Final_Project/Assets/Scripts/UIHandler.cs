@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class UIHandler : MonoBehaviour {
     // UI objects to control
     [SerializeField] private Text scoreText;
+    [SerializeField] private Text scoreMultiplier;
     public Slider shieldBarSlider;
     public Slider powerUpSlider;
     [SerializeField] private Text alertText;
@@ -23,6 +24,7 @@ public class UIHandler : MonoBehaviour {
     /* Initial UI conditions. */
     void Start()
     {
+        scoreMultiplier.text = "x 1";
         messageText.text = "";
         alertText.text = "";
         calloutText.text = "";
@@ -52,7 +54,7 @@ public class UIHandler : MonoBehaviour {
     /* Update ball collection status. */
     public void updateBallsText(int ballsFound, int ballsToFind)
     {
-        ballsText.text = "Balls: " +
+        ballsText.text = "Balls   " +
             ballsFound.ToString() + " : " + ballsToFind.ToString();
     }
 
