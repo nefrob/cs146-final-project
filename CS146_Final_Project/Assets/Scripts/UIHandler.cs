@@ -12,6 +12,8 @@ public class UIHandler : MonoBehaviour {
     // UI objects to control
     [SerializeField] private Text scoreText;
     [SerializeField] private Text scoreMultiplier;
+    private Color startMultColor;
+    [SerializeField] private Color[] multColors;
     public Slider shieldBarSlider;
     public Slider powerUpSlider;
     [SerializeField] private Text alertText;
@@ -21,6 +23,8 @@ public class UIHandler : MonoBehaviour {
     public GameObject waitText;
     public GameObject reloadText;
     [SerializeField] private Text ballsText;
+    [SerializeField] private Text streakText;
+    [SerializeField] private string[] streakMessages;
 
     // Camera to shake
     public GameObject cam;
@@ -29,9 +33,11 @@ public class UIHandler : MonoBehaviour {
     void Start()
     {
         scoreMultiplier.text = "x 1";
+        startMultColor = scoreMultiplier.color;
         messageText.text = "";
         alertText.text = "";
         calloutText.text = "";
+        streakText.text = "";
         calloutColor = calloutText.color;
     }
 
@@ -63,6 +69,10 @@ public class UIHandler : MonoBehaviour {
     /* Updates the score multiplier displayed. */
     public void updateScoreMultiplier(int mult)
     {
+        if (mult == 1) scoreMultiplier.color = startMultColor;
+        //else scoreMultiplier.color = Random.ColorHSV(0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+        else scoreMultiplier.color = multColors[Random.Range(0, multColors.Length)];
+
         iTween.ScaleBy(scoreMultiplier.gameObject, iTween.Hash("x", 2f, "y", 2f, "time", 0.25f));
         iTween.ScaleBy(scoreMultiplier.gameObject, iTween.Hash("x", 0.5f, "y", 0.5f, "time", 0.25f, "delay", 0.25f));
         iTween.ShakePosition(scoreMultiplier.gameObject, 
@@ -70,11 +80,16 @@ public class UIHandler : MonoBehaviour {
         scoreMultiplier.text = "x " + mult.ToString();
     }
 
-    /* Shakes the camera for desired time and amount. */
-    public void shakeCamera(float xShake = 3.0f, float yshake = 3.0f, float duration = 0.5f)
+    /* Sets the streak message. */
+    public void setStreakText()
     {
-        iTween.ShakePosition(cam, iTween.Hash("x", xShake, "y", yshake, "time", duration));
-        iTween.ShakeRotation(cam, iTween.Hash("x", 15f, "y", 15f, "time", duration));
+        streakText.CrossFadeAlpha(1.0f, 0.00f, false);
+        streakText.text = streakMessages[Random.Range(0, streakMessages.Length)];
+        iTween.ScaleBy(streakText.gameObject, iTween.Hash("x", 1.6f, "y", 1.6f, "time", 0.35f));
+        iTween.ScaleBy(streakText.gameObject, iTween.Hash("x", 0.625f, "y", 0.625f, "time", 0.35f, "delay", 0.35f));
+        iTween.ShakePosition(streakText.gameObject,
+            iTween.Hash("x", Random.Range(15, 30), "y", Random.Range(15, 30), "time", 0.7f));
+        streakText.CrossFadeAlpha(0.0f, 1.0f, false);
     }
 
     /* Update ball collection status. */

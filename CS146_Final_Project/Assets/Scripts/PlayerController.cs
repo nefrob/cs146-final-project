@@ -43,7 +43,11 @@ public class PlayerController : MonoBehaviour {
     private bool depletedShield;
     private bool powerUp;
     // For score/multipliers
-    public DontDestroyObjects overallScore;
+    private DontDestroyObjects overallScore;
+    public const float MAX_TIME_BETWEEN_EVENTS = 5.0f;
+    private const int BASE_MULTIPLIER = 1;
+    private float eventTimer;
+    private int deltaScore = 0;
     // Animation
     [SerializeField] private Animator anim;
     // Player Systems
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour {
         balls.Add(lastBall);
         ui.updateBallsText(ballsFound.Count, numBallsToFind);
         overallScore = FindObjectOfType<DontDestroyObjects>();
+        eventTimer = MAX_TIME_BETWEEN_EVENTS;
         shakeScript = FindObjectOfType<CameraShake>();
     }
 
@@ -84,12 +89,23 @@ public class PlayerController : MonoBehaviour {
 
         // Read the input in Update so button presses aren't missed.
         if (!jump) jump = Input.GetButtonDown("Jump");
-        throwBall = Input.GetKeyUp(KeyCode.Q);// Input.GetButtonDown("Fire1");
+        throwBall = Input.GetKeyUp(KeyCode.Q);// Input.GetButtonUp("Fire1");
         powerUp = Input.GetKey(KeyCode.Q);
         shield = Input.GetButton("Fire2");
         setCurrBallMouse();
         pickupBall = Input.GetKey(KeyCode.LeftShift);
         dropBall = Input.GetKeyDown(KeyCode.E);
+
+        if (eventTimer < MAX_TIME_BETWEEN_EVENTS)
+        {
+            eventTimer += Time.deltaTime;
+            if (eventTimer >= MAX_TIME_BETWEEN_EVENTS)
+            {
+                deltaScore = 0;
+                ui.updateScoreMultiplier(BASE_MULTIPLIER);
+                overallScore.multiplier = BASE_MULTIPLIER;
+            }
+        }
     }
 
     /* Compute physics and movement. */
@@ -132,7 +148,7 @@ public class PlayerController : MonoBehaviour {
     /* Sets player throwing status. */
     private void setThrowing()
     {
-        if (hasBall && throwBall && isGrounded)
+        if (hasBall && throwBall && isGrounded && !anim.GetCurrentAnimatorStateInfo(0).IsName("Throw"))
         {
             lastBall = balls[currBall];
             removeBall();
@@ -140,10 +156,6 @@ public class PlayerController : MonoBehaviour {
             myAudio.playThrowSound();
             myAudio.playTauntSound();
             StartCoroutine(InvokeThrow(0.28f, powerUpForce * ui.powerUpSlider.value));
-        }
-        else
-        {
-            anim.SetBool("isThrowing", false);
         }
     }
 
@@ -338,6 +350,7 @@ public class PlayerController : MonoBehaviour {
     /* Invoke function to throw ball. */
     IEnumerator InvokeThrow(float delay, float force) {
         yield return new WaitForSeconds(delay);
+        anim.SetBool("isThrowing", false);
         lastBall.ThrowBall(playerBody.transform.forward.x, force);
     }
 
@@ -366,7 +379,15 @@ public class PlayerController : MonoBehaviour {
     /* Adds value to score and updates UI component */
     public void updateScore(int add)
     {
-        overallScore.score += add;
+        eventTimer = 0.0f;
+        if (deltaScore >= 10)
+        {
+            if (overallScore.multiplier <= 512) overallScore.multiplier *= 2;
+            ui.updateScoreMultiplier(overallScore.multiplier);
+            ui.setStreakText();
+        }
+        overallScore.score += add * overallScore.multiplier;
+        deltaScore += add;
         ui.updateScore(overallScore.score);
     }
 
