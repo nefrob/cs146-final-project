@@ -19,7 +19,7 @@ public class DontDestroyObjects : MonoBehaviour {
 
     // Track player score here too
     public int score;
-
+    public int multiplier;
     /* Don't destroy, if already exists destroy self.  */
     void Awake()
     {
@@ -30,6 +30,7 @@ public class DontDestroyObjects : MonoBehaviour {
         } else {
             instance = this;
             score = 0;
+            multiplier = 1;
         }
         DontDestroyOnLoad(this.gameObject);
     }

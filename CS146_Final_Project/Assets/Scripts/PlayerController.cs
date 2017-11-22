@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float powerUpRate = 0.1f;
     [SerializeField] private float powerUpForce = 50f;
     [SerializeField] private GameObject playerBody;
+    private CameraShake shakeScript;
     private Rigidbody2D rb;
     // Ground status
     [SerializeField] private Transform[] groundPoints;
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour {
     private bool isDead;
     private bool depletedShield;
     private bool powerUp;
-    // for score
+    // For score/multipliers
     public DontDestroyObjects overallScore;
     // Animation
     [SerializeField] private Animator anim;
@@ -73,6 +74,7 @@ public class PlayerController : MonoBehaviour {
         balls.Add(lastBall);
         ui.updateBallsText(ballsFound.Count, numBallsToFind);
         overallScore = FindObjectOfType<DontDestroyObjects>();
+        shakeScript = FindObjectOfType<CameraShake>();
     }
 
     /* Check for input. */
@@ -96,7 +98,9 @@ public class PlayerController : MonoBehaviour {
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        bool temp = isGrounded;
         isGrounded = getIsGrounded();
+        if (temp != isGrounded) shakeScript.shakeScreen(0.25f, 0.25f); // shake screen on landing
         HandlePlayerSystems(horizontal, vertical);
         Flip(horizontal);
         jump = false; // reset input
@@ -195,6 +199,7 @@ public class PlayerController : MonoBehaviour {
         {
             myAudio.playerSource.PlayOneShot(myAudio.jumpSound);
             isGrounded = false;
+            shakeScript.shakeScreen(0.25f, 0.25f); // shake screen on takeoff
             anim.SetBool("isGrounded", false);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
         }
