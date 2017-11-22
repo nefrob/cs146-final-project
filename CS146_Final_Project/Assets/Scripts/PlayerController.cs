@@ -395,6 +395,7 @@ public class PlayerController : MonoBehaviour {
     private void resetScore()
     {
         overallScore.score = 0;
+        overallScore.multiplier = BASE_MULTIPLIER;
         ui.updateScore(0);
     }
 

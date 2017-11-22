@@ -123,9 +123,7 @@ public class UIHandler : MonoBehaviour {
      * ex. appear then fade out, enlarge with time, etc. */
     public void setCalloutText(string msg)
     {
-        // Ben insert code here
-        // You will probably have to use invoke, coroutine or do
-        // something in update to implement this
+        // Ben insert code here if you want
 
         // Maybe something along the lines of:
         calloutText.CrossFadeAlpha(1.0f, 0.00f, false);

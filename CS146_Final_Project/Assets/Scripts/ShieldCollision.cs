@@ -34,7 +34,7 @@ public class ShieldCollision : MonoBehaviour {
             if (uiScript.shieldBarSlider.value < 0) uiScript.shieldBarSlider.value = 0;
             playerScript.playExplosionSound();
             shakeScript.shakeScreen();
-            playerScript.updateScore(collisionPoints);
+            playerScript.updateScore(12 /*collisionPoints*/);
             Destroy(collision.gameObject);
         }
     }
