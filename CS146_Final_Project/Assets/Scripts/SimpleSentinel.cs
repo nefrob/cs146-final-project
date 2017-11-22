@@ -31,55 +31,62 @@ public class SimpleSentinel : MonoBehaviour {
 
     void Update () {
         bool movementEnabled = true;
+        fireManager(ref movementEnabled);
+        directionManager(movementEnabled);
+    }
+
+    private void fireManager(ref bool movementEnabled) {
         //Use the two store floats to create a new Vector2 variable movement.
         float range = Vector2.Distance(transform.position, player.transform.position);
 
         //Is in range and is looking at direction and is in angle
-        //Debug.Log((Vector3.Angle(transform.position - player.transform.position, transform.forward) + " " +!Physics.Linecast(transform.position, player.transform.position)));
-        if (range <= detectionRange && 
-            (Vector3.Angle(transform.position - player.transform.position, transform.forward) <= 10 &&
-            Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "forward")
-        {
+        if (range <= detectionRange &&
+            (Physics.Raycast(transform.position, -transform.forward, (float)detectionRange)) && direction == "forward"){
             movementEnabled = false;
             fireScript.startFiring();
             enemy.velocity = Vector2.right * 0;
-        }
+        } 
+
         else if (range <= detectionRange &&
-            (Vector3.Angle(player.transform.position - transform.position, transform.forward) <= 10 &&
-            Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "backward")
-        {
+            (Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "backward") { 
             movementEnabled = false;
             fireScript.startFiring();
             enemy.velocity = Vector2.right * 0;
         }
-        else {
+        else{
             fireScript.stopFiring();
             movementEnabled = true;
         }
-        
+    }
+
+    private void directionManager(bool movementEnabled) {
         Vector3 theScale = transform.localScale;
         if (timePassed > changeDirTime && movementEnabled)
+        {
+            if (direction == "backward")
             {
-                if (direction == "backward")
-                {
-                    direction = "forward";
-                    //enemy.AddForce(Vector2.right* -speed,ForceMode2D.Impulse);
-                    enemy.velocity = Vector2.right*-speed;
-                    theScale.z *= -1;
-                    transform.localScale = theScale;
+                direction = "forward";
+                //enemy.AddForce(Vector2.right* -speed,ForceMode2D.Impulse);
+                enemy.velocity = Vector2.right * -speed;
+                theScale.z *= -1;
+                transform.localScale = theScale;
             }
-                else
-                {
-                    direction = "backward";
-                    //enemy.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
-                    enemy.velocity = Vector2.right * speed;
-                    theScale.z *= -1;
-                    transform.localScale = theScale;
+            else
+            {
+                direction = "backward";
+                //enemy.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                enemy.velocity = Vector2.right * speed;
+                theScale.z *= -1;
+                transform.localScale = theScale;
             }
-                    timePassed = 0;
-            }
+            timePassed = 0;
+        }
+        if (movementEnabled) {
             timePassed = timePassed + Time.deltaTime;
+        }
+
     }
+        
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -98,7 +105,7 @@ public class SimpleSentinel : MonoBehaviour {
         }
     }
 
-    //_______________________________________________________________________________FOLLOW PLAYER________________________________________________________________________________
+    //______________________________________________________________________FOLLOW PLAYER_____________________________________________________________________________
     public void followPlayer() {
         float range = Vector2.Distance(transform.position, player.transform.position);
         if (range <= 15f)
@@ -107,15 +114,12 @@ public class SimpleSentinel : MonoBehaviour {
         }
     }
 
-    //_______________________________________________________________________________HELPERS______________________________________________________________________________________
-    public string getDirection()
-    {
-        if (direction == "forward")
-        {
+    //_________________________________________________________________________HELPERS________________________________________________________________________________
+    public string getDirection(){
+        if (direction == "forward"){
             return "backward";
         }
-        else
-        {
+        else{
             return "forward";
         }
         

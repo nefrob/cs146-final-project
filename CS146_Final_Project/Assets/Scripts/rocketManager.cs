@@ -2,16 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class rocketManager : MonoBehaviour
 {
+    //
     public GameObject rockets;
     public GameObject rocketsTargeted;
     public SimpleSentinel enemyControl;
-    public float cannonSpeed = 10f;
-    public float fireTime = 3f;
     public Animation shoot;
+
+    //Basic enemy controls #Not in use while random is checked (either of them)
+    public float shootingSpeed = 10f;
+    public float fireTime = 3f;
+    
+
+    //Random Shooting abilities
+    public bool randomizeShootingTime =  false;
+    public bool randomizeShootingSpeed = false;
+    public float minRandInterval = 0.5f;
+    public float maxRandInterval = 2.5f;
+    public float minRandSpeed = 8f;
+    public float maxRandSpeed = 20f;
+
+    //Private internal control variables
     private PlayerController playerScript;
     private double timePassed = 0;
     private bool firingAllowed = false;
@@ -20,6 +32,7 @@ public class rocketManager : MonoBehaviour
     private void Start()
     {
         playerScript = FindObjectOfType<PlayerController>();
+        if (randomizeShootingTime) fireTime = Random.Range(minRandInterval,maxRandInterval);
     }
 
     void Update()
@@ -32,6 +45,7 @@ public class rocketManager : MonoBehaviour
                 fire();
                 counter++;
                 timePassed = 0;
+                if (randomizeShootingTime) fireTime = Random.Range(minRandInterval, maxRandInterval);
             }
             timePassed = timePassed + Time.deltaTime;
         }
@@ -53,12 +67,13 @@ public class rocketManager : MonoBehaviour
     {
         if (playerScript.isDeadState()) return;
         shoot.Play();
+        if (randomizeShootingSpeed) shootingSpeed = Random.Range(minRandSpeed, maxRandSpeed);
         if (enemyControl.getDirection() == "forward")
         {
             Vector2 pos = transform.position;
             pos.y += 2.2f;
             GameObject bullet = Instantiate(rockets, pos, transform.rotation) as GameObject;            
-            bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 6, ForceMode2D.Impulse);
+            bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * shootingSpeed, ForceMode2D.Impulse);
             Vector3 theScale = bullet.transform.localScale;
             bullet.transform.localScale = theScale;
         }
@@ -68,7 +83,7 @@ public class rocketManager : MonoBehaviour
             Vector2 pos = transform.position;
             pos.y += 2.2f;
             GameObject bullet = Instantiate(rockets, pos, transform.rotation) as GameObject;          
-            bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -6, ForceMode2D.Impulse);
+            bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -1 *shootingSpeed, ForceMode2D.Impulse);
             Vector3 theScale = bullet.transform.localScale;
             theScale.z *= -1;
             bullet.transform.localScale = theScale;

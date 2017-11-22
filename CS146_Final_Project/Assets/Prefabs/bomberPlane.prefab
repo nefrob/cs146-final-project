@@ -445,8 +445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rockets: {fileID: 1895669237207368, guid: 28647f387c2926d468e9dec933b102ea, type: 2}
-  fireTime: 1
-  randomBombsMode: 0
+  fireTime: 0.5
+  randomBombsMode: 1
   detectionRange: 10
 --- !u!114 &114306098285781214
 MonoBehaviour:

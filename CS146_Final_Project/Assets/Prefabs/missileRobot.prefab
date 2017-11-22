@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527605889004954}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 113.77, y: 6.08, z: -0}
+  m_LocalPosition: {x: 113.77, y: 6.18, z: -0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4092155883896062}
@@ -618,7 +618,7 @@ MonoBehaviour:
   direction: forward
   changeDirTime: 3
   detectionRange: 15
-  speed: 3
+  speed: 0
   fireScript: {fileID: 114912055140026502}
   explosion: {fileID: 1000010608846784, guid: 6747b1742d70743a8aff8594e708b2f7, type: 2}
 --- !u!114 &114912055140026502
@@ -636,9 +636,15 @@ MonoBehaviour:
   rocketsTargeted: {fileID: 1373009456349000, guid: b130af442c640a74d83c31bba33cc162,
     type: 2}
   enemyControl: {fileID: 114178027379236362}
-  cannonSpeed: 14
-  fireTime: 3
   shoot: {fileID: 111073035234347858}
+  shootingSpeed: 10
+  fireTime: 3
+  randomizeShootingTime: 0
+  randomizeShootingSpeed: 0
+  minRandInterval: 0.5
+  maxRandInterval: 2.5
+  minRandSpeed: 8
+  maxRandSpeed: 20
 --- !u!135 &135921021197595738
 SphereCollider:
   m_ObjectHideFlags: 1
