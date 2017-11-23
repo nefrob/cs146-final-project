@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleSentinel : MonoBehaviour {
-    public string direction = "forward"; //Can be forward/backwards
+    public string direction = "left"; //Can be right/left
     public double changeDirTime = 3;
     public double detectionRange = 10;
     private double timePassed = 0;
@@ -41,14 +41,14 @@ public class SimpleSentinel : MonoBehaviour {
 
         //Is in range and is looking at direction and is in angle
         if (range <= detectionRange &&
-            (Physics.Raycast(transform.position, -transform.forward, (float)detectionRange)) && direction == "forward"){
+            (Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "right"){
             movementEnabled = false;
             fireScript.startFiring();
             enemy.velocity = Vector2.right * 0;
         } 
 
         else if (range <= detectionRange &&
-            (Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "backward") { 
+            (Physics.Raycast(transform.position, -transform.forward, (float)detectionRange)) && direction == "left") { 
             movementEnabled = false;
             fireScript.startFiring();
             enemy.velocity = Vector2.right * 0;
@@ -63,21 +63,21 @@ public class SimpleSentinel : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         if (timePassed > changeDirTime && movementEnabled)
         {
-            if (direction == "backward")
+            if (direction == "right")
             {
-                direction = "forward";
                 //enemy.AddForce(Vector2.right* -speed,ForceMode2D.Impulse);
                 enemy.velocity = Vector2.right * -speed;
                 theScale.z *= -1;
                 transform.localScale = theScale;
+                direction = "left";
             }
             else
             {
-                direction = "backward";
                 //enemy.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
                 enemy.velocity = Vector2.right * speed;
                 theScale.z *= -1;
                 transform.localScale = theScale;
+                direction = "right";
             }
             timePassed = 0;
         }
@@ -116,12 +116,6 @@ public class SimpleSentinel : MonoBehaviour {
 
     //_________________________________________________________________________HELPERS________________________________________________________________________________
     public string getDirection(){
-        if (direction == "forward"){
-            return "backward";
-        }
-        else{
-            return "forward";
-        }
-        
+        return direction;
     }
 }

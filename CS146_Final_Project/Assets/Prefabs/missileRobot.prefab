@@ -222,7 +222,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527605889004954}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 113.77, y: 6.18, z: -0}
+  m_LocalPosition: {x: 41.1, y: 0.52, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4092155883896062}
@@ -615,10 +615,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ed797bc7870a14d8e51073b69510da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: forward
+  direction: left
   changeDirTime: 3
   detectionRange: 15
-  speed: 0
+  speed: 2
   fireScript: {fileID: 114912055140026502}
   explosion: {fileID: 1000010608846784, guid: 6747b1742d70743a8aff8594e708b2f7, type: 2}
 --- !u!114 &114912055140026502
@@ -639,12 +639,12 @@ MonoBehaviour:
   shoot: {fileID: 111073035234347858}
   shootingSpeed: 10
   fireTime: 3
-  randomizeShootingTime: 0
-  randomizeShootingSpeed: 0
-  minRandInterval: 0.5
-  maxRandInterval: 2.5
+  randomizeShootingTime: 1
+  randomizeShootingSpeed: 1
+  minRandInterval: 0.3
+  maxRandInterval: 1.2
   minRandSpeed: 8
-  maxRandSpeed: 20
+  maxRandSpeed: 16
 --- !u!135 &135921021197595738
 SphereCollider:
   m_ObjectHideFlags: 1

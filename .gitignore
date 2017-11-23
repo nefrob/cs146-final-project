@@ -32,3 +32,13 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+CS146_Final_Project/.vs/CS146_Final_Project/v15/sqlite3/storage.ide-wal
+CS146_Final_Project/.vs/CS146_Final_Project/v15/sqlite3/storage.ide-shm
+CS146_Final_Project/.vs/CS146_Final_Project/v15/sqlite3/storage.ide
+CS146_Final_Project/.vs/CS146_Final_Project/v15/sqlite3/db.lock
+CS146_Final_Project/.vs/CS146_Final_Project/v15/Server/sqlite3/storage.ide-wal
+CS146_Final_Project/.vs/CS146_Final_Project/v15/Server/sqlite3/storage.ide-shm
+CS146_Final_Project/.vs/CS146_Final_Project/v15/sqlite3/storage.ide
+CS146_Final_Project/.vs/CS146_Final_Project/v15/Server/sqlite3/storage.ide
+CS146_Final_Project/.vs/CS146_Final_Project/v15/Server/sqlite3/db.lock
+CS146_Final_Project/.vs/CS146_Final_Project/v15/sqlite3/storage.ide

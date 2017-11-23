@@ -62,37 +62,30 @@ public class rocketManager : MonoBehaviour
         firingAllowed = false;
     }
 
-    //Organize these up
     private void fire()
     {
         if (playerScript.isDeadState()) return;
         shoot.Play();
         if (randomizeShootingSpeed) shootingSpeed = Random.Range(minRandSpeed, maxRandSpeed);
-        if (enemyControl.getDirection() == "forward")
-        {
-            Vector2 pos = transform.position;
-            pos.y += 2.2f;
-            GameObject bullet = Instantiate(rockets, pos, transform.rotation) as GameObject;            
-            bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * shootingSpeed, ForceMode2D.Impulse);
-            Vector3 theScale = bullet.transform.localScale;
-            bullet.transform.localScale = theScale;
-        }
-
-        else
-        {
-            Vector2 pos = transform.position;
-            pos.y += 2.2f;
-            GameObject bullet = Instantiate(rockets, pos, transform.rotation) as GameObject;          
-            bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * -1 *shootingSpeed, ForceMode2D.Impulse);
-            Vector3 theScale = bullet.transform.localScale;
-            theScale.z *= -1;
-            bullet.transform.localScale = theScale;
-        }
+        if (enemyControl.getDirection() == "left") createRocket(shootingSpeed*-1);
+        else createRocket(shootingSpeed);
     }
 
+    private void createRocket(float shootingSpeed)
+    {
+        Vector2 pos = transform.position;
+        pos.y += 2.2f;
+        GameObject bullet = Instantiate(rockets, pos, transform.rotation) as GameObject;
+        bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * shootingSpeed, ForceMode2D.Impulse);
+        Vector3 theScale = bullet.transform.localScale;
+        if (shootingSpeed < 0) theScale *= -1;
+        bullet.transform.localScale = theScale;
+    }
+
+    //TODO : IMPLEMENT IN MISSILE
     private void fireTargeted() {
         shoot.Play();
-        if (enemyControl.getDirection() == "forward")
+        if (enemyControl.getDirection() == "right")
         {
             Vector2 pos = transform.position;
             pos.y += 1.9f;
