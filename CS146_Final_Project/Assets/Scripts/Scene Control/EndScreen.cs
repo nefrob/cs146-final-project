@@ -25,8 +25,8 @@ public class EndScreen: MonoBehaviour {
     /* Set current game total score anmd credits to scroll. */
     void Start()
     {
-       // score = GetComponent<DontDestroyObjects>();
-       // scoreText.text = "Score: " + score.score.ToString();
+       score = GetComponent<DontDestroyObjects>();
+       scoreText.text = "Score: " + score.score.ToString();
         iTween.MoveBy(scrollObj, iTween.Hash("y", 22000, 
             "easeType", "linear", "delay", 5.0f, "time", 90.0f));
         Invoke("exit", 5.0f);
@@ -48,7 +48,6 @@ public class EndScreen: MonoBehaviour {
     /* Handle hover over a button. */
     public void enter()
     {
-        Debug.Log("enter");
         quitImg.CrossFadeAlpha(1.0f, fadeSpeed, false);
         quitText.CrossFadeAlpha(1.0f, fadeSpeed, false);
         scrollImg.CrossFadeAlpha(1.0f, fadeSpeed, false);
