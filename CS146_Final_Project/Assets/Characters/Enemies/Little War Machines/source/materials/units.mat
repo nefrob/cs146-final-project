@@ -37,7 +37,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Scale: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - _SpecColor: {r: 0, g: 0.83448315, b: 1, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

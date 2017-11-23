@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:CS146_Final_Project/Assets/Scripts/GroundScroller.cs.meta
+guid: e3857bb1d2189984a97c0e643ee67618
+timeCreated: 1509419641
+=======
+guid: 675654b4f6d40df42b3bd5c54989626c
+timeCreated: 1509384906
+>>>>>>> 2368dc00aaf98b64b87695be3d843907245ad60e:CS146_Final_Project/Assets/Scripts/GroundScroller.cs.meta
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
