@@ -33,6 +33,7 @@ public class SimpleSentinel : MonoBehaviour {
         bool movementEnabled = true;
         fireManager(ref movementEnabled);
         directionManager(movementEnabled);
+        Debug.Log(GetFirstRaycastHit(transform.forward, (float)detectionRange).collider.gameObject.tag);
     }
 
     private void fireManager(ref bool movementEnabled) {
@@ -41,14 +42,14 @@ public class SimpleSentinel : MonoBehaviour {
 
         //Is in range and is looking at direction and is in angle
         if (range <= detectionRange &&
-            (Physics.Raycast(transform.position, transform.forward, (float)detectionRange)) && direction == "right"){
+            (GetFirstRaycastHit(-transform.forward, (float)detectionRange).collider.gameObject.tag == "Player") && direction == "right"){
             movementEnabled = false;
             fireScript.startFiring();
             enemy.velocity = Vector2.right * 0;
         } 
 
         else if (range <= detectionRange &&
-            (Physics.Raycast(transform.position, -transform.forward, (float)detectionRange)) && direction == "left") { 
+            (GetFirstRaycastHit(transform.forward, (float)detectionRange).collider.gameObject.tag == "Player") && direction == "left") {
             movementEnabled = false;
             fireScript.startFiring();
             enemy.velocity = Vector2.right * 0;
@@ -117,5 +118,15 @@ public class SimpleSentinel : MonoBehaviour {
     //_________________________________________________________________________HELPERS________________________________________________________________________________
     public string getDirection(){
         return direction;
+    }
+
+    public RaycastHit2D GetFirstRaycastHit(Vector2 direction, float range)
+    {
+        //Check "Queries Start in Colliders" in Edit > Project Settings > Physics2D
+        RaycastHit2D[] hits = new RaycastHit2D[2];
+        hits = Physics2D.RaycastAll(transform.position, -direction, range);
+        //hits[0] will always be the Collider2D you are casting from.
+        if (hits.Length == 1) return hits[0];
+        return hits[1];
     }
 }

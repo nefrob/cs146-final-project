@@ -242,5 +242,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82a58434b6c0d64c940e69a51235664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 0}
+  explosion: {fileID: 1000010608846784, guid: dc7d82d9fa6230e43b2ebf85206e55f3, type: 2}
   onPlatformImpact: 0

@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114474508697676400}
   - component: {fileID: 114404394928408396}
   - component: {fileID: 50017632602530022}
+  - component: {fileID: 58298356134978618}
   m_Layer: 0
   m_Name: Targeting Drone
   m_TagString: Untagged
@@ -86,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1132518660251618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.85, y: 11.01, z: 0}
+  m_LocalPosition: {x: -21.03, y: 7.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4659300686479438}
@@ -236,6 +237,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58298356134978618
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1132518660251618}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04363644, y: -0.087928295}
+  serializedVersion: 2
+  m_Radius: 1.2249393
 --- !u!114 &114081662346642130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,13 +268,13 @@ MonoBehaviour:
   m_shotPrefab: {fileID: 1067119549245832, guid: 5e2585e491105f74f96fc80fde17777b,
     type: 2}
   m_guiTexture: {fileID: 2800000, guid: 9d8463b3c89aa844289e2b169c96d827, type: 3}
-  shootingSpeed: 8
-  fireTime: 0.3
-  detectionRange: 20
+  shootingSpeed: 24.78
+  fireTime: 0.75
+  detectionRange: 17.5
   randomizeShootingTime: 1
   randomizeShootingSpeed: 0
-  minRandInterval: 0.5
-  maxRandInterval: 2.5
+  minRandInterval: 0.2
+  maxRandInterval: 0.6
   minRandSpeed: 8
   maxRandSpeed: 20
 --- !u!114 &114404394928408396
@@ -273,9 +289,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: backward
-  changeDirTime: 4
+  changeDirTime: 2
   flipableBody: {fileID: 4659300686479438}
-  speed: 0
+  speed: 3.22
+  canFlip: 0
 --- !u!114 &114474508697676400
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -33,7 +33,7 @@ public class killOnImpact : MonoBehaviour
             shakeScript.shakeScreen(0.5f, 0.7f);
             Destroy(gameObject, 0.02f);
         }
-        else if (onPlatformImpact)
+        else if (onPlatformImpact && other.gameObject.tag == "Ground")
         {
             if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject, 0.02f);

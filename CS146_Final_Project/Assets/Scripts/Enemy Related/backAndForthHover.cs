@@ -7,6 +7,7 @@ public class backAndForthHover : MonoBehaviour {
     public double changeDirTime = 3;
     public Transform flipableBody;
     public float speed = 6f;
+    public bool canFlip = true;
     private double timePassed = 0;
     private Rigidbody2D enemy;
     // Use this for initialization
@@ -34,7 +35,7 @@ public class backAndForthHover : MonoBehaviour {
                 enemy.velocity = Vector2.right * speed;
             }
 
-            if (changeDirTime != 0)
+            if (canFlip)
             {
                 theScale.z *= -1;
                 flipableBody.localScale = theScale;
