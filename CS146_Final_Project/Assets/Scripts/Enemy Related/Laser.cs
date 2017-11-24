@@ -54,8 +54,9 @@ public class Laser : MonoBehaviour {
     {
         //if (playerScript.isDeadState()) return;
         //shoot.Play(); // Need new sound
-        GameObject go = GameObject.Instantiate(m_shotPrefab, m_muzzle.position, m_muzzle.rotation) as GameObject;
-        go.GetComponent<Rigidbody2D>().AddForce(go.transform.forward * shootingSpeed, ForceMode2D.Impulse);
+        GameObject go = Instantiate(m_shotPrefab, m_muzzle.position, Quaternion.identity);
+        go.transform.GetChild(0).rotation = m_muzzle.rotation;
+        go.GetComponent<Rigidbody2D>().AddForce(go.transform.GetChild(0).forward * shootingSpeed, ForceMode2D.Impulse);
         //var script = go.GetComponent<ShotBehavior>();
         //script.speed = shootingSpeed;
         GameObject.Destroy(go, 3f);
