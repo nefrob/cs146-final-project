@@ -10,6 +10,7 @@ using UnityEngine;
 public class PlayerAudio : MonoBehaviour {
     // Player sources
     public AudioSource playerSource;
+    public AudioSource calloutSource;
     public AudioSource shieldSource;
     // Player sounds
     public AudioClip jumpSound;
@@ -23,6 +24,10 @@ public class PlayerAudio : MonoBehaviour {
     public AudioClip switchBall;
     [SerializeField] private AudioClip[] generalCommentary;
     [SerializeField] private string[] commentMessages;
+    [SerializeField] private AudioClip[] pickupCommentary;
+    [SerializeField] private string[] pickupMessages;
+    [SerializeField] private AudioClip[] outCommentary;
+    [SerializeField] private string[] outMessages;
     [SerializeField] private AudioClip[] celebrations;
     [SerializeField] private string[] celebrationMessages;
     [SerializeField] private AudioClip[] taunts;
@@ -50,36 +55,44 @@ public class PlayerAudio : MonoBehaviour {
         playerSource.Play();
     }
 
+    /* Template to play random callout sound. */
+    private void playRandCallout(AudioClip[] sounds, string[] messages)
+    {
+        if (sounds.Length > 0 && !calloutSource.isPlaying)
+        {
+            int rand = Random.Range(0, sounds.Length);
+            calloutSource.PlayOneShot(sounds[rand]);
+            ui.setCalloutText(messages[rand]);
+        }
+    }
+
     /* Plays random comment dialogue sound. */
     public void playCommentSound()
     {
-        if (generalCommentary.Length > 0)
-        {
-            int rand = Random.Range(0, generalCommentary.Length);
-            playerSource.PlayOneShot(generalCommentary[rand]);
-            ui.setCalloutText(commentMessages[rand]);
-        }
+        playRandCallout(generalCommentary, commentMessages);
+    }
+
+    /* Plays random comment dialogue sound. */
+    public void playPickupCommentSound()
+    {
+        playRandCallout(pickupCommentary, pickupMessages);
+    }
+
+    /* Plays random comment dialogue sound. */
+    public void playOutCommentSound()
+    {
+        playRandCallout(outCommentary, outMessages);
     }
 
     /* Plays random celebration dialogue sound. */
     public void playCelebrationSound()
     {
-        if (celebrations.Length > 0)
-        {
-            int rand = Random.Range(0, celebrations.Length);
-            playerSource.PlayOneShot(celebrations[rand]);
-            ui.setCalloutText(celebrationMessages[rand]);
-        }
+        playRandCallout(celebrations, celebrationMessages);
     }
 
     /* Plays random taunt dialogue sound. */
     public void playTauntSound()
     {
-        if (taunts.Length > 0)
-        {
-            int rand = Random.Range(0, taunts.Length);
-            playerSource.PlayOneShot(taunts[rand]);
-            ui.setCalloutText(tauntMessages[rand]);
-        }
+        playRandCallout(taunts, tauntMessages);
     }
 }

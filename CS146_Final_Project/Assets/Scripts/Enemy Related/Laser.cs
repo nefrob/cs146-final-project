@@ -31,7 +31,7 @@ public class Laser : MonoBehaviour {
 
     private void Start()
     {
-        player = GameObject.Find("Exo_HiRes_Meshes").GetComponent<Transform>();
+        player = GameObject.Find("FBX/Hips").GetComponent<Transform>();
         if (randomizeShootingTime) fireTime = Random.Range(minRandInterval, maxRandInterval);
     }
 

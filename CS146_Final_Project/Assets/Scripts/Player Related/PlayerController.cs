@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour {
             removeBall();
             anim.SetBool("isThrowing", true);
             myAudio.playThrowSound();
-            myAudio.playTauntSound();
+            myAudio.playCommentSound();
             StartCoroutine(InvokeThrow(0.28f, powerUpForce * ui.powerUpSlider.value));
         }
     }
@@ -250,6 +250,7 @@ public class PlayerController : MonoBehaviour {
         // Set that has a ball
         hasBall = true;
         myAudio.playerSource.PlayOneShot(myAudio.pickupBall);
+        myAudio.playPickupCommentSound();
         ballsFound.Add(ball);
         ui.updateBallsText(ballsFound.Count, numBallsToFind);
 
@@ -367,6 +368,7 @@ public class PlayerController : MonoBehaviour {
         } else
          {
              hasBall = false;
+             myAudio.playOutCommentSound();
          }
     }
 
@@ -377,7 +379,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     /* Adds value to score and updates UI component */
-    public void updateScore(int add)
+    public void updateScore(int add, bool wasMissile = false)
     {
         eventTimer = 0.0f;
         deltaScore += add;
@@ -386,9 +388,13 @@ public class PlayerController : MonoBehaviour {
             if (overallScore.multiplier <= 512) overallScore.multiplier *= 2;
             ui.updateScoreMultiplier(overallScore.multiplier);
             ui.setStreakText();
+            // TODO add support for sound?
         }
         overallScore.score += add * overallScore.multiplier;
         ui.updateScore(overallScore.score);
+
+        if (wasMissile) myAudio.playTauntSound();
+        else myAudio.playCelebrationSound();
     }
 
     /* Reset score to zero. */

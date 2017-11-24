@@ -1902,6 +1902,7 @@ GameObject:
   - component: {fileID: 4470648323969322}
   - component: {fileID: 114546336811025206}
   - component: {fileID: 82363637437366632}
+  - component: {fileID: 82117963074785596}
   m_Layer: 0
   m_Name: PlayerAudio
   m_TagString: Untagged
@@ -2741,7 +2742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1848457820731728
 GameObject:
   m_ObjectHideFlags: 1
@@ -5952,6 +5953,86 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!82 &82117963074785596
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1588305879811932}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &82288628528409220
 AudioSource:
   m_ObjectHideFlags: 1
@@ -7001,7 +7082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9607844, g: 0, b: 0.69411767, a: 1}
+  m_Color: {r: 0.9568628, g: 0, b: 0.6901961, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7244,6 +7325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSource: {fileID: 82363637437366632}
+  calloutSource: {fileID: 82117963074785596}
   shieldSource: {fileID: 82288628528409220}
   jumpSound: {fileID: 8300000, guid: a4fc1550214bfce43b43c94b42eb9093, type: 3}
   explosionSound: {fileID: 8300000, guid: 76a52012c594ca04ca54f68c5bb54b81, type: 3}
@@ -7263,6 +7345,16 @@ MonoBehaviour:
   commentMessages:
   - NICE
   - RIGHTEOUS
+  pickupCommentary: []
+  pickupMessages:
+  - Lock'n load
+  - I like this one
+  - New Ball!
+  - Justice
+  outCommentary: []
+  outMessages:
+  - I'm out!
+  - Help
   celebrations:
   - {fileID: 8300000, guid: 2e3ad1db426394bfa997ba482dceec2b, type: 3}
   - {fileID: 8300000, guid: 84c181d44a0f74d72ab7e8c6b40de8ff, type: 3}
@@ -8133,7 +8225,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ae53259c73e2449b2efdb7d77e908d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 0.34
+  missileCost: 0.34
+  laserCost: 0.1
+  playerScript: {fileID: 114085421907316594}
+  uiScript: {fileID: 114676109636382548}
+  shakeScript: {fileID: 114789206788424280}
   collisionPoints: 2
 --- !u!114 &114960505192178958
 MonoBehaviour:
@@ -13390,7 +13486,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767172705438134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2300, y: 350, z: 0}
+  m_LocalPosition: {x: 3000, y: 700, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224558046548153716}
@@ -13398,7 +13494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2350, y: 400}
+  m_AnchoredPosition: {x: 3050, y: 750}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224589561121092602

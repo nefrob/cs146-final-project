@@ -59,8 +59,8 @@ public class UIHandler : MonoBehaviour {
     /* Adds value to score and updates UI component */
     public void updateScore(int score)
     {
-        iTween.ScaleBy(scoreText.gameObject, iTween.Hash("x", 1.25f, "y", 1.25f, "time", 0.25f));
-        iTween.ScaleBy(scoreText.gameObject, iTween.Hash("x", 0.8f, "y", 0.8f, "time", 0.25f, "delay", 0.25f));
+        iTween.ScaleBy(scoreText.gameObject, iTween.Hash("x", 2f, "y", 2f, "time", 0.25f));
+        iTween.ScaleBy(scoreText.gameObject, iTween.Hash("x", 0.5f, "y", 0.5f, "time", 0.25f, "delay", 0.25f));
         iTween.ShakePosition(scoreText.gameObject,
             iTween.Hash("x", Random.Range(10, 30), "y", Random.Range(10, 30), "time", 0.5f));
         scoreText.text = "Score: " + score.ToString();
