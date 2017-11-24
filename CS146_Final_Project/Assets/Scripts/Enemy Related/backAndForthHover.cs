@@ -25,15 +25,17 @@ public class backAndForthHover : MonoBehaviour {
             {
                 direction = "forward";
                 //enemy.AddForce(Vector2.right* -speed,ForceMode2D.Impulse);
-                enemy.velocity = Vector2.right * -speed;
-                theScale.z *= -1;
-                flipableBody.localScale = theScale;
+                enemy.velocity = Vector2.right * -speed;  
             }
             else
             {
                 direction = "backward";
                 //enemy.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
                 enemy.velocity = Vector2.right * speed;
+            }
+
+            if (changeDirTime != 0)
+            {
                 theScale.z *= -1;
                 flipableBody.localScale = theScale;
             }
