@@ -26,7 +26,7 @@ public class CutsceneLogic : MonoBehaviour {
         continueImg.CrossFadeAlpha(0.0f, 0.0f, false);
         continueText.CrossFadeAlpha(0.0f, 0.0f, false);
 
-        Invoke("animDone", 67.0f / 8);
+        Invoke("animDone", 67.0f);
     }
 	
 	/* Check if user wants to switch. */
