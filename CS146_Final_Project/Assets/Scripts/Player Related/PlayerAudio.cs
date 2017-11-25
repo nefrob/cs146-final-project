@@ -56,13 +56,13 @@ public class PlayerAudio : MonoBehaviour {
     }
 
     /* Template to play random callout sound. */
-    private void playRandCallout(AudioClip[] sounds, string[] messages)
+    private void playRandCallout(AudioClip[] sounds, string[] messages, bool useUI = true)
     {
         if (sounds.Length > 0 && !calloutSource.isPlaying)
         {
             int rand = Random.Range(0, sounds.Length);
             calloutSource.PlayOneShot(sounds[rand]);
-            ui.setCalloutText(messages[rand]);
+            if (useUI) ui.setCalloutText(messages[rand]);
         }
     }
 
@@ -75,13 +75,13 @@ public class PlayerAudio : MonoBehaviour {
     /* Plays random comment dialogue sound. */
     public void playPickupCommentSound()
     {
-        playRandCallout(pickupCommentary, pickupMessages);
+        playRandCallout(pickupCommentary, pickupMessages, false);
     }
 
     /* Plays random comment dialogue sound. */
     public void playOutCommentSound()
     {
-        playRandCallout(outCommentary, outMessages);
+        playRandCallout(outCommentary, outMessages, false);
     }
 
     /* Plays random celebration dialogue sound. */

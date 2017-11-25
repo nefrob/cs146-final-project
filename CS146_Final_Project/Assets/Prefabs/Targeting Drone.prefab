@@ -266,16 +266,16 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -302,7 +302,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -358,6 +358,8 @@ MonoBehaviour:
   maxRandInterval: 0.6
   minRandSpeed: 8
   maxRandSpeed: 20
+  source: {fileID: 82467133927586138}
+  laser: {fileID: 8300000, guid: 4f0b1dc0fc7e90c4786e26c057f264fc, type: 3}
 --- !u!114 &114404394928408396
 MonoBehaviour:
   m_ObjectHideFlags: 1

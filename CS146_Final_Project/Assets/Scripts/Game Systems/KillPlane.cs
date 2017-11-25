@@ -33,7 +33,7 @@ public class KillPlane : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerController>().FallDie();
+            other.gameObject.GetComponent<PlayerController>().Die(true);
         }
     }
 }

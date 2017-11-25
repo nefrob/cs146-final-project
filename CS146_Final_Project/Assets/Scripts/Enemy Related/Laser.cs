@@ -29,15 +29,13 @@ public class Laser : MonoBehaviour {
     private Transform player;
 
     // Audio
-    private AudioSource source;
-
+    public AudioSource source;
+    public AudioClip laser;
 
     private void Start()
     {
         player = GameObject.Find("FBX/Hips").GetComponent<Transform>();
         if (randomizeShootingTime) fireTime = Random.Range(minRandInterval, maxRandInterval);
-
-        source = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -61,7 +59,7 @@ public class Laser : MonoBehaviour {
         //shoot.Play(); // Need new sound
         GameObject go = Instantiate(m_shotPrefab, m_muzzle.position, Quaternion.identity);
         go.transform.GetChild(0).rotation = m_muzzle.rotation;
-        source.Play();
+        source.PlayOneShot(laser);
         go.GetComponent<Rigidbody2D>().AddForce(go.transform.GetChild(0).forward * shootingSpeed, ForceMode2D.Impulse);
         GameObject.Destroy(go, 3f);
     }

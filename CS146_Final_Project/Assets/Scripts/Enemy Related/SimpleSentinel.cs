@@ -33,7 +33,7 @@ public class SimpleSentinel : MonoBehaviour {
         bool movementEnabled = true;
         fireManager(ref movementEnabled);
         directionManager(movementEnabled);
-        Debug.Log(GetFirstRaycastHit(transform.forward, (float)detectionRange).collider.gameObject.tag);
+        //Debug.Log(GetFirstRaycastHit(transform.forward, (float)detectionRange).collider.gameObject.tag);
     }
 
     private void fireManager(ref bool movementEnabled) {

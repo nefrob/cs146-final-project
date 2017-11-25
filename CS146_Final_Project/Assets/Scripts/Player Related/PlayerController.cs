@@ -320,31 +320,27 @@ public class PlayerController : MonoBehaviour {
     }
 
     /* Perform kill action. */
-    public void Die()
+    public void Die(bool isFalling = false)
     {
         if (isDead) return;
 
         // Reset all values
-        anim.SetBool("isDead", true);
+        if (isFalling)
+        {
+            anim.SetBool("isFallingDead", true);
+            iTween.RotateBy(playerBody, iTween.Hash("y", 0.9, "easeType", "easeInOutBack", "time", 5.0f));
+            myAudio.playerSource.PlayOneShot(myAudio.fallingDeathSound);
+        }
+        else
+        {
+            anim.SetBool("isDead", true);
+            myAudio.playerSource.PlayOneShot(myAudio.deathSound);
+        }
+
         anim.SetBool("isGrounded", true);
         isDead = true;
         resetScore();
-        myAudio.playerSource.PlayOneShot(myAudio.deathSound);
-        FindObjectOfType<GameManager>().endGame();
-    }
-
-    /* Perform kill action if falling. */
-    public void FallDie()
-    {
-        if (isDead) return;
-
-        // Reset all values
-        anim.SetBool("isFallingDead", true);
-        anim.SetBool("isGrounded", true);
-        iTween.RotateBy(playerBody, iTween.Hash("y", 0.9, "easeType", "easeInOutBack", "time", 5.0f));
-        isDead = true;
-        resetScore();
-        myAudio.playerSource.PlayOneShot(myAudio.fallingDeathSound);
+        shakeScript.shakeScreen();
         FindObjectOfType<GameManager>().endGame();
     }
 
