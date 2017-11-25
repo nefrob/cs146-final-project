@@ -349,15 +349,15 @@ MonoBehaviour:
   m_shotPrefab: {fileID: 1067119549245832, guid: 5e2585e491105f74f96fc80fde17777b,
     type: 2}
   m_guiTexture: {fileID: 2800000, guid: 9d8463b3c89aa844289e2b169c96d827, type: 3}
-  shootingSpeed: 24.78
+  shootingSpeed: 8
   fireTime: 0.75
   detectionRange: 17.5
   randomizeShootingTime: 1
   randomizeShootingSpeed: 0
-  minRandInterval: 0.2
-  maxRandInterval: 0.6
-  minRandSpeed: 8
-  maxRandSpeed: 20
+  minRandInterval: 0.4
+  maxRandInterval: 0.8
+  minRandSpeed: 7
+  maxRandSpeed: 10
   source: {fileID: 82467133927586138}
   laser: {fileID: 8300000, guid: 4f0b1dc0fc7e90c4786e26c057f264fc, type: 3}
 --- !u!114 &114404394928408396
