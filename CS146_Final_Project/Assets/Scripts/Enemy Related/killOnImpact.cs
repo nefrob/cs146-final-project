@@ -28,8 +28,11 @@ public class killOnImpact : MonoBehaviour
         else if (other.gameObject.tag == "Ball")
         {
             if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
-            playerScript.updateScore(10);
-            playerAudio.playCelebrationSound();
+            if (other.tag != "Missile")
+            {
+                playerScript.updateScore(10);
+                playerAudio.playCelebrationSound();
+            }
             shakeScript.shakeScreen(0.5f, 0.7f);
             Destroy(gameObject, 0.02f);
         }

@@ -25,7 +25,7 @@ public class EndScreen: MonoBehaviour {
     /* Set current game total score anmd credits to scroll. */
     void Start()
     {
-       score = GetComponent<DontDestroyObjects>();
+       score = FindObjectOfType<DontDestroyObjects>();
        scoreText.text = "Score: " + score.score.ToString();
         iTween.MoveBy(scrollObj, iTween.Hash("y", 22000, 
             "easeType", "linear", "delay", 5.0f, "time", 90.0f));

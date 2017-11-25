@@ -407,11 +407,12 @@ public class PlayerController : MonoBehaviour {
     /* Adds value to score and updates UI component */
     public void updateScore(int add, bool wasMissile = false)
     {
+        // TODO, remove arbitrary numbers
         eventTimer = 0.0f;
         deltaScore += add;
         if (deltaScore >= 10)
         {
-            if (overallScore.multiplier <= 512) overallScore.multiplier *= 2;
+            if (overallScore.multiplier < 16) overallScore.multiplier *= 2; // max 16 times multiplier
             ui.updateScoreMultiplier(overallScore.multiplier);
             ui.setStreakText();
             // TODO add support for sound?

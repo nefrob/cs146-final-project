@@ -48,8 +48,7 @@ public class UIHandler : MonoBehaviour {
         {
             powerUpSlider.gameObject.SetActive(true);
             if (powerUpSlider.value < 1) powerUpSlider.value += powerUpRate * Time.deltaTime;
-        }
-        else
+        } else
         {
             powerUpSlider.gameObject.SetActive(false);
             powerUpSlider.value = 0;
@@ -60,7 +59,7 @@ public class UIHandler : MonoBehaviour {
     public void updateScore(int score)
     {
         iTween.ScaleBy(scoreText.gameObject, iTween.Hash("x", 2f, "y", 2f, "time", 0.25f));
-        iTween.ScaleBy(scoreText.gameObject, iTween.Hash("x", 0.5f, "y", 0.5f, "time", 0.25f, "delay", 0.25f));
+        iTween.ScaleTo(scoreText.gameObject, iTween.Hash("x", 1, "y", 1, "time", 0.25f, "delay", 0.25f));
         iTween.ShakePosition(scoreText.gameObject,
             iTween.Hash("x", Random.Range(10, 30), "y", Random.Range(10, 30), "time", 0.5f));
         scoreText.text = "Score: " + score.ToString();
@@ -74,7 +73,7 @@ public class UIHandler : MonoBehaviour {
         else scoreMultiplier.color = multColors[Random.Range(0, multColors.Length)];
 
         iTween.ScaleBy(scoreMultiplier.gameObject, iTween.Hash("x", 2f, "y", 2f, "time", 0.25f));
-        iTween.ScaleBy(scoreMultiplier.gameObject, iTween.Hash("x", 0.5f, "y", 0.5f, "time", 0.25f, "delay", 0.25f));
+        iTween.ScaleTo(scoreMultiplier.gameObject, iTween.Hash("x", 1, "y", 1, "time", 0.25f, "delay", 0.25f));
         iTween.ShakePosition(scoreMultiplier.gameObject, 
             iTween.Hash("x", Random.Range(10, 30), "y", Random.Range(10, 30), "time", 0.5f));
         scoreMultiplier.text = "x " + mult.ToString();
@@ -86,7 +85,7 @@ public class UIHandler : MonoBehaviour {
         streakText.CrossFadeAlpha(1.0f, 0.00f, false);
         streakText.text = streakMessages[Random.Range(0, streakMessages.Length)];
         iTween.ScaleBy(streakText.gameObject, iTween.Hash("x", 1.6f, "y", 1.6f, "time", 0.35f));
-        iTween.ScaleBy(streakText.gameObject, iTween.Hash("x", 0.625f, "y", 0.625f, "time", 0.35f, "delay", 0.35f));
+        iTween.ScaleTo(streakText.gameObject, iTween.Hash("x", 1, "y", 1, "time", 0.35f, "delay", 0.35f));
         iTween.ShakePosition(streakText.gameObject,
             iTween.Hash("x", Random.Range(15, 30), "y", Random.Range(15, 30), "time", 0.7f));
         streakText.CrossFadeAlpha(0.0f, 1.0f, false);
@@ -129,7 +128,7 @@ public class UIHandler : MonoBehaviour {
         calloutText.CrossFadeAlpha(1.0f, 0.00f, false);
         calloutText.text = msg;
         iTween.ScaleBy(calloutText.gameObject, iTween.Hash("x", 1.6f, "y", 1.6f, "time", 0.25f));
-        iTween.ScaleBy(calloutText.gameObject, iTween.Hash("x", 0.625f, "y", 0.625f, "time", 0.25f, "delay", 0.25f));
+        iTween.ScaleTo(calloutText.gameObject, iTween.Hash("x", 1, "y", 1, "time", 0.25f, "delay", 0.25f));
         iTween.ShakePosition(calloutText.gameObject,
             iTween.Hash("x", Random.Range(15, 30), "y", Random.Range(15, 30), "time", 0.5f));
         calloutText.CrossFadeAlpha(0.0f, 0.65f, false);
