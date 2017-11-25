@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Player Controller
 * Author:      Robert Neff
-* Date:        11/21/17
+* Date:        11/24/17
 * Description: Implements player related systems: movement, animation, and
 *              and public methods to be called upon collision with another object.
 */
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     private bool jump;
     private bool throwBall;
     private bool dropBall;
+    private bool crouch;
     private bool shield;
     private bool isDead;
     private bool depletedShield;
@@ -52,6 +53,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Animator anim;
     // Player Systems
     [SerializeField] private GameObject forceField;
+    public BoxCollider2D standingCollider;
+    [SerializeField] private BoxCollider2D crouchingCollider;
     // Balls
     [SerializeField] private DodgeBall lastBall;
     public List<DodgeBall> balls;
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour {
         pickupBall = false;
         throwBall = false;
         dropBall = false;
+        crouch = false;
         isDead = false;
         depletedShield = false;
         powerUp = false;
@@ -91,11 +95,18 @@ public class PlayerController : MonoBehaviour {
         if (!jump) jump = Input.GetButtonDown("Jump");
         throwBall = Input.GetKeyUp(KeyCode.Q);// Input.GetButtonUp("Fire1");
         powerUp = Input.GetKey(KeyCode.Q);
+        crouch = Input.GetKey(KeyCode.S);
         shield = Input.GetButton("Fire2");
         setCurrBallMouse();
         pickupBall = Input.GetKey(KeyCode.LeftShift);
         dropBall = Input.GetKeyDown(KeyCode.E);
 
+        setEventTimer();
+    }
+
+    /* Sets event timer based on last time player scored. */
+    void setEventTimer()
+    {
         if (eventTimer < MAX_TIME_BETWEEN_EVENTS)
         {
             eventTimer += Time.deltaTime;
@@ -132,8 +143,9 @@ public class PlayerController : MonoBehaviour {
 
         // Update player state
         if (dropBall) playerDropBall();
-        setThrowing();
         setPowerUp();
+        setThrowing();
+        setCrouching();
         setShielding();
         setMovement(horizontal);
         setJumping();
@@ -192,12 +204,30 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /* Sets the player crouching status. */
+    void setCrouching()
+    {
+        if (isGrounded && crouch)
+        {
+            anim.SetBool("isCrouching", true);
+            standingCollider.enabled = false;
+            crouchingCollider.enabled = true;
+        }
+        else
+        {
+            anim.SetBool("isCrouching", false);
+            standingCollider.enabled = true;
+            crouchingCollider.enabled = false;
+        }
+    }
+
     /* Sets player movement status. */
     private void setMovement(float horizontal)
     {
         // Disbale movement if shielding or throwing
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shield") ||
-            anim.GetCurrentAnimatorStateInfo(0).IsName("Throw")) horizontal = 0.0f;
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Throw") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch")) horizontal = 0.0f;
 
         // Set movement
         if (isGrounded || airControl) rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);

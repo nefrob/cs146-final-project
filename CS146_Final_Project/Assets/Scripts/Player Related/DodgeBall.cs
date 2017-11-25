@@ -44,7 +44,7 @@ public class DodgeBall : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         playerScript = FindObjectOfType<PlayerController>();
-        Physics2D.IgnoreCollision(playerScript.gameObject.GetComponent<BoxCollider2D>(), myCollider);
+        Physics2D.IgnoreCollision(playerScript.standingCollider, myCollider);
         source = GetComponent<AudioSource>();
         startLocation = transform.position;
         hand = GameObject.FindGameObjectWithTag("PlayerHand").transform;
@@ -61,7 +61,7 @@ public class DodgeBall : MonoBehaviour {
     void OnEnable()
     {
         if (playerScript == null) return;
-        Physics2D.IgnoreCollision(playerScript.gameObject.GetComponent<BoxCollider2D>(), myCollider);
+        Physics2D.IgnoreCollision(playerScript.standingCollider, myCollider);
     }
 
     /* Throw the ball in player facing direction. */
@@ -122,11 +122,6 @@ public class DodgeBall : MonoBehaviour {
         {
             // Collide with ground
             if (!source.isPlaying) source.PlayOneShot(bounceSound);
-        } else if (collision.gameObject.tag == "Stand")
-        {
-            // Put on ball stand
-            //transform.parent = collision.gameObject.transform;
-            // TODO: position on top?
         }
     }
 }

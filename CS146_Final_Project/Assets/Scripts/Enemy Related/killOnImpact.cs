@@ -21,9 +21,9 @@ public class killOnImpact : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(gameObject, 0.02f);
             other.gameObject.GetComponent<PlayerController>().Die();
             if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject, 0.02f);
         }
         else if (other.gameObject.tag == "Ball")
         {

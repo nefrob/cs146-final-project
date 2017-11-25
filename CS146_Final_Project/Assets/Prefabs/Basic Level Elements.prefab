@@ -2645,6 +2645,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1805569637669098
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4249286090257206}
+  - component: {fileID: 61204359592575428}
+  m_Layer: 0
+  m_Name: CrouchCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1843029441385696
 GameObject:
   m_ObjectHideFlags: 1
@@ -3639,6 +3655,19 @@ Transform:
   m_Father: {fileID: 4585857600853666}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -0.6625113, y: 2.9021769, z: -12.765621}
+--- !u!4 &4249286090257206
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1805569637669098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4431074680077140}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4249946402295036
 Transform:
   m_ObjectHideFlags: 1
@@ -4151,6 +4180,7 @@ Transform:
   - {fileID: 224880764960312198}
   - {fileID: 4425875666861280}
   - {fileID: 4660760925561376}
+  - {fileID: 4249286090257206}
   m_Father: {fileID: 4100578315434168}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5797,6 +5827,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!61 &61204359592575428
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1805569637669098}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.37, y: 0.73}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.54, y: 1.38}
+  m_EdgeRadius: 0
 --- !u!61 &61716283065969588
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -6213,9 +6268,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0
-  MaxDistance: 15
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -6242,7 +6297,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -6720,11 +6775,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   airControl: 1
-  myAudio: {fileID: 0}
-  ui: {fileID: 0}
+  myAudio: {fileID: 114546336811025206}
+  ui: {fileID: 114676109636382548}
   pickupBall: 0
   anim: {fileID: 95181167167095360}
   forceField: {fileID: 1906132087207240}
+  standingCollider: {fileID: 61036033905287568}
+  crouchingCollider: {fileID: 61204359592575428}
   lastBall: {fileID: 114741762416415138}
   balls: []
   numBallsToFind: 2
@@ -13486,7 +13543,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767172705438134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3000, y: 700, z: 0}
+  m_LocalPosition: {x: 3700, y: 1050, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224558046548153716}
@@ -13494,7 +13551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 3050, y: 750}
+  m_AnchoredPosition: {x: 3750, y: 1100}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224589561121092602
