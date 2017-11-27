@@ -238,7 +238,7 @@ public class PlayerController : MonoBehaviour {
     private void setJumping()
     {
         if (isGrounded && jump && anim.GetBool("isGrounded"))
-        {
+        {            
             myAudio.playerSource.PlayOneShot(myAudio.jumpSound);
             isGrounded = false;
             shakeScript.shakeScreen(0.25f, 0.25f); // shake screen on takeoff

@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
     [SerializeField] private GameObject start;
+    [SerializeField] private GameObject credits;
     [SerializeField] private GameObject panel;
     [SerializeField] private float load_delay = 2.0f;
 
@@ -24,6 +25,7 @@ public class Menu : MonoBehaviour {
         GetComponent<AudioSource>().Play();
         iTween.MoveBy(panel, iTween.Hash("y", 3 * Screen.height, "easeType", "easeInOutExpo", "delay", 0.25));
         iTween.MoveBy(start, iTween.Hash("y", -3 * Screen.height, "easeType", "easeInOutExpo", "delay", 0.25));
+        iTween.MoveBy(credits, iTween.Hash("y", -3 * Screen.height, "easeType", "easeInOutExpo", "delay", 0.25));
     }
 
     public void changeScene()

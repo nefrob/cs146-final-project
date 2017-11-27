@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: {fileID: 1237861051}
+  credits: {fileID: 1189244376}
   panel: {fileID: 1930362700}
   load_delay: 2
 --- !u!4 &139591336
