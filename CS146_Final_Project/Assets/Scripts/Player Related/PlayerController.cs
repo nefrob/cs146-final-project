@@ -113,8 +113,11 @@ public class PlayerController : MonoBehaviour {
             if (eventTimer >= MAX_TIME_BETWEEN_EVENTS)
             {
                 deltaScore = 0;
-                ui.updateScoreMultiplier(BASE_MULTIPLIER);
-                overallScore.multiplier = BASE_MULTIPLIER;
+                if (overallScore.multiplier != BASE_MULTIPLIER)
+                {
+                    ui.updateScoreMultiplier(BASE_MULTIPLIER);
+                    overallScore.multiplier = BASE_MULTIPLIER;
+                }
             }
         }
     }
@@ -415,6 +418,7 @@ public class PlayerController : MonoBehaviour {
             if (overallScore.multiplier < 16) overallScore.multiplier *= 2; // max 16 times multiplier
             ui.updateScoreMultiplier(overallScore.multiplier);
             ui.setStreakText();
+            deltaScore = 0;
             // TODO add support for sound?
         }
         overallScore.score += add * overallScore.multiplier;
