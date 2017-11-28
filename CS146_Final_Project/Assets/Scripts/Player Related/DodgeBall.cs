@@ -24,6 +24,9 @@ public class DodgeBall : MonoBehaviour {
     // Audio
     private AudioSource source;
     [SerializeField] private AudioClip bounceSound;
+    // Particle system for collision flair
+    [SerializeField] private ParticleSystem contactPS;
+    [SerializeField] private float particlesPlayTime = -1f;
 
     /* Set collider. */
     void Awake()
@@ -54,6 +57,13 @@ public class DodgeBall : MonoBehaviour {
             transform.position = hand.position;
             transform.parent = hand;
             rb.simulated = false;
+        }
+    
+        if (contactPS != null)
+        {
+            contactPS.Stop(); // in case starts playing
+            if (particlesPlayTime == -1f) particlesPlayTime = 
+                    contactPS.main.duration / contactPS.main.simulationSpeed;
         }
     }
 
@@ -94,6 +104,7 @@ public class DodgeBall : MonoBehaviour {
         transform.position = hand.position;
         transform.parent = hand;
         rb.simulated = false;
+        if (contactPS != null) contactPS.Stop();
     }
 
     /* Handle collisions with the player. */
@@ -120,8 +131,22 @@ public class DodgeBall : MonoBehaviour {
     {    
         if (collision.gameObject.tag == "Ground")
         {
-            // Collide with ground
+            // Collide with ground sound
             if (!source.isPlaying) source.PlayOneShot(bounceSound);
+
+            // Particle system flair
+            if (contactPS == null) return;
+            if (!contactPS.isPlaying)
+            {
+                contactPS.Play();
+                Invoke("stopContactPS", particlesPlayTime);
+            }
         }
+    }
+
+    /* Stops contact particle system playing. */
+    private void stopContactPS()
+    {
+        contactPS.Stop();
     }
 }

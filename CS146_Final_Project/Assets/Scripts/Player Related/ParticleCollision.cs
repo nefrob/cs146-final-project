@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class particleCollision : MonoBehaviour {
+public class ParticleCollision : MonoBehaviour {
 
     //Can be added to variables
 
