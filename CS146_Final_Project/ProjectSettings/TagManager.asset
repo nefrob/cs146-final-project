@@ -13,6 +13,7 @@ TagManager:
   - Ball
   - CanDestroy
   - Red
+  - jumppad
   layers:
   - Default
   - TransparentFX
