@@ -1,28 +1,33 @@
 ﻿/*
 * File:        End Trigger
 * Author:      Robert Neff
-* Date:        11/05/17
+* Date:        11/28/17
 * Description: Checks whether the player has entered the end zone and
 *              calls the game manager on change.
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndTrigger : MonoBehaviour {
     // UI
     [SerializeField] private GameObject ballMsg;
+    [SerializeField] private Text msg;
     // Change game state
     private GameManager gameManager;
     private PlayerController playerScript;
+    [SerializeField] private float delay = 3.0f;
+    private DontDestroyObjects endCodes;
+    // End position
+    [SerializeField] private Transform endPos;
 
     /* Set tweening and get game manager. */
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         playerScript = FindObjectOfType<PlayerController>();
+        endCodes = FindObjectOfType<DontDestroyObjects>();
     }
 
     /* Trigger next level to load on reaching end zone of current. */
@@ -38,9 +43,17 @@ public class EndTrigger : MonoBehaviour {
 
         // End game, all complete
         GetComponent<AudioSource>().Play();
-        gameManager.completeLevel();
         playerScript.gameObject.GetComponent<Rigidbody2D>().simulated = false; // disable movement
         playerScript.enabled = false;
+        playerScript.setUnkillableIdle(endPos.position);
+        msg.text = "Level Code: " + endCodes.inverseLevelCodes[SceneManager.GetActiveScene().buildIndex];
+        Invoke("loadNext", delay);
+    }
+
+    /* Delay time to load next level. */
+    private void loadNext()
+    {
+        gameManager.completeLevel();
     }
 
     /* Get rid of display text. */

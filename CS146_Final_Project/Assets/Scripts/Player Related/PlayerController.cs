@@ -437,8 +437,16 @@ public class PlayerController : MonoBehaviour {
         ui.updateScore(0);
     }
 
-    /*For external scripts to note when the player has died*/
+    /* For external scripts to note when the player has died. */
     public bool isDeadState() {
         return isDead;
+    }
+
+    /* Set players death state. */
+    public void setUnkillableIdle(Vector3 pos)
+    {
+        transform.position = pos;
+        isDead = true; // stop ability to die by other obstacles
+        anim.SetFloat("hSpeed", 0.0f);
     }
 }
