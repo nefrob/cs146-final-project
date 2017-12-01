@@ -6029,7 +6029,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.19634955
-  m_LinearDrag: 0.5
+  m_LinearDrag: 0.85
   m_AngularDrag: 0.05
   m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 486fc68f3c290e2448168a0733cb838a, type: 2}
@@ -8511,6 +8511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStartBall: 1
   throwForce: 155
+  dropForce: 25
   bounceSound: {fileID: 8300000, guid: 84ab941ab95bbdc43bd16f1460e6d3cc, type: 3}
   contactPS: {fileID: 198314878503148536}
   particlesPlayTime: -1
@@ -20966,7 +20967,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767172705438134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4300, y: 1350, z: 0}
+  m_LocalPosition: {x: 4400, y: 1400, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224558046548153716}
@@ -20974,7 +20975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 4350, y: 1400}
+  m_AnchoredPosition: {x: 4450, y: 1450}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224589561121092602

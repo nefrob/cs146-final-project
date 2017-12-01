@@ -235,7 +235,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.19634955
-  m_LinearDrag: 0
+  m_LinearDrag: 0.85
   m_AngularDrag: 0.05
   m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 486fc68f3c290e2448168a0733cb838a, type: 2}
@@ -459,6 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStartBall: 0
   throwForce: 155
+  dropForce: 25
   bounceSound: {fileID: 8300000, guid: 84ab941ab95bbdc43bd16f1460e6d3cc, type: 3}
   contactPS: {fileID: 198929394555162384}
   particlesPlayTime: -1

@@ -17,8 +17,10 @@ public class DodgeBall : MonoBehaviour {
     private CircleCollider2D myCollider;
     private Rigidbody2D rb;
     private Vector3 startLocation;
+    private bool pickedUp = false;
     // Ball stats
     [SerializeField] private float throwForce = 100.0f;
+    [SerializeField] private float dropForce = 25.0f;
     // Player update
     private PlayerController playerScript;
     // Audio
@@ -57,6 +59,7 @@ public class DodgeBall : MonoBehaviour {
             transform.position = hand.position;
             transform.parent = hand;
             rb.simulated = false;
+            pickedUp = true;
         }
     
         if (contactPS != null)
@@ -88,22 +91,26 @@ public class DodgeBall : MonoBehaviour {
         transform.parent = null;
         Vector3 update = transform.position;
         update.x += xPlayerFacing * 2;
+        rb.AddForce(new Vector2(xPlayerFacing * dropForce, 1.5f * dropForce)); // hard code because dont;
         transform.position = update;
         rb.simulated = true;
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
+        pickedUp = false;
     }
 
     /* Ball picked up by player. */
     private void playerPickMeUp()
     {
         // Pickup ball
-        if (!playerScript.pickupBall) return;
+        if (pickedUp) return;
+        //if (!playerScript.pickupBall) return; // enable if non-automatic pickup
         playerScript.AddBallToPlayer(this);
         playerScript.pickupBall = false;
         transform.position = hand.position;
         transform.parent = hand;
         rb.simulated = false;
+        pickedUp = true;
         if (contactPS != null) contactPS.Stop();
     }
 

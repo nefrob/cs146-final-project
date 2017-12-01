@@ -234,7 +234,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.19634955
-  m_LinearDrag: 0
+  m_LinearDrag: 0.85
   m_AngularDrag: 0.05
   m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 486fc68f3c290e2448168a0733cb838a, type: 2}
@@ -265,7 +265,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1245808606401458}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e0cc0c4261dfd314d86eee7243c3a936, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -365,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStartBall: 0
   throwForce: 155
+  dropForce: 25
   bounceSound: {fileID: 8300000, guid: 84ab941ab95bbdc43bd16f1460e6d3cc, type: 3}
   contactPS: {fileID: 198716279101065828}
   particlesPlayTime: -1
