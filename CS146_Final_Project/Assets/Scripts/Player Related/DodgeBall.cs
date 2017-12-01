@@ -80,22 +80,22 @@ public class DodgeBall : MonoBehaviour {
     /* Throw the ball in player facing direction. */
     public void ThrowBall(float xPlayerFacing, float powerUpForce)
     {
-        DropBall(xPlayerFacing);
+        DropBall(xPlayerFacing, Vector3.zero);
         float totalForce = throwForce + powerUpForce;
         rb.AddForce(new Vector2(xPlayerFacing * totalForce, 0.3f * totalForce));
     }
 
     /* Drops the ball from the player's hand. */
-    public void DropBall(float xPlayerFacing)
+    public void DropBall(float xPlayerFacing, Vector3 playerVelocity)
     {
         transform.parent = null;
         Vector3 update = transform.position;
         update.x += xPlayerFacing * 2;
-        rb.AddForce(new Vector2(xPlayerFacing * dropForce, 1.5f * dropForce)); // hard code because dont;
-        transform.position = update;
-        rb.simulated = true;
-        rb.velocity = Vector2.zero;
+        rb.velocity = playerVelocity * 0.75f; // tone down a little
         rb.angularVelocity = 0;
+        rb.simulated = true;
+        rb.AddForce(new Vector2(xPlayerFacing * dropForce, 1.5f * dropForce));
+        transform.position = update;
         pickedUp = false;
     }
 

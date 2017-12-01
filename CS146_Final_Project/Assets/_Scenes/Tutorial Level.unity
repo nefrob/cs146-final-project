@@ -4676,7 +4676,7 @@ MonoBehaviour:
   messages:
   - Press [W or D] to move
   - Press [SPACE] to jump
-  - Press [Q] to throw ball
+  - Press [MOUSE 0] to throw ball
   - Press [LSHIFT] to pickup ball
   - Press [E] to drop ball
   - Press [RIGHT MOUSE] to shield

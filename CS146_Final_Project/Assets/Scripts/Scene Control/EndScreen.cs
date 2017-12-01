@@ -40,7 +40,7 @@ public class EndScreen: MonoBehaviour {
     /* Load first scene and reset values to replay game. */
     public void Replay()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2); // first level of game
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
         score.score = 0; 
         score.multiplier = 1;
     }

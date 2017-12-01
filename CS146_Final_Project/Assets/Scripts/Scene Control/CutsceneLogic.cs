@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Cutscene Logic
 * Author:      Robert Neff
-* Date:        11/23/17
+* Date:        12/01/17
 * Description: Displays button and allows for scene switching after cutscene.
 */
 
@@ -20,13 +20,14 @@ public class CutsceneLogic : MonoBehaviour {
     float timer = 0.0f;
     // Animation status
     bool animBoolDone = false;
+    [SerializeField] private float animationLength = 67.0f;
 
     /* Hide button initially. */
     void Start () {
         continueImg.CrossFadeAlpha(0.0f, 0.0f, false);
         continueText.CrossFadeAlpha(0.0f, 0.0f, false);
 
-        Invoke("animDone", 67.0f);
+        Invoke("animDone", animationLength);
     }
 	
 	/* Check if user wants to switch. */

@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float groundRadius;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private bool airControl;
-    [SerializeField] private PhysicsMaterial2D deathFriction;
     // Audio
     [SerializeField] private PlayerAudio myAudio;
     //UI
@@ -68,7 +67,6 @@ public class PlayerController : MonoBehaviour {
         myAudio = FindObjectOfType<PlayerAudio>();
         ui = FindObjectOfType<UIHandler>();
         rb = GetComponent<Rigidbody2D>();
-        rb.sharedMaterial.friction = 0.0f; // ensure slippery on start
         facingRight = true;
         hasBall = true;
         pickupBall = false;
@@ -95,13 +93,13 @@ public class PlayerController : MonoBehaviour {
 
         // Read the input in Update so button presses aren't missed.
         if (!jump) jump = Input.GetButtonDown("Jump");
-        throwBall = Input.GetKeyUp(KeyCode.Q);// Input.GetButtonUp("Fire1");
-        powerUp = Input.GetKey(KeyCode.Q);
+        throwBall = Input.GetButtonUp("Fire1");
+        powerUp = Input.GetButton("Fire1");
         crouch = Input.GetKey(KeyCode.S);
         shield = Input.GetButton("Fire2");
         setCurrBallMouse();
         pickupBall = Input.GetKey(KeyCode.LeftShift);
-        dropBall = Input.GetKeyDown(KeyCode.E);
+        dropBall = Input.GetKeyDown(KeyCode.W);
 
         setEventTimer();
     }
@@ -231,8 +229,10 @@ public class PlayerController : MonoBehaviour {
     {
         // Disbale movement if shielding or throwing
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Shield") ||
-            anim.GetCurrentAnimatorStateInfo(0).IsName("Throw") ||
+            /*anim.GetCurrentAnimatorStateInfo(0).IsName("Throw") || */
             anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch")) horizontal = 0.0f;
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Throw")) horizontal *= 0.5f;
 
         // Set movement
         if (isGrounded || airControl) rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
@@ -317,7 +317,7 @@ public class PlayerController : MonoBehaviour {
         myAudio.playerSource.PlayOneShot(myAudio.dropSound);
         lastBall = balls[currBall];
         removeBall();
-        lastBall.DropBall(playerBody.transform.forward.x);
+        lastBall.DropBall(playerBody.transform.forward.x, rb.velocity);
     }
 
     /* Flips player facing direction */
@@ -376,7 +376,7 @@ public class PlayerController : MonoBehaviour {
         isDead = true;
         resetScore();
         shakeScript.shakeScreen();
-        rb.sharedMaterial.friction = 0.8f;
+        rb.velocity = Vector3.zero;
         forceField.SetActive(false);
         FindObjectOfType<GameManager>().endGame();
     }
@@ -414,6 +414,8 @@ public class PlayerController : MonoBehaviour {
     /* Adds value to score and updates UI component */
     public void updateScore(int add, bool wasMissile = false)
     {
+        if (isDead) return;
+
         // TODO, remove arbitrary numbers
         eventTimer = 0.0f;
         deltaScore += add;
