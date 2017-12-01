@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float groundRadius;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private bool airControl;
+    [SerializeField] private PhysicsMaterial2D deathFriction;
     // Audio
     [SerializeField] private PlayerAudio myAudio;
     //UI
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour {
         myAudio = FindObjectOfType<PlayerAudio>();
         ui = FindObjectOfType<UIHandler>();
         rb = GetComponent<Rigidbody2D>();
+        rb.sharedMaterial.friction = 0.0f; // ensure slippery on start
         facingRight = true;
         hasBall = true;
         pickupBall = false;
@@ -374,6 +376,8 @@ public class PlayerController : MonoBehaviour {
         isDead = true;
         resetScore();
         shakeScript.shakeScreen();
+        rb.sharedMaterial.friction = 0.8f;
+        forceField.SetActive(false);
         FindObjectOfType<GameManager>().endGame();
     }
 
