@@ -109,7 +109,7 @@ public class TutorialLogic : MonoBehaviour {
         if (actionCount == 7 && Input.GetAxis("Mouse ScrollWheel") != 0.0f)
         {
             actionCount++;
-            Invoke("hide", 0.0f);
+            hide();
             blockers[3].SetActive(false);
             arrowsEnd.SetActive(true);
         }

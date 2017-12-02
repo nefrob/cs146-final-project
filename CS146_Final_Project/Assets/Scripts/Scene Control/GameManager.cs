@@ -1,7 +1,7 @@
 ﻿/*
 * File:        Game Manager
 * Author:      Robert Neff
-* Date:        10/28/17
+* Date:        12/02/17
 * Description: Handles the game state and scene loading.
 */
 
@@ -16,13 +16,24 @@ public class GameManager : MonoBehaviour {
     // UI elements to enable/diasble upon actions
     [SerializeField] private GameObject completeLevelUI;
     [SerializeField] private GameObject deathUI;
+    [SerializeField] private GameObject quitUI;
+    private bool quitUIDisplayed = false;
 
     // Game state
     private bool gameHasEnded = false;
 
+    /* Handle input. */
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) displayQuitUI();
+    }
+
     /* Load next level, player won. */
     public void completeLevel() {
         completeLevelUI.SetActive(true);
+        gameHasEnded = true;
+        quitUI.SetActive(false);
+        Time.timeScale = 1.0f;
         Invoke("LoadNextLevel", loadDelay);
     }
 
@@ -31,6 +42,8 @@ public class GameManager : MonoBehaviour {
         if (!gameHasEnded) {
             deathUI.SetActive(true);
             gameHasEnded = true;
+            quitUI.SetActive(false);
+            Time.timeScale = 1.0f;
             // Restart game
             Invoke("restart", restartDelay);
         }
@@ -45,5 +58,34 @@ public class GameManager : MonoBehaviour {
     void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    /* Pauses the game and gives a quit option (to menu or out of application). */
+    private void displayQuitUI()
+    {
+        if (gameHasEnded) return;
+        if (quitUI.activeInHierarchy)
+        {
+            quitUI.SetActive(false);
+            Time.timeScale = 1.0f; // play
+        }
+        else
+        {
+            quitUI.SetActive(true);
+            Time.timeScale = 0.0f; // pause
+        }
+    } 
+
+    /* UI quit game. */
+    public void quitGame()
+    {
+        Application.Quit();
+    }
+
+    /* Quit to menu. */
+    public void quitToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1.0f; // play
     }
 }
