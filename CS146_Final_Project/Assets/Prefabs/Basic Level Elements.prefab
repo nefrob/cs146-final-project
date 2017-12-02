@@ -8329,28 +8329,26 @@ MonoBehaviour:
   commentMessages:
   - NICE
   - RIGHTEOUS
-  pickupCommentary: []
+  pickupCommentary:
+  - {fileID: 8300000, guid: d063dbd9356320d428ff91d8c9f83dca, type: 3}
   pickupMessages:
   - Lock'n load
   - I like this one
   - New Ball!
   - Justice
-  outCommentary: []
+  outCommentary:
+  - {fileID: 8300000, guid: 7faeb5a093b7c6341a3053060d60ae63, type: 3}
   outMessages:
   - I'm out!
   - Help
   celebrations:
-  - {fileID: 8300000, guid: 2e3ad1db426394bfa997ba482dceec2b, type: 3}
-  - {fileID: 8300000, guid: 84c181d44a0f74d72ab7e8c6b40de8ff, type: 3}
+  - {fileID: 8300000, guid: aa0db1a84e355584fb18a51e45d7a670, type: 3}
   celebrationMessages:
-  - NICE
-  - RIGHTEOUS
+  - Celebrate
   taunts:
-  - {fileID: 8300000, guid: 2e3ad1db426394bfa997ba482dceec2b, type: 3}
-  - {fileID: 8300000, guid: 84c181d44a0f74d72ab7e8c6b40de8ff, type: 3}
+  - {fileID: 8300000, guid: 2d1350aa5951d574891fce94698ef7a6, type: 3}
   tauntMessages:
-  - NICE
-  - RIGHTEOUS
+  - Taunt
 --- !u!114 &114548319353218794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -21403,7 +21401,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767172705438134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5000, y: 1700, z: 0}
+  m_LocalPosition: {x: 5100, y: 1750, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224558046548153716}
@@ -21411,7 +21409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5050, y: 1750}
+  m_AnchoredPosition: {x: 5150, y: 1800}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224589561121092602

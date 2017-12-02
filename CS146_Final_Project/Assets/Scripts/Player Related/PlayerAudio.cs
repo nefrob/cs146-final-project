@@ -75,13 +75,13 @@ public class PlayerAudio : MonoBehaviour {
     /* Plays random comment dialogue sound. */
     public void playPickupCommentSound()
     {
-        playRandCallout(pickupCommentary, pickupMessages, false);
+        playRandCallout(pickupCommentary, pickupMessages);
     }
 
     /* Plays random comment dialogue sound. */
     public void playOutCommentSound()
     {
-        playRandCallout(outCommentary, outMessages, false);
+        playRandCallout(outCommentary, outMessages);
     }
 
     /* Plays random celebration dialogue sound. */

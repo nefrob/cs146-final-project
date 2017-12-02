@@ -398,6 +398,7 @@ public class PlayerController : MonoBehaviour {
             currBall--;
             if (currBall < 0) currBall = balls.Count - 1;
             balls[currBall].gameObject.SetActive(true);
+            //if (!isGrounded) myAudio.playTauntSound(); // "throwing in air"
         } else
          {
              hasBall = false;
