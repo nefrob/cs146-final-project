@@ -7,7 +7,7 @@ public float loopduration;
 private float ramptime=0;
 private float alphatime=1;	
 	void Update () {
-		Destroy(gameObject, 2.5);
+		Destroy(gameObject, 2.5f);
 ramptime+=Time.deltaTime*2;
 alphatime-=Time.deltaTime;		
 float r = Mathf.Sin((Time.time / loopduration) * (2 * Mathf.PI)) * 0.5f + 0.25f;
