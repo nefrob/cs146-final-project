@@ -25,6 +25,7 @@ public class rocketManager : MonoBehaviour
 
     //Private internal control variables
     private PlayerController playerScript;
+    private EnemyRespawn respawnScript;
     private double timePassed = 0;
     private bool firingAllowed = false;
     private int counter = 0;
@@ -32,11 +33,14 @@ public class rocketManager : MonoBehaviour
     private void Start()
     {
         playerScript = FindObjectOfType<PlayerController>();
+        respawnScript = GetComponent<EnemyRespawn>();
         if (randomizeShootingTime) fireTime = Random.Range(minRandInterval,maxRandInterval);
     }
 
     void Update()
     {
+        if (respawnScript.isDead) return;
+
         //Firing given Timer
         if (firingAllowed)
         {

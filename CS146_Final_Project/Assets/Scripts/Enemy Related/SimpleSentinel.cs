@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class SimpleSentinel : MonoBehaviour {
     public string direction = "left"; //Can be right/left
+    public Transform flipableBody;
     public double changeDirTime = 3;
     public double detectionRange = 10;
     private double timePassed = 0;
@@ -21,15 +22,37 @@ public class SimpleSentinel : MonoBehaviour {
     private GameObject explosion;
 
     private PlayerController playerScript;
+    private EnemyRespawn respawnScript;
+    private bool dead;
+    private bool yieldsImpactPoints;
+    private Vector2 speedBefore;
 
     void Start(){
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         enemy = GetComponent<Rigidbody2D>();
         playerScript = FindObjectOfType<PlayerController>();
         player = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+        respawnScript = GetComponent<EnemyRespawn>();
+        dead = false;
+        yieldsImpactPoints = true;
     }
 
     void Update () {
+        if (dead && respawnScript.isDead) return;
+
+        if (!dead && respawnScript.isDead)
+        {
+            dead = true;
+            speedBefore = enemy.velocity;
+            enemy.velocity = Vector2.zero;
+            return;
+        }
+        if (dead && !respawnScript.isDead)
+        {
+            dead = false;
+            enemy.velocity = speedBefore;
+        }
+
         bool movementEnabled = true;
         fireManager(ref movementEnabled);
         directionManager(movementEnabled);
@@ -61,7 +84,7 @@ public class SimpleSentinel : MonoBehaviour {
     }
 
     private void directionManager(bool movementEnabled) {
-        Vector3 theScale = transform.localScale;
+        Vector3 theScale = flipableBody.localScale;
         if (timePassed > changeDirTime && movementEnabled)
         {
             if (direction == "right")
@@ -69,7 +92,7 @@ public class SimpleSentinel : MonoBehaviour {
                 //enemy.AddForce(Vector2.right* -speed,ForceMode2D.Impulse);
                 enemy.velocity = Vector2.right * -speed;
                 theScale.z *= -1;
-                transform.localScale = theScale;
+                flipableBody.localScale = theScale;
                 direction = "left";
             }
             else
@@ -77,7 +100,7 @@ public class SimpleSentinel : MonoBehaviour {
                 //enemy.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
                 enemy.velocity = Vector2.right * speed;
                 theScale.z *= -1;
-                transform.localScale = theScale;
+                flipableBody.localScale = theScale;
                 direction = "right";
             }
             timePassed = 0;
@@ -95,14 +118,17 @@ public class SimpleSentinel : MonoBehaviour {
         {
             Vector3 pos = transform.position;
             pos.y += 1.5f;
-            Destroy(this.gameObject, 0.02f);
+            Destroy(gameObject, 0.02f);
             GameObject boom = Instantiate(explosion, pos, transform.rotation) as GameObject;
             other.gameObject.GetComponent<PlayerController>().Die();
         } else if(other.gameObject.tag == "Ball")
         {
             GameObject boom = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
-            playerScript.updateScore(10);
-            Destroy(this.gameObject, 0.02f);
+
+            if (yieldsImpactPoints) playerScript.updateScore(10);
+            yieldsImpactPoints = false;
+            respawnScript.disableEnemy(true);
+            //Destroy(this.gameObject, 0.02f);
         }
     }
 

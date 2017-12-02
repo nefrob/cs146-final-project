@@ -9,13 +9,19 @@ public class bomber : MonoBehaviour {
     public float detectionRange = 6f;
     private Transform player;
     private float timePassed = 0;
+
+    private EnemyRespawn respawnScript;
+
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player").GetComponent<Transform>();
+        respawnScript = GetComponent<EnemyRespawn>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (respawnScript.isDead) return;
+
         float range = Vector2.Distance(transform.position, player.transform.position);
         Vector3 directionToTarget = transform.position - player.transform.position;
 
@@ -48,5 +54,6 @@ public class bomber : MonoBehaviour {
         Vector2 pos = transform.position;
         pos.y -= 1.2f;
         GameObject bomb = Instantiate(rockets, pos, transform.rotation) as GameObject;
+        bomb.GetComponent<killOnImpact>().yieldsImpactPoints = !respawnScript.hasDiedBefore;
     }
 }

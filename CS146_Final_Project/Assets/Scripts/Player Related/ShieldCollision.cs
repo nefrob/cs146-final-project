@@ -22,16 +22,18 @@ public class ShieldCollision : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Missile")
-        {
+        { 
             if (collision.gameObject.name.Substring(0, 9) == "LaserShot") // less cost and value
             {
                 uiScript.shieldBarSlider.value -= laserCost;
-                playerScript.updateScore(collisionPoints / 2, true);
+                if (collision.gameObject.GetComponent<killOnImpact>().yieldsImpactPoints)
+                    playerScript.updateScore(collisionPoints / 2, true);
             }
             else
             {
                 uiScript.shieldBarSlider.value -= missileCost;
-                playerScript.updateScore(collisionPoints, true);
+                if (collision.gameObject.GetComponent<killOnImpact>().yieldsImpactPoints)
+                    playerScript.updateScore(collisionPoints, true);
             }
             if (uiScript.shieldBarSlider.value < 0) uiScript.shieldBarSlider.value = 0;
             playerScript.playExplosionSound();

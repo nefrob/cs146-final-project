@@ -27,6 +27,7 @@ public class Laser : MonoBehaviour {
     private bool firingAllowed = true;
     private int counter = 0;
     private Transform player;
+    [SerializeField] private EnemyRespawn respawnScript;
 
     // Audio
     public AudioSource source;
@@ -40,6 +41,8 @@ public class Laser : MonoBehaviour {
 
     void Update()
     {
+        if (respawnScript.isDead) return;
+
         transform.LookAt(player, Vector3.forward);
         //Firing given Timer
         if (Vector2.Distance(transform.position, player.transform.position) < detectionRange)
@@ -60,8 +63,9 @@ public class Laser : MonoBehaviour {
         GameObject go = Instantiate(m_shotPrefab, m_muzzle.position, Quaternion.identity);
         go.transform.GetChild(0).rotation = m_muzzle.rotation;
         source.PlayOneShot(laser);
+        go.GetComponent<killOnImpact>().yieldsImpactPoints = !respawnScript.hasDiedBefore;
         go.GetComponent<Rigidbody2D>().AddForce(go.transform.GetChild(0).forward * shootingSpeed, ForceMode2D.Impulse);
-        GameObject.Destroy(go, 3f);
+        Destroy(go, 3f);
     }
 
 }

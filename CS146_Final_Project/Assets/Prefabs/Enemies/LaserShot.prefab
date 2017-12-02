@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 23211267665318444}
   - component: {fileID: 33510012680433624}
   - component: {fileID: 114536007678740490}
-  - component: {fileID: 114520634071111550}
   - component: {fileID: 108221322164587404}
   m_Layer: 0
   m_Name: shot_prefab
@@ -270,18 +269,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114520634071111550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1836301311711584}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb039d3a64491f4ebfc852d25b5ee70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!114 &114536007678740490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,3 +300,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 1000010608846784, guid: dc7d82d9fa6230e43b2ebf85206e55f3, type: 2}
   onPlatformImpact: 1
+  yieldsImpactPoints: 1
