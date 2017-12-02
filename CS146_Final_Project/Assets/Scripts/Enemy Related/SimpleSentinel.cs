@@ -119,7 +119,7 @@ public class SimpleSentinel : MonoBehaviour {
             Vector3 pos = transform.position;
             pos.y += 1.5f;
             Destroy(gameObject, 0.02f);
-            GameObject boom = Instantiate(explosion, pos, transform.rotation) as GameObject;
+            Instantiate(explosion, pos, transform.rotation);
             other.gameObject.GetComponent<PlayerController>().Die();
         } else if(other.gameObject.tag == "Ball")
         {

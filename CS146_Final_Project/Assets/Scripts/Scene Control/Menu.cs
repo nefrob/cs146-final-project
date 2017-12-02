@@ -18,7 +18,11 @@ public class Menu : MonoBehaviour {
     [SerializeField] private GameObject codeField;
     [SerializeField] private Text codeFieldText;
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject infoBtn;
+    [SerializeField] private GameObject infoPanel;
     [SerializeField] private float load_delay = 2.0f;
+
+    private bool infoDisplayed = false;
 
     private DontDestroyObjects codes;
 
@@ -84,12 +88,27 @@ public class Menu : MonoBehaviour {
     /* Exit codes field screen. */
     public void exitCodesField()
     {
-        iTween.MoveBy(startBtn, iTween.Hash("y", Screen.height / 3, "easeType", "easeInOutExpo", "delay", 1f));
-        iTween.MoveBy(creditsBtn, iTween.Hash("y", Screen.height / 3, "easeType", "easeInOutExpo", "delay", 1f));
-        iTween.MoveBy(codeBtn, iTween.Hash("y", Screen.height / 3, "easeType", "easeInOutExpo", "delay", 1f));
+        iTween.MoveBy(startBtn, iTween.Hash("y", Screen.height / 3f, "easeType", "easeInOutExpo", "delay", 1f));
+        iTween.MoveBy(creditsBtn, iTween.Hash("y", Screen.height / 3f, "easeType", "easeInOutExpo", "delay", 1f));
+        iTween.MoveBy(codeBtn, iTween.Hash("y", Screen.height / 3f, "easeType", "easeInOutExpo", "delay", 1f));
 
-        iTween.MoveBy(codeField, iTween.Hash("y", 2.35 * Screen.height / 3, "easeType", "easeInOutExpo", "delay", 0.5f));
-        iTween.MoveBy(submitBtn, iTween.Hash("x", -Screen.width / 2.25, "easeType", "easeInOutExpo", "delay", 0.5f));
-        iTween.MoveBy(codeExitBtn, iTween.Hash("x", Screen.width / 2.25, "easeType", "easeInOutExpo", "delay", 0.5f));
+        iTween.MoveBy(codeField, iTween.Hash("y", 2.35f * Screen.height / 3f, "easeType", "easeInOutExpo", "delay", 0.5f));
+        iTween.MoveBy(submitBtn, iTween.Hash("x", -Screen.width / 2.25f, "easeType", "easeInOutExpo", "delay", 0.5f));
+        iTween.MoveBy(codeExitBtn, iTween.Hash("x", Screen.width / 2.25f, "easeType", "easeInOutExpo", "delay", 0.5f));
+    }
+
+    /* Open info screen. */
+    public void openInfo()
+    {
+        if (infoDisplayed) return;
+        infoDisplayed = true;
+        iTween.MoveBy(infoPanel, iTween.Hash("y", -Screen.height / 1.1f, "easeType", "easeInOutExpo", "delay", 0.5f));
+    }
+
+    /* Close info screen. */
+    public void closeInfo()
+    {
+        infoDisplayed = false;
+        iTween.MoveBy(infoPanel, iTween.Hash("y", Screen.height / 1.1f, "easeType", "easeInOutExpo", "delay", 0.5f));
     }
 }

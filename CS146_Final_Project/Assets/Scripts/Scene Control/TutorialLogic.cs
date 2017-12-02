@@ -9,17 +9,8 @@ public class TutorialLogic : MonoBehaviour {
     private UIHandler ui;
     [SerializeField] private string[] messages;
     // Actions
-    private bool moved = false;
-    private bool jumped = false;
-    private bool threwBall = false;
-    private bool droppedBall = false;
-    private bool pickedUpBall = false;
-    private bool shielded = false;
-    private bool scrolled = false;
-
-    private bool distanceDisplay1 = false; // so bad style :(
-    private bool distanceDisplay2 = false;
-    private bool ballsChanged = false;
+    private int actionCount = 0;
+    private int distanceMarker = 0;
 
     // Colliders
     public GameObject[] blockers;
@@ -41,78 +32,84 @@ public class TutorialLogic : MonoBehaviour {
 	
 	/* Get action updates. */
 	void Update () {
+        if (actionCount == 8) return;
+
         if (player.isDeadState())
         {
             ui.hideMessage();
             return;
         }
 
-        // Bad style but need to be done quick so leave
-        if (!moved && Input.GetAxis("Horizontal") != 0.0f)
+        // Check if moved
+        if (actionCount == 0 && Input.GetAxis("Horizontal") != 0.0f)
         {
-            moved = true;
+            actionCount++;
             Invoke("hide", 0.2f);
             Invoke("displayNextText", 1.0f);
             blockers[0].SetActive(false);
             arrowsStart.SetActive(true);
         }
-        if (!jumped && Input.GetAxis("Jump") != 0 && moved)
+        // Check if jumped
+        if (actionCount == 1 && Input.GetAxis("Jump") != 0)
         {
-            jumped = true;
+            actionCount++;
             Invoke("hide", 0.2f);
         }
-
-        if (player.transform.position.x > 64 && !threwBall && !distanceDisplay1)
+        // Display next message when reach desired distance
+        if (player.transform.position.x > 64 && actionCount == 2 && distanceMarker == 0)
         {
-            Invoke("displayNextText", 0.0f);
-            distanceDisplay1 = true;
-        }
-
-        if (!threwBall && Input.GetKey(KeyCode.Q) && moved && jumped)
-        {
-            threwBall = true;
             Invoke("hide", 0.2f);
-            Invoke("displayNextText", 1.5f);
+            Invoke("displayNextText", 1.0f);
+            distanceMarker++;
         }
-        if (!pickedUpBall && Input.GetKey(KeyCode.LeftShift) && moved && jumped && threwBall)
+        // Check if threw ball
+        if (actionCount == 2 && Input.GetButton("Fire1") && distanceMarker == 1)
         {
-            pickedUpBall = true;
+            actionCount++;
             Invoke("hide", 0.2f);
-            Invoke("displayNextText", 1.5f);
+            Invoke("displayNextText", 1.0f);
         }
-        if (!droppedBall && Input.GetKey(KeyCode.E) && moved && jumped && threwBall && pickedUpBall)
+        // Check if dropped ball
+        if (actionCount == 3 && Input.GetKey(KeyCode.W))
         {
-            droppedBall = true;
+            actionCount++;
             Invoke("hide", 0.2f);
             blockers[1].SetActive(false);
             arrowsUp.SetActive(true);
         }
-
-        if (player.transform.position.x > 105 && !shielded && !distanceDisplay2)
+        // Display next message when reach desired distance
+        if (player.transform.position.x > 105 && actionCount == 4 && distanceMarker == 1)
         {
-            Invoke("displayNextText", 0.0f);
-            distanceDisplay2 = true;
+            Invoke("hide", 0.2f);
+            Invoke("displayNextText", 1.0f);
+            distanceMarker++;
         }
-
-        if (!shielded && (player.transform.position.x > 105) && Input.GetMouseButton(1) && 
-            moved && jumped && threwBall && droppedBall && pickedUpBall)
+        // Check if shielded
+        if (actionCount == 4 && Input.GetMouseButton(1) && distanceMarker == 2)
         {
-            shielded = true;
+            actionCount++;
+            Invoke("displayNextText", 1.0f);
+            Invoke("hide", 0.2f);
+        }
+        // Check if crouched
+        if (actionCount == 5 && Input.GetKey(KeyCode.S))
+        {
+            actionCount++;
             Invoke("hide", 0.2f);
             blockers[2].SetActive(false);
         }
-
-        if (player.getNumBallsFound() > 1 && !scrolled && !ballsChanged)
+        // Check if scrolled balls
+        if (player.getNumBallsFound() > 1 && actionCount == 6)
         {
-            Invoke("displayNextText", 0.0f);
-            ballsChanged = true;
-        }
-
-        if (!scrolled && Input.GetAxis("Mouse ScrollWheel") != 0.0f && moved && jumped && threwBall 
-            && droppedBall && pickedUpBall && shielded)
-        {
-            scrolled = true;
             Invoke("hide", 0.2f);
+            Invoke("displayNextText", 1.0f);
+            actionCount++;
+        }
+        // Check if scrolled balls
+        if (actionCount == 7 && Input.GetAxis("Mouse ScrollWheel") != 0.0f)
+        {
+            actionCount++;
+            Invoke("hide", 0.0f);
             blockers[3].SetActive(false);
             arrowsEnd.SetActive(true);
         }

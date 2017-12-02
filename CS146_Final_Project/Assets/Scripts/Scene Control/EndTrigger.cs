@@ -44,7 +44,6 @@ public class EndTrigger : MonoBehaviour {
         // End game, all complete
         GetComponent<AudioSource>().Play();
         playerScript.gameObject.GetComponent<Rigidbody2D>().simulated = false; // disable movement
-        playerScript.enabled = false;
         playerScript.setUnkillableIdle(endPos.position);
         msg.text = "Level Code: " + endCodes.inverseLevelCodes[SceneManager.GetActiveScene().buildIndex];
         Invoke("loadNext", delay);
