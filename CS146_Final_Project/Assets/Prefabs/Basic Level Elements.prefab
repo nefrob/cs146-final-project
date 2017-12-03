@@ -2410,7 +2410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1707088647204292
 GameObject:
   m_ObjectHideFlags: 1
@@ -3056,7 +3056,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4660760925561376}
   - component: {fileID: 33889052375244986}
-  - component: {fileID: 135424728940269148}
   - component: {fileID: 23959430356943148}
   m_Layer: 11
   m_Name: miniPlayerIcon
@@ -3642,8 +3641,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1711495987763976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 1, z: 10}
+  m_LocalPosition: {x: 2.06, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 1, z: 10}
   m_Children:
   - {fileID: 4293100783985536}
   m_Father: {fileID: 4100578315434168}
@@ -4541,7 +4540,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579638203146822}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 113.4, y: 11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311977174187386}
@@ -5145,7 +5144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1756663624750102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -20, z: 0}
+  m_LocalPosition: {x: 0, y: -32, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4100578315434168}
@@ -5622,7 +5621,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719644579843888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 351.4, y: 25.75, z: 0}
+  m_LocalPosition: {x: 219.7, y: 15.4, z: 0}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children:
   - {fileID: 4323563625594082}
@@ -7746,7 +7745,7 @@ MonoBehaviour:
   crouchingCollider: {fileID: 61204359592575428}
   lastBall: {fileID: 114741762416415138}
   balls: []
-  numBallsToFind: 2
+  numBallsToFind: 3
 --- !u!114 &114119244140055312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9868,18 +9867,6 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1077835686097478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135424728940269148
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1847364705106740}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

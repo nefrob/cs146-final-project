@@ -466,21 +466,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 33
       objectReference: {fileID: 0}
-    - target: {fileID: 114583143951946036, guid: 7d24eaa4f68ee0c48a09455fdc3d90ad,
-        type: 2}
-      propertyPath: flipableBody
-      value: 
-      objectReference: {fileID: 882509978}
-    - target: {fileID: 114583143951946036, guid: 7d24eaa4f68ee0c48a09455fdc3d90ad,
-        type: 2}
-      propertyPath: direction
-      value: backward
-      objectReference: {fileID: 0}
-    - target: {fileID: 114583143951946036, guid: 7d24eaa4f68ee0c48a09455fdc3d90ad,
-        type: 2}
-      propertyPath: changeDirTime
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d24eaa4f68ee0c48a09455fdc3d90ad, type: 2}
   m_IsPrefabParent: 0
@@ -3171,11 +3156,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d24eaa4f68ee0c48a09455fdc3d90ad, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &882509978 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4799376038941866, guid: 7d24eaa4f68ee0c48a09455fdc3d90ad,
-    type: 2}
-  m_PrefabInternal: {fileID: 91622986}
 --- !u!1001 &901831862
 Prefab:
   m_ObjectHideFlags: 0
@@ -3946,12 +3926,12 @@ Prefab:
     - target: {fileID: 224579835909310582, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4500
+      value: 4100
       objectReference: {fileID: 0}
     - target: {fileID: 224579835909310582, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1450
+      value: 1250
       objectReference: {fileID: 0}
     - target: {fileID: 224412387171573740, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
@@ -4018,6 +3998,11 @@ Prefab:
         type: 2}
       propertyPath: numBallsToFind
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 50800447351808502, guid: d4f1f24f22417024197edad43d21b940,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4f1f24f22417024197edad43d21b940, type: 2}

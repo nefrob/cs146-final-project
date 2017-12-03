@@ -174,7 +174,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4489689228037578}
   - component: {fileID: 33431383302746792}
-  - component: {fileID: 135921021197595738}
   - component: {fileID: 23054890184932014}
   m_Layer: 11
   m_Name: miniRobot
@@ -343,7 +342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527605889004954}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -136.84, y: 0.51, z: 0}
+  m_LocalPosition: {x: 100.71, y: 3.710001, z: -1.55}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4116397674205392}
@@ -736,7 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: left
   flipableBody: {fileID: 4116397674205392}
-  changeDirTime: 3
+  changeDirTime: 5.04
   detectionRange: 15
   speed: 3
   fireScript: {fileID: 114912055140026502}
@@ -962,18 +961,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.9607844, g: 0, b: 0.69411767, a: 0.916}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!135 &135921021197595738
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1662788759894058}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222060569639401698
 CanvasRenderer:
   m_ObjectHideFlags: 1

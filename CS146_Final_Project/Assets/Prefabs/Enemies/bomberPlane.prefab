@@ -38,7 +38,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4737184895903284}
   - component: {fileID: 33246031204584446}
-  - component: {fileID: 135863932438647436}
   - component: {fileID: 23130295345684838}
   m_Layer: 11
   m_Name: miniBomber
@@ -209,7 +208,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1434233875052836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.19, y: 9.07, z: 0}
+  m_LocalPosition: {x: 76.04, y: 22.95, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 224553009032759158}
@@ -570,7 +569,7 @@ MonoBehaviour:
   rockets: {fileID: 1895669237207368, guid: 28647f387c2926d468e9dec933b102ea, type: 2}
   fireTime: 0.5
   randomBombsMode: 1
-  detectionRange: 10
+  detectionRange: 17
 --- !u!114 &114200169603979992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -765,18 +764,6 @@ MonoBehaviour:
   flipableBody: {fileID: 4981169000294514}
   speed: 6
   canFlip: 1
---- !u!135 &135863932438647436
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1205698596377198}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222092646188941970
 CanvasRenderer:
   m_ObjectHideFlags: 1

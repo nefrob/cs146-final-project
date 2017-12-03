@@ -294,7 +294,12 @@ Prefab:
     - target: {fileID: 224317298369471498, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 50800447351808502, guid: d4f1f24f22417024197edad43d21b940,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4f1f24f22417024197edad43d21b940, type: 2}
@@ -1280,14 +1285,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 45
       objectReference: {fileID: 0}
-    - target: {fileID: 4303179573764788, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 150
-      objectReference: {fileID: 0}
     - target: {fileID: 1007794443186660, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
       propertyPath: m_Name
       value: platformRed (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 23108502767713186, guid: 6a7d9edcb81214a47927919e9b150315,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31543fbb980f8154d84bb1d68fceafa9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
   m_IsPrefabParent: 0
@@ -1537,6 +1543,10 @@ Prefab:
     - target: {fileID: 1007794443186660, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
       propertyPath: m_Name
       value: platformRed (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303179573764788, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
@@ -3469,6 +3479,15 @@ Prefab:
     - target: {fileID: 1007794443186660, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
       propertyPath: m_Name
       value: platformRed (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 23108502767713186, guid: 6a7d9edcb81214a47927919e9b150315,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31543fbb980f8154d84bb1d68fceafa9, type: 2}
+    - target: {fileID: 4303179573764788, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a7d9edcb81214a47927919e9b150315, type: 2}
