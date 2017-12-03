@@ -24,7 +24,6 @@ public class UIHandler : MonoBehaviour {
     public GameObject reloadText;
     [SerializeField] private Text ballsText;
     [SerializeField] private Text streakText;
-    [SerializeField] private string[] streakMessages;
 
     // Camera to shake
     public GameObject cam;
@@ -80,10 +79,10 @@ public class UIHandler : MonoBehaviour {
     }
 
     /* Sets the streak message. */
-    public void setStreakText()
+    public void setStreakText(string msg)
     {
         streakText.CrossFadeAlpha(1.0f, 0.00f, false);
-        streakText.text = streakMessages[Random.Range(0, streakMessages.Length)];
+        streakText.text = msg;
         iTween.ScaleBy(streakText.gameObject, iTween.Hash("x", 1.6f, "y", 1.6f, "time", 0.35f));
         iTween.ScaleTo(streakText.gameObject, iTween.Hash("x", 1, "y", 1, "time", 0.35f, "delay", 0.35f));
         iTween.ShakePosition(streakText.gameObject,

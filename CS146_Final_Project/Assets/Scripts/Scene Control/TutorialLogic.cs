@@ -14,6 +14,7 @@ public class TutorialLogic : MonoBehaviour {
 
     // Colliders
     public GameObject[] blockers;
+    public GameObject[] cheatRecognizers;
     public GameObject arrowsStart;
     public GameObject arrowsUp;
     public GameObject arrowsEnd;
@@ -47,6 +48,7 @@ public class TutorialLogic : MonoBehaviour {
             Invoke("hide", 0.2f);
             Invoke("displayNextText", 1.0f);
             blockers[0].SetActive(false);
+            cheatRecognizers[0].SetActive(false);
             arrowsStart.SetActive(true);
         }
         // Check if jumped
@@ -75,6 +77,7 @@ public class TutorialLogic : MonoBehaviour {
             actionCount++;
             Invoke("hide", 0.2f);
             blockers[1].SetActive(false);
+            cheatRecognizers[1].SetActive(false);
             arrowsUp.SetActive(true);
         }
         // Display next message when reach desired distance
@@ -97,6 +100,7 @@ public class TutorialLogic : MonoBehaviour {
             actionCount++;
             Invoke("hide", 0.2f);
             blockers[2].SetActive(false);
+            cheatRecognizers[2].SetActive(false);
         }
         // Check if scrolled balls
         if (player.getNumBallsFound() > 1 && actionCount == 6)
@@ -111,6 +115,7 @@ public class TutorialLogic : MonoBehaviour {
             actionCount++;
             hide();
             blockers[3].SetActive(false);
+            cheatRecognizers[2].SetActive(false);
             arrowsEnd.SetActive(true);
         }
     }

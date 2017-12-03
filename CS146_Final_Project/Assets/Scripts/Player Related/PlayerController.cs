@@ -166,10 +166,10 @@ public class PlayerController : MonoBehaviour {
         if (hasBall && throwBall && isGrounded && !anim.GetCurrentAnimatorStateInfo(0).IsName("Throw"))
         {
             lastBall = balls[currBall];
-            removeBall();
             anim.SetBool("isThrowing", true);
             myAudio.playThrowSound();
             myAudio.playCommentSound();
+            removeBall();
             StartCoroutine(InvokeThrow(0.28f, powerUpForce * ui.powerUpSlider.value));
         }
     }
@@ -424,9 +424,8 @@ public class PlayerController : MonoBehaviour {
         {
             if (overallScore.multiplier < 16) overallScore.multiplier *= 2; // max 16 times multiplier
             ui.updateScoreMultiplier(overallScore.multiplier);
-            ui.setStreakText();
+            myAudio.playStreakSound();
             deltaScore = 0;
-            // TODO add support for sound?
         }
         overallScore.score += add * overallScore.multiplier;
         ui.updateScore(overallScore.score);

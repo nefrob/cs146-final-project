@@ -32,6 +32,8 @@ public class PlayerAudio : MonoBehaviour {
     [SerializeField] private string[] celebrationMessages;
     [SerializeField] private AudioClip[] taunts;
     [SerializeField] private string[] tauntMessages;
+    [SerializeField] private AudioClip[] streaks;
+    [SerializeField] private string[] streakMessages;
 
     private UIHandler ui;
 
@@ -63,6 +65,17 @@ public class PlayerAudio : MonoBehaviour {
             int rand = Random.Range(0, sounds.Length);
             calloutSource.PlayOneShot(sounds[rand]);
             if (useUI) ui.setCalloutText(messages[rand]);
+        }
+    }
+
+    /* Plays random streak sound. */
+    public void playStreakSound()
+    {
+        if (streaks.Length > 0 && !calloutSource.isPlaying)
+        {
+            int rand = Random.Range(0, streaks.Length);
+            calloutSource.PlayOneShot(streaks[rand]);
+            ui.setStreakText(streakMessages[rand]);
         }
     }
 

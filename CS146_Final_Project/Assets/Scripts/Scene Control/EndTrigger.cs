@@ -1,7 +1,7 @@
 ﻿/*
 * File:        End Trigger
 * Author:      Robert Neff
-* Date:        11/28/17
+* Date:        12/02/17
 * Description: Checks whether the player has entered the end zone and
 *              calls the game manager on change.
 */
@@ -21,6 +21,7 @@ public class EndTrigger : MonoBehaviour {
     private DontDestroyObjects endCodes;
     // End position
     [SerializeField] private Transform endPos;
+    private PlayerAudio audioScript;
 
     /* Set tweening and get game manager. */
     void Start()
@@ -28,6 +29,7 @@ public class EndTrigger : MonoBehaviour {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         playerScript = FindObjectOfType<PlayerController>();
         endCodes = FindObjectOfType<DontDestroyObjects>();
+        audioScript = FindObjectOfType<PlayerAudio>();
     }
 
     /* Trigger next level to load on reaching end zone of current. */
@@ -45,7 +47,9 @@ public class EndTrigger : MonoBehaviour {
         GetComponent<AudioSource>().Play();
         playerScript.gameObject.GetComponent<Rigidbody2D>().simulated = false; // disable movement
         playerScript.setUnkillableIdle(endPos.position);
+        audioScript.playCelebrationSound();
         msg.text = "Level Code: " + endCodes.inverseLevelCodes[SceneManager.GetActiveScene().buildIndex];
+
         Invoke("loadNext", delay);
     }
 

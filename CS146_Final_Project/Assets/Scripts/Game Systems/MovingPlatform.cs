@@ -29,12 +29,14 @@ public class MovingPlatform : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag != "Player") return;
         playerParent = collision.gameObject.transform.parent;
         collision.gameObject.transform.parent = gameObject.transform;
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
+        if (collision.gameObject.tag != "Player") return;
         collision.gameObject.transform.parent = playerParent;
     }
 }

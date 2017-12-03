@@ -3642,7 +3642,7 @@ Transform:
   m_GameObject: {fileID: 1711495987763976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.06, y: 0, z: 0}
-  m_LocalScale: {x: 25, y: 1, z: 10}
+  m_LocalScale: {x: 35, y: 1, z: 10}
   m_Children:
   - {fileID: 4293100783985536}
   m_Father: {fileID: 4100578315434168}
@@ -4540,7 +4540,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579638203146822}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 113.4, y: 11, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311977174187386}
@@ -5621,7 +5621,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719644579843888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 219.7, y: 15.4, z: 0}
+  m_LocalPosition: {x: 88.6, y: 57.7, z: 0}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children:
   - {fileID: 4323563625594082}
@@ -6240,7 +6240,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 9011c761a7656a84ca26ccacb2e0cc13, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!50 &50945505194999932
 Rigidbody2D:
@@ -6506,7 +6506,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c6383ce70092f4ff28dd73cc812be8c9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 775b04d1a5e09c54fa0d95c7a5be4cd5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
@@ -7745,7 +7745,7 @@ MonoBehaviour:
   crouchingCollider: {fileID: 61204359592575428}
   lastBall: {fileID: 114741762416415138}
   balls: []
-  numBallsToFind: 3
+  numBallsToFind: 4
 --- !u!114 &114119244140055312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8541,31 +8541,69 @@ MonoBehaviour:
   fallingDeathSound: {fileID: 8300000, guid: 420aec3d8ae4bdb43a9666613ee4dd48, type: 3}
   switchBall: {fileID: 8300000, guid: bc5cf1f81184c01489d55476a5fb5a66, type: 3}
   generalCommentary:
-  - {fileID: 8300000, guid: 2e3ad1db426394bfa997ba482dceec2b, type: 3}
-  - {fileID: 8300000, guid: 84c181d44a0f74d72ab7e8c6b40de8ff, type: 3}
+  - {fileID: 8300000, guid: c3ad5a916c0e7f84cb2bfc116f9e5d94, type: 3}
+  - {fileID: 8300000, guid: 48947fc1e316ff74f83b4aa52faabcce, type: 3}
+  - {fileID: 8300000, guid: 2b89e5ea99867d94cb7543430adce289, type: 3}
+  - {fileID: 8300000, guid: 5c424e4c18900d949a5d1671cb918cd1, type: 3}
+  - {fileID: 8300000, guid: ae58454cfda9b364bad60283cb268618, type: 3}
   commentMessages:
+  - BaBoom!
+  - EAT THAT!
+  - KAPOW
   - NICE
   - RIGHTEOUS
   pickupCommentary:
-  - {fileID: 8300000, guid: d063dbd9356320d428ff91d8c9f83dca, type: 3}
+  - {fileID: 8300000, guid: e2f4923da7bcbaa4b89a69ffdddc6ea6, type: 3}
+  - {fileID: 8300000, guid: 1b8175389390d9f419be6956b175c244, type: 3}
+  - {fileID: 8300000, guid: 26b778abf112baf41a8e49a0a1767abd, type: 3}
   pickupMessages:
-  - Lock'n load
-  - I like this one
-  - New Ball!
-  - Justice
+  - AWW YEA!
+  - LOCK'N'LOAD
+  - JUSTICE IS SERVED
   outCommentary:
-  - {fileID: 8300000, guid: 7faeb5a093b7c6341a3053060d60ae63, type: 3}
+  - {fileID: 8300000, guid: bc0ef78d333379643b0a98864a4cc5ac, type: 3}
+  - {fileID: 8300000, guid: af52f65aaa5155f489d525a56dfa09e3, type: 3}
+  - {fileID: 8300000, guid: d071492508a5f3d48a8fb9984feed0da, type: 3}
   outMessages:
-  - I'm out!
-  - Help
+  - I'M OUT!
+  - HELP
+  - ;)
   celebrations:
-  - {fileID: 8300000, guid: aa0db1a84e355584fb18a51e45d7a670, type: 3}
+  - {fileID: 8300000, guid: 9cd7275afe1d3c242b4358ad3ba171a5, type: 3}
+  - {fileID: 8300000, guid: f6bc5a83855a5c04ba684dbaceb15a2a, type: 3}
+  - {fileID: 8300000, guid: 0dd26ae3fddb5684e9a5947e270f56a4, type: 3}
+  - {fileID: 8300000, guid: e85a38c8e6109a74ba4c8678f25479e7, type: 3}
+  - {fileID: 8300000, guid: b237eb9a89b6455428aecbd77082744c, type: 3}
   celebrationMessages:
-  - Celebrate
+  - BINGO
+  - BOOYAA!
+  - I'M DEATH
+  - KING
+  - OUT!
   taunts:
-  - {fileID: 8300000, guid: 2d1350aa5951d574891fce94698ef7a6, type: 3}
+  - {fileID: 8300000, guid: bcbc2cfc9c743d1459ddc5803ad4ed4a, type: 3}
+  - {fileID: 8300000, guid: 6a85ba66383bb6147add3c5bbc17fe96, type: 3}
+  - {fileID: 8300000, guid: bf580e9283d210e4abd8eb0d98a687d0, type: 3}
+  - {fileID: 8300000, guid: 462c158add6df25429ada24521c4889c, type: 3}
+  - {fileID: 8300000, guid: 5f0d511985590e248807194e58fef736, type: 3}
   tauntMessages:
-  - Taunt
+  - GET SOME
+  - DODGE THAT
+  - EAT MY ...
+  - GOOD WINS
+  - NO MATCH
+  streaks:
+  - {fileID: 8300000, guid: 83a4de1a2b0957d48b70f6b8ac78b8c0, type: 3}
+  - {fileID: 8300000, guid: 91c5a68184bcfe84cbb645e758ec7a4f, type: 3}
+  - {fileID: 8300000, guid: 3d9ca6d958b0c8f4494e0d086d15569d, type: 3}
+  - {fileID: 8300000, guid: 309eb7cb0c4823a4aa8bc6ce939e5c58, type: 3}
+  - {fileID: 8300000, guid: 33120911ab3d97b4fb987770a9954502, type: 3}
+  streakMessages:
+  - EAT BALL
+  - STREAK
+  - SUPER
+  - UNSTOPPABLE
+  - SEXY!
 --- !u!114 &114548319353218794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9029,12 +9067,6 @@ MonoBehaviour:
   reloadText: {fileID: 1745992035293100}
   ballsText: {fileID: 114942969725561448}
   streakText: {fileID: 114428231702811888}
-  streakMessages:
-  - STREAK!
-  - UNSTOPPABLE
-  - UNDEFEATED
-  - SUPER!
-  - EAT BALL
   cam: {fileID: 1414852587437974}
 --- !u!114 &114682123059102704
 MonoBehaviour:
@@ -21891,7 +21923,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767172705438134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4000, y: 1200, z: 0}
+  m_LocalPosition: {x: 6600, y: 2500, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224558046548153716}
@@ -21899,7 +21931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 4050, y: 1250}
+  m_AnchoredPosition: {x: 6650, y: 2550}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224589561121092602
