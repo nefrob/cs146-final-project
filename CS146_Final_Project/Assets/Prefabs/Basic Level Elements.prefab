@@ -3200,6 +3200,7 @@ GameObject:
   - component: {fileID: 4168687401811340}
   - component: {fileID: 82028029350269210}
   - component: {fileID: 114357922802063354}
+  - component: {fileID: 114863515215510918}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -9455,6 +9456,20 @@ MonoBehaviour:
   editColorOnCamera: 1
   baseColorPower: 0.3
   fullColorPower: 0.7
+--- !u!114 &114863515215510918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1882590156320594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70921d36215eca74a847783856ce558b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: c8cec8a9905be2e419f8e71c911ab8b0, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!114 &114879666638981366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -21923,7 +21938,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767172705438134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6600, y: 2500, z: 0}
+  m_LocalPosition: {x: 6700, y: 2550, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224558046548153716}
@@ -21931,7 +21946,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 6650, y: 2550}
+  m_AnchoredPosition: {x: 6750, y: 2600}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224589561121092602

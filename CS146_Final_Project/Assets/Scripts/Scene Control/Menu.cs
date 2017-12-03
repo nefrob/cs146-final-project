@@ -36,6 +36,12 @@ public class Menu : MonoBehaviour {
         codes = FindObjectOfType<DontDestroyObjects>();
     }
 
+    /* Check for exit input. */
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape)) Application.Quit();
+    }
+
     /* Start game after delay. */
     public void StartGame() {
         Invoke("changeScene", load_delay);
