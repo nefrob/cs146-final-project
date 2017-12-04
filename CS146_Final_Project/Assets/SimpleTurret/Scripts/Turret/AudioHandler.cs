@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioHandler : MonoBehaviour {
 
-	TurretController controller;
+    TurretController controller;
 
 	[Tooltip("Bullet Fire Sound")]
 	public AudioClip fire;

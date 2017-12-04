@@ -12,6 +12,7 @@ public class WallCheatStopper : MonoBehaviour {
     // Get ui to display message
     private UIHandler uiScript;
     [SerializeField] private string[] messages;
+    private string messageBefore = "";
 
     /* Init vars. */
 	void Start () {
@@ -23,8 +24,16 @@ public class WallCheatStopper : MonoBehaviour {
     {
         if (collision.gameObject.tag != "Ball") return;
 
+        messageBefore = uiScript.messageText.text;
         uiScript.displayMessage(messages[Random.Range(0, messages.Length)]);
-        Invoke("hide", 1.5f);
+        Invoke("changeMsgBack", 1.75f);
+    }
+
+    /*Switches message back. */
+    private void changeMsgBack()
+    {
+        uiScript.displayMessage(messageBefore);
+        Invoke("hide", 2.0f);
     }
 
     /* Hides message thorugh invoke. */

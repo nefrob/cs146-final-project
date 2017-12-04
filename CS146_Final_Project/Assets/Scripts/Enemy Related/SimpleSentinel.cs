@@ -123,7 +123,7 @@ public class SimpleSentinel : MonoBehaviour {
             other.gameObject.GetComponent<PlayerController>().Die();
         } else if(other.gameObject.tag == "Ball")
         {
-            GameObject boom = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+            Instantiate(explosion, transform.position, transform.rotation);
 
             if (yieldsImpactPoints) playerScript.updateScore(10);
             yieldsImpactPoints = false;

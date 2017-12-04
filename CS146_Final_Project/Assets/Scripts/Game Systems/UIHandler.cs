@@ -17,7 +17,7 @@ public class UIHandler : MonoBehaviour {
     public Slider shieldBarSlider;
     public Slider powerUpSlider;
     [SerializeField] private Text alertText;
-    [SerializeField] private Text messageText;
+    public Text messageText;
     [SerializeField] private Text calloutText;
     private Color calloutColor;
     public GameObject waitText;

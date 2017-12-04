@@ -81,7 +81,7 @@ Shader "Custom/CRTShader"
 			{
 				// Drop every other pixel line
 				fixed p = i.uv.y / i.uv.w;
-				if ((uint) (p * _ScreenParams.y / floor(_LineSize)) % 2 == 0) discard;
+				if ((int) (p * _ScreenParams.y / floor(_LineSize)) % 2 == 0) discard;
 				
 				// Apply texture overlay
 				float2 movingUV = float2(i.uv.x, i.uv.y + (_YScrollSpeed *_Time.y));

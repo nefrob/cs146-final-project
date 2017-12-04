@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialLogic : MonoBehaviour {
-    // Audio
-    private PlayerAudio playerAudio;
     // UI
     private UIHandler ui;
     [SerializeField] private string[] messages;
@@ -19,13 +17,11 @@ public class TutorialLogic : MonoBehaviour {
     public GameObject arrowsUp;
     public GameObject arrowsEnd;
     // Time
-    private float timer = 0.0f;
     private int currMsg = 0;
     private PlayerController player;
 
     /* Get objects. */
     void Start () {
-        playerAudio = FindObjectOfType<PlayerAudio>();
         ui = FindObjectOfType<UIHandler>();
         player = FindObjectOfType<PlayerController>();
         Invoke("displayNextText", 1.0f);

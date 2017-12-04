@@ -21,7 +21,6 @@ public class EnemyRespawn : MonoBehaviour {
     private Rigidbody2D rb;
     public bool isDead;
     public bool hasDiedBefore;
-    private bool freezePosition;
 
     /* Get required info. */
 	void Start () {
@@ -30,7 +29,6 @@ public class EnemyRespawn : MonoBehaviour {
         isDead = false;
         value = respawnTime;
         hasDiedBefore = false;
-        freezePosition = false;
     }
 	
 	/* Update respawn timer if necessary. */
@@ -49,7 +47,6 @@ public class EnemyRespawn : MonoBehaviour {
         hasDiedBefore = true;
         if (freezePos)
         {
-            freezePosition = true;
             rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         }
         myCollider.enabled = false;

@@ -23,7 +23,6 @@ public class bomber : MonoBehaviour {
         if (respawnScript.isDead) return;
 
         float range = Vector2.Distance(transform.position, player.transform.position);
-        Vector3 directionToTarget = transform.position - player.transform.position;
 
         if (range <= detectionRange) {
             if (randomBombsMode)
