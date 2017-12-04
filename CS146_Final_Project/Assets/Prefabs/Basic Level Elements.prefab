@@ -4541,7 +4541,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579638203146822}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311977174187386}
@@ -5622,7 +5622,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719644579843888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 88.6, y: 57.7, z: 0}
+  m_LocalPosition: {x: 352.58, y: 25.66, z: 0}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children:
   - {fileID: 4323563625594082}
@@ -7724,7 +7724,7 @@ MonoBehaviour:
   crouchingCollider: {fileID: 61204359592575428}
   lastBall: {fileID: 114741762416415138}
   balls: []
-  numBallsToFind: 4
+  numBallsToFind: 2
 --- !u!114 &114119244140055312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8292,7 +8292,7 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Message
@@ -21732,7 +21732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 6850, y: 2650}
+  m_AnchoredPosition: {x: 4150, y: 1300}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224589561121092602
@@ -22074,8 +22074,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 45, y: -247}
-  m_SizeDelta: {x: -1760.3723, y: -1049.9581}
+  m_AnchoredPosition: {x: -0.000030559, y: -285.04}
+  m_SizeDelta: {x: 0, y: -973.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224849086520971984
 RectTransform:

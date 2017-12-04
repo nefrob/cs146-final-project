@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
     }
 
     /* Reload the scene. */
-    void restart () {
+    public void restart () {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
             quitUI.SetActive(true);
             Time.timeScale = 0.0f; // pause
         }
-    } 
+    }
 
     /* UI quit game. */
     public void quitGame()

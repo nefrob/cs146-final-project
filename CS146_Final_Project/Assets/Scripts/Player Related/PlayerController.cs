@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
     private bool isDead;
     private bool depletedShield;
     private bool powerUp;
+    private float deathTime = 0.0f;
     // For score/multipliers
     private DontDestroyObjects overallScore;
     public const float MAX_TIME_BETWEEN_EVENTS = 5.0f;
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private GameObject forceField;
     public BoxCollider2D standingCollider;
     [SerializeField] private BoxCollider2D crouchingCollider;
+    private bool isPlaying = false;
     // Balls
     [SerializeField] private DodgeBall lastBall;
     public List<DodgeBall> balls;
@@ -84,12 +86,16 @@ public class PlayerController : MonoBehaviour {
         overallScore = FindObjectOfType<DontDestroyObjects>();
         eventTimer = MAX_TIME_BETWEEN_EVENTS;
         shakeScript = FindObjectOfType<CameraShake>();
+        Time.timeScale = 0.0f;
     }
 
     /* Check for input. */
     void Update()
     {
-        if (isDead) return;
+        if (isPlaying && Input.GetKeyDown(KeyCode.R))
+            FindObjectOfType<GameManager>().restart(); // quick restart, still allow if dead
+
+        if (isDead) return; // do nothing if dead
 
         // Read the input in Update so button presses aren't missed.
         if (!jump) jump = Input.GetButtonDown("Jump");
@@ -102,6 +108,19 @@ public class PlayerController : MonoBehaviour {
         dropBall = Input.GetKeyDown(KeyCode.W);
 
         setEventTimer();
+
+        // Restart playing
+        if (!isPlaying)
+        {
+            shakeScript.shakeDuration = 0.0f;
+            ui.displayMessage("Hit [R] to Play");
+        }
+        if (!isPlaying && Input.GetKeyDown(KeyCode.R))
+        {         
+            Time.timeScale = 1.0f;
+            isPlaying = true;
+            ui.hideMessage();
+        }
     }
 
     /* Sets event timer based on last time player scored. */

@@ -1203,7 +1203,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.0000008063993, y: 0.00009918213}
-  m_SizeDelta: {x: 0, y: 613.5}
+  m_SizeDelta: {x: 0, y: 703.2}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &906473890
 GameObject:
@@ -1418,7 +1418,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 451f3999771984ec5af89b9e6ae699a6, type: 3}
-    m_FontSize: 30
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1445,7 +1445,9 @@ MonoBehaviour:
 
     Switch Ball: Scroll Wheel
 
-    Exit in Game: Escape '
+    Exit in Game: Escape
+
+    Restart in Game: R'
 --- !u!222 &1102998743
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2310,8 +2312,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1346557332}
   m_HandleRect: {fileID: 1346557331}
   m_Direction: 2
-  m_Value: 0.9999996
-  m_Size: 0.4953545
+  m_Value: 0.9999997
+  m_Size: 0.43216723
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2412,8 +2414,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.2998657, y: 0.54991}
-  m_SizeDelta: {x: 335.4, y: 614.6}
+  m_AnchoredPosition: {x: 2.3498535, y: -2.1501465}
+  m_SizeDelta: {x: 335.3, y: 709.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440412995
 MonoBehaviour:
@@ -2459,6 +2461,8 @@ MonoBehaviour:
 
     - Enter level codes found after beating a level to replay it directly from the
     main menu
+
+    - If you lose the ball, it respawns where you first found it
 
 '
 --- !u!222 &1440412996
