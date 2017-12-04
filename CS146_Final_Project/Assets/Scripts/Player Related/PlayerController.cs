@@ -344,7 +344,7 @@ public class PlayerController : MonoBehaviour {
 
                 for (int i = 0; i < colliders.Length; i++)
                 {
-                    if (colliders[i].gameObject != gameObject && colliders[i].tag != "Climbable")
+                    if (colliders[i].gameObject != gameObject && colliders[i].tag == "Ground")
                     {
                         return true;
                     }
