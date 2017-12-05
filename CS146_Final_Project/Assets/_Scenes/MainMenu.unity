@@ -649,7 +649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -243, y: 149}
+  m_AnchoredPosition: {x: -243, y: 173}
   m_SizeDelta: {x: 215.5, y: 43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &272088146
@@ -1148,8 +1148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44503a0693b3ac74fae2262bdc19aa5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  multiplier: 0
   codesByLevel:
   - DownWithGlobo
   - TotallyRad
@@ -1443,7 +1441,7 @@ MonoBehaviour:
 
     Shield: Right Mouse
 
-    Switch Ball: Scroll Wheel
+    Switch Ball: Scroll Wheel or Up/Dpwn Arrows
 
     Exit in Game: Escape
 
@@ -2312,8 +2310,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1346557332}
   m_HandleRect: {fileID: 1346557331}
   m_Direction: 2
-  m_Value: 0.9999997
-  m_Size: 0.43216723
+  m_Value: 0.9999998
+  m_Size: 0.45463595
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2733,7 +2731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 196.0001, y: 149}
+  m_AnchoredPosition: {x: 196.0001, y: 173}
   m_SizeDelta: {x: 339.8, y: 43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702279720
@@ -3677,8 +3675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.4, y: -195.2}
-  m_SizeDelta: {x: 356.6, y: 303.9}
+  m_AnchoredPosition: {x: 8.4, y: -203.9}
+  m_SizeDelta: {x: 356.6, y: 319.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101529418
 MonoBehaviour:

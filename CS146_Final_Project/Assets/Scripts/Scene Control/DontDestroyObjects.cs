@@ -12,29 +12,27 @@ using UnityEngine;
 
 public class DontDestroyObjects : MonoBehaviour {
     // Original instance
-    private static DontDestroyObjects instance = null;
-    public static DontDestroyObjects Instance
-    {
-        get { return instance; }
-    }
+    public static DontDestroyObjects instance = null;
 
     // Track player score here too
-    public int score;
-    public int multiplier;
+    public static int score;
+    public static int multiplier;
 
     // Level codes
     [SerializeField] private string[] codesByLevel;
-    public Dictionary<string, int> levelCodes;
-    public Dictionary<int, string> inverseLevelCodes;
+    public static Dictionary<string, int> levelCodes;
+    public static Dictionary<int, string> inverseLevelCodes;
 
     /* Don't destroy, if already exists destroy self.  */
     void Awake()
     {
         transform.parent = null;
-        if (instance != null &&instance != this) {
+        if (instance != null && instance != this) {
             Destroy(gameObject);
             return;
-        } else {
+        }
+
+        if (instance == null) { 
             instance = this;
             score = 0;
             multiplier = 1;
@@ -46,7 +44,7 @@ public class DontDestroyObjects : MonoBehaviour {
                 levelCodes[codesByLevel[i]] = i + 2; // account for main menu and cutscene
                 inverseLevelCodes[i + 2] = codesByLevel[i];
             }
+            DontDestroyOnLoad(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
 }

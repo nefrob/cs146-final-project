@@ -18,7 +18,6 @@ public class EndTrigger : MonoBehaviour {
     private GameManager gameManager;
     private PlayerController playerScript;
     [SerializeField] private float delay = 3.0f;
-    private DontDestroyObjects endCodes;
     // End position
     [SerializeField] private Transform endPos;
     private PlayerAudio audioScript;
@@ -28,7 +27,6 @@ public class EndTrigger : MonoBehaviour {
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         playerScript = FindObjectOfType<PlayerController>();
-        endCodes = FindObjectOfType<DontDestroyObjects>();
         audioScript = FindObjectOfType<PlayerAudio>();
     }
 
@@ -48,7 +46,7 @@ public class EndTrigger : MonoBehaviour {
         playerScript.gameObject.GetComponent<Rigidbody2D>().simulated = false; // disable movement
         playerScript.setUnkillableIdle(endPos.position);
         audioScript.playCelebrationSound();
-        msg.text = "Level Code: " + endCodes.inverseLevelCodes[SceneManager.GetActiveScene().buildIndex];
+        msg.text = "Level Code: " + DontDestroyObjects.inverseLevelCodes[SceneManager.GetActiveScene().buildIndex];
 
         Invoke("loadNext", delay);
     }

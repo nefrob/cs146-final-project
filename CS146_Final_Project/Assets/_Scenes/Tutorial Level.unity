@@ -1874,7 +1874,7 @@ Prefab:
     - target: {fileID: 224317298369471498, guid: d4f1f24f22417024197edad43d21b940,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4f1f24f22417024197edad43d21b940, type: 2}
@@ -4838,13 +4838,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messages:
-  - Press [W or D] to move
+  - Press [A or D] to move
   - Press [SPACE] to jump
   - Press [LEFT MOUSE] to throw ball
   - Press [W] to drop ball
   - Press [RIGHT MOUSE] to shield
   - Press [S] to crouch
-  - Scroll [MOUSE WHEEL] to change ball
+  - Press [SCROLL or UP/DOWN ARROW] to change ball
   blockers:
   - {fileID: 1709210709}
   - {fileID: 49659863}

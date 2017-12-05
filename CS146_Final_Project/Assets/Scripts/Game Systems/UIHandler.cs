@@ -31,6 +31,7 @@ public class UIHandler : MonoBehaviour {
     /* Initial UI conditions. */
     void Start()
     {
+        scoreText.text = "Score: " + DontDestroyObjects.score.ToString();
         scoreMultiplier.text = "x 1";
         startMultColor = scoreMultiplier.color;
         messageText.text = "";

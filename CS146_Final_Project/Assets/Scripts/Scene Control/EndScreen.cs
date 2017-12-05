@@ -25,8 +25,8 @@ public class EndScreen: MonoBehaviour {
     /* Set current game total score anmd credits to scroll. */
     void Start()
     {
-      // score = FindObjectOfType<DontDestroyObjects>();
-       //scoreText.text = "Score: " + score.score.ToString();
+        score = FindObjectOfType<DontDestroyObjects>();
+        if (score != null) scoreText.text = "Score: " + DontDestroyObjects.score.ToString();
         iTween.MoveBy(scrollObj, iTween.Hash("y", 22000, 
             "easeType", "linear", "delay", 5.0f, "time", 90.0f));
         Invoke("exit", 5.0f);
@@ -41,8 +41,8 @@ public class EndScreen: MonoBehaviour {
     public void Replay()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
-        score.score = 0; 
-        score.multiplier = 1;
+        DontDestroyObjects.score = 0; 
+        DontDestroyObjects.multiplier = 1;
     }
 
     /* Handle hover over a button. */

@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour {
     private bool powerUp;
     private float deathTime = 0.0f;
     // For score/multipliers
-    private DontDestroyObjects overallScore;
     public const float MAX_TIME_BETWEEN_EVENTS = 5.0f;
     private const int BASE_MULTIPLIER = 1;
     private float eventTimer;
@@ -83,7 +82,6 @@ public class PlayerController : MonoBehaviour {
         ballsFound.Add(lastBall);
         balls.Add(lastBall);
         ui.updateBallsText(ballsFound.Count, numBallsToFind);
-        overallScore = FindObjectOfType<DontDestroyObjects>();
         eventTimer = MAX_TIME_BETWEEN_EVENTS;
         shakeScript = FindObjectOfType<CameraShake>();
         Time.timeScale = 0.0f;
@@ -132,10 +130,10 @@ public class PlayerController : MonoBehaviour {
             if (eventTimer >= MAX_TIME_BETWEEN_EVENTS)
             {
                 deltaScore = 0;
-                if (overallScore.multiplier != BASE_MULTIPLIER)
+                if (DontDestroyObjects.multiplier != BASE_MULTIPLIER)
                 {
                     ui.updateScoreMultiplier(BASE_MULTIPLIER);
-                    overallScore.multiplier = BASE_MULTIPLIER;
+                    DontDestroyObjects.multiplier = BASE_MULTIPLIER;
                 }
             }
         }
@@ -279,7 +277,12 @@ public class PlayerController : MonoBehaviour {
 
         // Change on input
         float input = Input.GetAxis("Mouse ScrollWheel");
-        if (input == 0) return;
+        if (input == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow)) input = 1;
+            else if (Input.GetKeyDown(KeyCode.DownArrow)) input = -1;
+            else return;
+        }
 
         balls[currBall].gameObject.SetActive(false);
         myAudio.playerSource.PlayOneShot(myAudio.switchBall);
@@ -441,13 +444,14 @@ public class PlayerController : MonoBehaviour {
         deltaScore += add;
         if (deltaScore >= 10)
         {
-            if (overallScore.multiplier < 16) overallScore.multiplier *= 2; // max 16 times multiplier
-            ui.updateScoreMultiplier(overallScore.multiplier);
+            if (DontDestroyObjects.multiplier < 16) DontDestroyObjects.multiplier *= 2; // max 16 times multiplier
+            ui.updateScoreMultiplier(DontDestroyObjects.multiplier);
             myAudio.playStreakSound();
             deltaScore = 0;
         }
-        overallScore.score += add * overallScore.multiplier;
-        ui.updateScore(overallScore.score);
+
+        DontDestroyObjects.score += add * DontDestroyObjects.multiplier;
+        ui.updateScore(DontDestroyObjects.score);
 
         if (wasMissile) myAudio.playTauntSound();
         else myAudio.playCelebrationSound();
@@ -456,9 +460,9 @@ public class PlayerController : MonoBehaviour {
     /* Reset score to zero. */
     private void resetScore()
     {
-        overallScore.score = 0;
+        DontDestroyObjects.score = 0;
         deltaScore = 0;
-        overallScore.multiplier = BASE_MULTIPLIER;
+        DontDestroyObjects.multiplier = BASE_MULTIPLIER;
         ui.updateScore(0);
     }
 

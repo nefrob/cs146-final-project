@@ -24,16 +24,12 @@ public class Menu : MonoBehaviour {
 
     private bool infoDisplayed = false;
 
-    private DontDestroyObjects codes;
-
     /* Tween objects onto screen. */
     public void Start()
     {        
         iTween.MoveBy(startBtn, iTween.Hash("y", Screen.height / 3, "easeType", "easeInOutExpo", "delay", 1f));
         iTween.MoveBy(creditsBtn, iTween.Hash("y", Screen.height / 3, "easeType", "easeInOutExpo", "delay", 1f));
         iTween.MoveBy(codeBtn, iTween.Hash("y", Screen.height / 3, "easeType", "easeInOutExpo", "delay", 1f));
-
-        codes = FindObjectOfType<DontDestroyObjects>();
     }
 
     /* Check for exit input. */
@@ -80,8 +76,8 @@ public class Menu : MonoBehaviour {
     public void submitCode()
     {
         string entered = codeFieldText.text;
-        if (codes.levelCodes.ContainsKey(entered))
-            SceneManager.LoadScene(codes.levelCodes[entered]);
+        if (DontDestroyObjects.levelCodes.ContainsKey(entered))
+            SceneManager.LoadScene(DontDestroyObjects.levelCodes[entered]);
         else
         {
             iTween.ScaleBy(codeField, iTween.Hash("x", 1.2f, "y", 1.2f, "time", 0.25f));

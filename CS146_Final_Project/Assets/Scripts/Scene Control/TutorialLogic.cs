@@ -106,7 +106,8 @@ public class TutorialLogic : MonoBehaviour {
             actionCount++;
         }
         // Check if scrolled balls
-        if (actionCount == 7 && Input.GetAxis("Mouse ScrollWheel") != 0.0f)
+        if (actionCount == 7 && (Input.GetAxis("Mouse ScrollWheel") != 0.0f || Input.GetKeyDown(KeyCode.UpArrow) ||
+            Input.GetKeyDown(KeyCode.DownArrow)))
         {
             actionCount++;
             hide();
