@@ -144,17 +144,16 @@ public class PlayerController : MonoBehaviour {
         if (isDead) return;
 
         float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
         bool temp = isGrounded;
         isGrounded = getIsGrounded();
         if (temp != isGrounded) shakeScript.shakeScreen(0.25f, 0.25f); // shake screen on landing
-        HandlePlayerSystems(horizontal, vertical);
+        HandlePlayerSystems(horizontal);
         Flip(horizontal);
         jump = false; // reset input
     }
 
     /* Handle all forms of player movement. */
-    private void HandlePlayerSystems(float horizontal, float vertical)
+    private void HandlePlayerSystems(float horizontal)
     {
         // Set the vertical animation
         anim.SetFloat("vSpeed", rb.velocity.y);

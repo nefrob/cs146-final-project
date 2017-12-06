@@ -41,7 +41,7 @@ public class DontDestroyObjects : MonoBehaviour {
             inverseLevelCodes = new Dictionary<int, string>();
             for (int i = 0; i < codesByLevel.Length; i++)
             {
-                levelCodes[codesByLevel[i]] = i + 2; // account for main menu and cutscene
+                levelCodes[codesByLevel[i].ToLower()] = i + 2; // account for main menu and cutscene
                 inverseLevelCodes[i + 2] = codesByLevel[i];
             }
             DontDestroyOnLoad(gameObject);

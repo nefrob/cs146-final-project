@@ -76,8 +76,8 @@ public class Menu : MonoBehaviour {
     public void submitCode()
     {
         string entered = codeFieldText.text;
-        if (DontDestroyObjects.levelCodes.ContainsKey(entered))
-            SceneManager.LoadScene(DontDestroyObjects.levelCodes[entered]);
+        if (DontDestroyObjects.levelCodes.ContainsKey(entered.ToLower()))
+            SceneManager.LoadScene(DontDestroyObjects.levelCodes[entered.ToLower()]);
         else
         {
             iTween.ScaleBy(codeField, iTween.Hash("x", 1.2f, "y", 1.2f, "time", 0.25f));
